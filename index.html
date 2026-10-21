@@ -1159,6 +1159,16 @@
                 return "El dueño absoluto y creador de esta tienda es <b>MR DARIAN YT</b> 👑. ¡Los admins te atienden directamente al WhatsApp para cualquier pedido o duda!";
             }
 
+            // ¿CÓMO BUSCAR ID?
+            if (txt.includes("id") && (txt.includes("donde") || txt.includes("como") || txt.includes("busco") || txt.includes("encuentro") || txt.includes("consigo") || txt.includes("cual") || txt.includes("ver"))) {
+                return "📌 <b>Cómo ver tu ID en Free Fire:</b><br>1️⃣ Abre el juego.<br>2️⃣ Toca tu foto/perfil arriba a la izquierda.<br>3️⃣ Verás tu <b>ID (números)</b> debajo de tu nombre.<br>4️⃣ Cópialo y pégalo arriba en el formulario.";
+            }
+
+            // ¿CÓMO VER O QUÉ ES EL NOMBRE?
+            if (txt.includes("nombre") || txt.includes("apodo") || txt.includes("nick")) {
+                return "👤 <b>Nombre en el juego:</b><br>Es tu nick o apodo visible dentro de Free Fire. Lo usamos para verificar tu cuenta antes de enviarte los diamantes.";
+            }
+
             if (txt.includes("compro") || txt.includes("comprar") || txt.includes("recargar") || txt.includes("recarga") || txt.includes("proceso") || txt.includes("pasos")) {
                 return "🛒 ¡Es super sencillo bro! Sigue estos 3 pasos arriba en la web:<br>1️⃣ Pon tu <b>ID</b> y tu <b>Nombre</b> de Free Fire.<br>2️⃣ Toca el botón <b>(+)</b> en la oferta que quieras.<br>3️⃣ Toca el botón verde <b>'PEDIR POR WHATSAPP'</b> para confirmar con el admin.";
             }
