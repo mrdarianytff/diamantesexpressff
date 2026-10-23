@@ -715,7 +715,7 @@
                 <div class="form-group">
                     <label for="player-id"><i class="fa-solid fa-id-card"></i> ID de Jugador (Free Fire):</label>
                     <div class="input-btn-group">
-                        <input type="number" id="player-id" class="form-control" placeholder="Ej: 123456789" oninput="autoVerifyID()" required>
+                        <input type="number" id="player-id" class="form-control" placeholder="Ej: 123456789" required>
                         <button type="button" class="btn-verify" onclick="fetchPlayerName()"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
                     </div>
                     <div id="id-status" class="id-status"></div>
@@ -723,7 +723,7 @@
 
                 <div class="form-group">
                     <label for="player-name"><i class="fa-solid fa-signature"></i> Nombre / Apodo en el Juego:</label>
-                    <input type="text" id="player-name" class="form-control" placeholder="Se completará o escríbelo" required>
+                    <input type="text" id="player-name" class="form-control" placeholder="Ej: Moreira_FF" required>
                 </div>
             </div>
 
@@ -1013,66 +1013,36 @@
 
     <script>
         let cart = {};
-        let autoVerifyTimer = null;
 
-        /* FUNCIONALIDAD DE BÚSQUEDA DE ID POR INYECCIÓN DE SCRIPT / JSONP (OMITE BLOQUEO CORS) */
-        function fetchPlayerName() {
+        async function fetchPlayerName() {
             const playerId = document.getElementById('player-id').value.trim();
             const statusEl = document.getElementById('id-status');
             const nameInput = document.getElementById('player-name');
 
             if (!playerId || playerId.length < 7) {
                 statusEl.style.color = '#ff007f';
-                statusEl.innerText = '❌ Ingresa un ID válido (mínimo 8 dígitos)';
+                statusEl.innerText = '❌ Ingresa un ID válido';
                 return;
             }
 
             statusEl.style.color = '#00f0ff';
-            statusEl.innerText = '⏳ Buscando cuenta en Free Fire...';
+            statusEl.innerText = '⏳ Buscando cuenta...';
 
-            // Limpieza de scripts anteriores
-            const oldScript = document.getElementById('ff-api-script');
-            if (oldScript) oldScript.remove();
+            try {
+                const res = await fetch(`https://api.game-lookup.com/ff?id=${playerId}`);
+                const data = await res.json();
 
-            // Callback global llamado por la respuesta JSONP
-            window.ffApiResponse = function(data) {
-                if (data && (data.nickname || data.Name || data.name || data.nickname_ff)) {
-                    const nickname = data.nickname || data.Name || data.name || data.nickname_ff;
+                if (data && (data.name || data.nickname)) {
+                    const nickname = data.name || data.nickname;
                     nameInput.value = nickname;
                     statusEl.style.color = '#25D366';
-                    statusEl.innerText = `✅ ¡Cuenta encontrada: ${nickname}!`;
+                    statusEl.innerText = `✅ ¡Cuenta: ${nickname}!`;
                 } else {
-                    statusEl.style.color = '#ffe600';
-                    statusEl.innerText = '⚠️ No se encontró la cuenta. Escríbela manualmente.';
+                    throw new Error("No encontrado");
                 }
-            };
-
-            // Creamos e inyectamos la etiqueta <script>
-            const script = document.createElement('script');
-            script.id = 'ff-api-script';
-            script.src = `https://api.v2.freefireapi.com/search?id=${playerId}&region=us&callback=ffApiResponse`;
-
-            // Si falla el servidor primario, se usa el de respaldo
-            script.onerror = function() {
-                const script2 = document.createElement('script');
-                script2.src = `https://region-info-ff.vercel.app/api/ff?id=${playerId}&callback=ffApiResponse`;
-                script2.onerror = function() {
-                    statusEl.style.color = '#ffe600';
-                    statusEl.innerText = '⚠️ Servidor ocupado. Escribe tu apodo abajo.';
-                };
-                document.body.appendChild(script2);
-            };
-
-            document.body.appendChild(script);
-        }
-
-        function autoVerifyID() {
-            clearTimeout(autoVerifyTimer);
-            const playerId = document.getElementById('player-id').value.trim();
-            if (playerId.length >= 8) {
-                autoVerifyTimer = setTimeout(() => {
-                    fetchPlayerName();
-                }, 800);
+            } catch (e) {
+                statusEl.style.color = '#ffe600';
+                statusEl.innerText = '⚠️ Escribe tu nombre abajo.';
             }
         }
 
@@ -1165,7 +1135,7 @@
             }
 
             if (!playerName) {
-                alert("Por favor, ingresa tu Nombre/Apodo del juego para verificar la cuenta.");
+                alert("Por favor, ingresa tu Nombre/Apodo del juego.");
                 return;
             }
 
