@@ -1015,7 +1015,7 @@
         let cart = {};
         let verifyTimeout = null;
 
-        /* FUNCIONALIDAD DE BÚSQUEDA AUTOMÁTICA DE ID FREE FIRE */
+        /* FUNCIONALIDAD DE BÚSQUEDA DE ID GRATUITA Y ROBUSTA VIA PROXY */
         function autoVerifyID() {
             clearTimeout(verifyTimeout);
             const playerId = document.getElementById('player-id').value.trim();
@@ -1041,23 +1041,26 @@
             statusEl.innerText = '⏳ Buscando cuenta en Free Fire...';
 
             try {
-                // Petición a la API pública de Free Fire
-                const response = await fetch(`https://api.v2.freefireapi.com/search?id=${playerId}&region=us`);
+                // Consulta sin CORS mediante proxy público directo
+                const targetUrl = `https://api.v2.freefireapi.com/search?id=${playerId}&region=us`;
+                const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
+
+                const response = await fetch(proxyUrl);
                 const data = await response.json();
 
-                if (data && (data.nickname || data.Name)) {
-                    const nickname = data.nickname || data.Name;
+                if (data && (data.nickname || data.Name || data.name)) {
+                    const nickname = data.nickname || data.Name || data.name;
                     nameInput.value = nickname;
                     statusEl.style.color = '#25D366';
                     statusEl.innerText = `✅ ¡Cuenta encontrada: ${nickname}!`;
                 } else {
                     statusEl.style.color = '#ffe600';
-                    statusEl.innerText = '⚠️ No se pudo obtener el nombre. Por favor escríbelo manualmente.';
+                    statusEl.innerText = '⚠️ No se encontró el apodo. Puedes escribirlo manualmente abajo.';
                 }
             } catch (error) {
-                console.log("Error al consultar API:", error);
+                console.log("Error consultando proxy:", error);
                 statusEl.style.color = '#ffe600';
-                statusEl.innerText = '⚠️ Servidor ocupado. Escribe tu nombre/apodo manualmente abajo.';
+                statusEl.innerText = '⚠️ La búsqueda automática demoró. Puedes escribir tu nombre abajo.';
             }
         }
 
@@ -1242,12 +1245,10 @@
                 return "El dueño absoluto y creador de esta tienda es <b>MR DARIAN YT</b> 👑. ¡Los admins te atienden directamente al WhatsApp para cualquier pedido o duda!";
             }
 
-            // ¿CÓMO BUSCAR ID?
             if (txt.includes("id") && (txt.includes("donde") || txt.includes("como") || txt.includes("busco") || txt.includes("encuentro") || txt.includes("consigo") || txt.includes("cual") || txt.includes("ver"))) {
                 return "📌 <b>Cómo ver tu ID en Free Fire:</b><br>1️⃣ Abre el juego.<br>2️⃣ Toca tu foto/perfil arriba a la izquierda.<br>3️⃣ Verás tu <b>ID (números)</b> debajo de tu nombre.<br>4️⃣ Cópialo y pégalo arriba en el formulario.";
             }
 
-            // ¿CÓMO VER O QUÉ ES EL NOMBRE?
             if (txt.includes("nombre") || txt.includes("apodo") || txt.includes("nick")) {
                 return "👤 <b>Nombre en el juego:</b><br>Es tu nick o apodo visible dentro de Free Fire. Lo usamos para verificar tu cuenta antes de enviarte los diamantes.";
             }
