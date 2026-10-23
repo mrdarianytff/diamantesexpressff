@@ -723,7 +723,7 @@
 
                 <div class="form-group">
                     <label for="player-name"><i class="fa-solid fa-signature"></i> Nombre / Apodo en el Juego:</label>
-                    <input type="text" id="player-name" class="form-control" placeholder="Se completará al verificar ID" required>
+                    <input type="text" id="player-name" class="form-control" placeholder="Se completará o escríbelo" required>
                 </div>
             </div>
 
@@ -1015,7 +1015,7 @@
         let cart = {};
         let verifyTimeout = null;
 
-        /* FUNCIONALIDAD DE BÚSQUEDA DE ID GRATUITA Y ROBUSTA VIA PROXY */
+        /* BÚSQUEDA MEDIANTE ENDPOINT ALTERNATIVO EN VERCEL */
         function autoVerifyID() {
             clearTimeout(verifyTimeout);
             const playerId = document.getElementById('player-id').value.trim();
@@ -1041,26 +1041,22 @@
             statusEl.innerText = '⏳ Buscando cuenta en Free Fire...';
 
             try {
-                // Consulta sin CORS mediante proxy público directo
-                const targetUrl = `https://api.v2.freefireapi.com/search?id=${playerId}&region=us`;
-                const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://region-info-ff.vercel.app/api/ff?id=' + playerId)}`);
+                const result = await response.json();
+                const data = JSON.parse(result.contents);
 
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
-
-                if (data && (data.nickname || data.Name || data.name)) {
-                    const nickname = data.nickname || data.Name || data.name;
+                if (data && (data.nickname || data.Name || data.name || data.nickname_ff)) {
+                    const nickname = data.nickname || data.Name || data.name || data.nickname_ff;
                     nameInput.value = nickname;
                     statusEl.style.color = '#25D366';
                     statusEl.innerText = `✅ ¡Cuenta encontrada: ${nickname}!`;
                 } else {
                     statusEl.style.color = '#ffe600';
-                    statusEl.innerText = '⚠️ No se encontró el apodo. Puedes escribirlo manualmente abajo.';
+                    statusEl.innerText = '⚠️ Escribe tu nombre/apodo manualmente abajo.';
                 }
             } catch (error) {
-                console.log("Error consultando proxy:", error);
                 statusEl.style.color = '#ffe600';
-                statusEl.innerText = '⚠️ La búsqueda automática demoró. Puedes escribir tu nombre abajo.';
+                statusEl.innerText = '⚠️ Consulta no disponible. Escribe tu nombre abajo.';
             }
         }
 
