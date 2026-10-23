@@ -174,11 +174,6 @@
             color: var(--text-muted);
         }
 
-        .input-btn-group {
-            display: flex;
-            gap: 8px;
-        }
-
         .form-control {
             background: rgba(10, 12, 22, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -195,32 +190,6 @@
         .form-control:focus {
             border-color: var(--primary);
             box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
-        }
-
-        .btn-verify {
-            background: linear-gradient(135deg, var(--primary), #0072ff);
-            border: none;
-            color: #0a0c16;
-            font-weight: 700;
-            padding: 0 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .btn-verify:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-        }
-
-        .id-status {
-            font-size: 0.78rem;
-            margin-top: 4px;
-            font-weight: 600;
         }
 
         select.form-control option {
@@ -714,11 +683,7 @@
             <div class="input-grid">
                 <div class="form-group">
                     <label for="player-id"><i class="fa-solid fa-id-card"></i> ID de Jugador (Free Fire):</label>
-                    <div class="input-btn-group">
-                        <input type="number" id="player-id" class="form-control" placeholder="Ej: 123456789" required>
-                        <button type="button" class="btn-verify" onclick="fetchPlayerName()"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
-                    </div>
-                    <div id="id-status" class="id-status"></div>
+                    <input type="number" id="player-id" class="form-control" placeholder="Ej: 123456789" required>
                 </div>
 
                 <div class="form-group">
@@ -1014,38 +979,6 @@
     <script>
         let cart = {};
 
-        async function fetchPlayerName() {
-            const playerId = document.getElementById('player-id').value.trim();
-            const statusEl = document.getElementById('id-status');
-            const nameInput = document.getElementById('player-name');
-
-            if (!playerId || playerId.length < 7) {
-                statusEl.style.color = '#ff007f';
-                statusEl.innerText = '❌ Ingresa un ID válido';
-                return;
-            }
-
-            statusEl.style.color = '#00f0ff';
-            statusEl.innerText = '⏳ Buscando cuenta...';
-
-            try {
-                const res = await fetch(`https://api.game-lookup.com/ff?id=${playerId}`);
-                const data = await res.json();
-
-                if (data && (data.name || data.nickname)) {
-                    const nickname = data.name || data.nickname;
-                    nameInput.value = nickname;
-                    statusEl.style.color = '#25D366';
-                    statusEl.innerText = `✅ ¡Cuenta: ${nickname}!`;
-                } else {
-                    throw new Error("No encontrado");
-                }
-            } catch (e) {
-                statusEl.style.color = '#ffe600';
-                statusEl.innerText = '⚠️ Escribe tu nombre abajo.';
-            }
-        }
-
         function switchTab(type) {
             document.getElementById('grid-saldo').style.display = type === 'saldo' ? 'grid' : 'none';
             document.getElementById('grid-tarjeta').style.display = type === 'tarjeta' ? 'grid' : 'none';
@@ -1250,7 +1183,7 @@
             if (txt.includes("2398")) return "💎 2398 Diamantes = 5,200 CUP por Saldo Móvil / 19,000 CUP por Tarjeta CUP.";
 
             if (txt.includes("rebaja") || txt.includes("descuento") || txt.includes("fiado") || txt.includes("barato") || txt.includes("alcanza") || txt.includes("200")) {
-                return "💎 <b>Precios Fijos:</b> Nuestros precios son fijos y no hacemos rebajas ni fiado bro. La oferta mínima es de 110 Diamantes por 260 CUP en Saldo Móvil o 950 CUP por Tarjeta CUP.";
+                return "💎 <b>Precios Fijos:</b> Nuestros precios are fijos y no hacemos rebajas ni fiado bro. La oferta mínima es de 110 Diamantes por 260 CUP en Saldo Móvil o 950 CUP por Tarjeta CUP.";
             }
 
             if (txt.includes("usdt") || txt.includes("binance") || txt.includes("crypto")) {
