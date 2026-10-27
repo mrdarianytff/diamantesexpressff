@@ -3,141 +3,1070 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diamantes Express FF</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Diamantes Express FF | Tienda Oficial de Recargas</title>
+    <!-- FontAwesome para íconos interactivos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fuentes modernas de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
-        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        :root {
+            --primary: #00f0ff;
+            --secondary: #ff007f;
+            --accent: #ffe600;
+            --bg-dark: #0a0c16;
+            --card-bg: rgba(22, 27, 46, 0.75);
+            --card-border: rgba(0, 240, 255, 0.2);
+            --text: #ffffff;
+            --text-muted: #a0aec0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(255, 0, 127, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+        }
+
+        /* Banner Promocional */
+        .top-banner {
+            background: linear-gradient(90deg, var(--secondary), #7928ca, var(--primary));
+            background-size: 200% auto;
+            animation: gradientMove 5s ease infinite;
+            color: #fff;
+            text-align: center;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Header / Logo */
+        header {
+            text-align: center;
+            padding: 30px 20px 20px;
+        }
+
+        .logo-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #ffffff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .logo-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Badges de Garantía */
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .badge-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .badge-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .badge-item i {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .badge-item span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        /* CARRUSEL HORIZONTAL DINÁMICO */
+        .carousel-container-wrapper {
+            margin-bottom: 25px;
+        }
+
+        .carousel-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .carousel-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .carousel-scroll::-webkit-scrollbar-thumb {
+            background: rgba(0, 240, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .carousel-card {
+            min-width: 280px;
+            max-width: 280px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.15), rgba(0, 240, 255, 0.15));
+            border: 2px solid var(--secondary);
+            border-radius: 18px;
+            padding: 18px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .carousel-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+        }
+
+        .carousel-card-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 240, 255, 0.4);
+            margin-bottom: 10px;
+        }
+
+        .carousel-card-text {
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            line-height: 1.4;
+            white-space: pre-line;
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+
+        /* Secciones principales */
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        .section-header i { color: var(--primary); }
+
+        /* Formulario Inputs */
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) { .input-grid { grid-template-columns: 1fr; } }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            background: rgba(10, 12, 22, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+            user-select: text;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+        }
+
+        select.form-control option { background: #101424; color: #fff; }
+
+        /* Tabs Método Pago */
+        .payment-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(255, 0, 127, 0.15));
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Grid de Paquetes */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .pkg-card {
+            background: rgba(10, 12, 22, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px 8px;
+            text-align: center;
+            position: relative;
+            overflow: visible;
+            transition: all 0.25s ease;
+        }
+
+        .pkg-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .pkg-card.selected {
+            background: linear-gradient(145deg, rgba(0, 240, 255, 0.2), rgba(10, 12, 22, 0.95));
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        .pkg-card .badge-popular {
+            position: absolute;
+            top: -8px; right: 50%;
+            transform: translateX(50%);
+            background: var(--secondary);
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .pkg-icon { font-size: 1.5rem; margin-bottom: 4px; color: var(--primary); }
+        .pkg-title { font-size: 0.8rem; font-weight: 700; margin-bottom: 2px; color: #fff; }
+        .pkg-price { font-size: 0.95rem; font-family: 'Orbitron', sans-serif; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .qty-btn {
+            background: rgba(0, 240, 255, 0.2);
+            border: none;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .qty-btn:hover { background: var(--primary); color: #0a0c16; }
+        .qty-value { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; color: #fff; min-width: 20px; text-align: center; }
+
+        .order-summary {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed var(--primary);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 18px;
+            font-size: 0.9rem;
+        }
+
+        .summary-title { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+
+        .community-card {
+            background: linear-gradient(135deg, rgba(22, 27, 46, 0.9), rgba(10, 12, 22, 0.95));
+            border: 1px solid var(--primary);
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+        }
+
+        .community-img-container {
+            width: 100%; max-width: 280px; margin: 0 auto 15px; border-radius: 14px; overflow: hidden; border: 2px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .community-img-container img { width: 100%; height: auto; display: block; }
+        .community-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #fff; margin-bottom: 8px; }
+        .community-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.4; }
+        .community-desc a { color: var(--primary); text-decoration: underline; font-weight: 600; }
+
+        .btn-channel {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(90deg, #25D366, #128C7E); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-family: 'Orbitron', sans-serif; font-size: 0.95rem; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); transition: 0.3s;
+        }
+
+        .btn-channel:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5); }
+
+        .steps-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; text-align: center; }
+        .step-box { font-size: 0.75rem; color: var(--text-muted); }
+        .step-number { width: 24px; height: 24px; background: rgba(0, 240, 255, 0.15); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-weight: 700; font-size: 0.8rem; }
+
+        .btn-order {
+            width: 100%; background: linear-gradient(90deg, #25D366, #128C7E); color: #fff; border: none; padding: 16px; border-radius: 14px; font-size: 1.1rem; font-weight: 700; font-family: 'Orbitron', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;
+        }
+
+        .btn-order:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5); }
+
+        .chat-widget-btn {
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: 2px solid #fff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.6); color: #fff; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; transition: transform 0.3s ease;
+        }
+
+        .chat-widget-btn:hover { transform: scale(1.1) rotate(10deg); }
+
+        .chat-window {
+            position: fixed; bottom: 90px; right: 20px; width: 330px; max-width: calc(100vw - 40px); height: 450px; background: rgba(10, 12, 22, 0.95); border: 1px solid var(--primary); border-radius: 18px; box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3); display: flex; flex-direction: column; overflow: hidden; z-index: 9998; backdrop-filter: blur(15px); transition: all 0.3s ease; transform: scale(0); transform-origin: bottom right;
+        }
+
+        .chat-window.open { transform: scale(1); }
+
+        .chat-header {
+            background: linear-gradient(90deg, rgba(0,240,255,0.2), rgba(255,0,127,0.2)); padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .chat-header-info { display: flex; align-items: center; gap: 10px; }
+        .chat-header-title { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: #fff; font-weight: 700; }
+        .chat-status { font-size: 0.7rem; color: #25D366; display: flex; align-items: center; gap: 4px; }
+        .chat-close-btn { background: none; border: none; color: #a0aec0; font-size: 1.2rem; cursor: pointer; }
+
+        .chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem; user-select: text; }
+        .msg { max-width: 82%; padding: 10px 12px; border-radius: 12px; line-height: 1.4; }
+        .msg-bot { background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.3); color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-user { background: linear-gradient(135deg, var(--secondary), #7928ca); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+
+        .chat-input-area { display: flex; padding: 8px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); }
+        .chat-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-size: 0.85rem; outline: none; user-select: text; }
+        .chat-send-btn { background: var(--primary); border: none; color: #0a0c16; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+
+        footer { text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.8rem; }
     </style>
 </head>
-<body class="bg-slate-950 min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Header -->
-    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3 flex justify-between items-center shadow-md">
-        <div class="flex items-center space-x-2">
-            <span class="bg-amber-500 text-slate-950 font-black px-2 py-1 rounded text-sm tracking-wider">FF</span>
-            <h1 class="font-extrabold text-lg tracking-wide text-white">DIAMANTES <span class="text-amber-400">EXPRESS</span></h1>
-        </div>
-        <div class="flex items-center space-x-3">
-            <a href="admin.html" class="text-slate-400 hover:text-amber-400 transition text-sm"><i class="fa-solid fa-lock"></i></a>
-            <div class="bg-slate-800 px-3 py-1.5 rounded-full border border-slate-700 flex items-center space-x-1.5 text-xs font-semibold text-amber-400">
-                <i class="fa-solid fa-circle text-[8px] animate-pulse"></i>
-                <span>En Línea</span>
-            </div>
+    <!-- Banner Promocional -->
+    <div class="top-banner">
+        🔥 ¡RECARGAS INSTANTÁNEAS Y 100% SEGURAS EN MENOS DE 5 MINUTOS! 🔥
+    </div>
+
+    <header>
+        <div class="logo">
+            <h1 class="logo-title"><i class="fa-solid fa-gem" style="margin-right: 8px;"></i>DIAMANTES EXPRESS</h1>
+            <p class="logo-subtitle">Tienda Oficial de Recargas para Free Fire</p>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-md mx-auto w-full p-4 space-y-6 mb-12">
+    <main class="container">
 
-        <!-- Carrusel Dinámico de Ofertas y Agendas -->
-        <section id="carousel-section" class="hidden">
-            <div class="flex items-center justify-between mb-2">
-                <h2 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-                    <i class="fa-solid fa-bullhorn"></i> Novedades y Ofertas
-                </h2>
-                <span class="text-[10px] text-slate-400 font-medium">Desliza para ver más <i class="fa-solid fa-arrow-right ml-0.5"></i></span>
+        <!-- CARRUSEL DINÁMICO MULTI-ANUNCIO -->
+        <div id="dynamicCarouselWrapper" class="carousel-container-wrapper" style="display: none;">
+            <div style="font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-bullhorn"></i> Novedades y Ofertas (Desliza 👉)
             </div>
-            
-            <!-- Contenedor Deslizable Horizontal -->
-            <div id="dynamic-carousel" class="flex overflow-x-auto space-x-3 pb-3 no-scrollbar snap-x snap-mandatory">
-                <!-- Se llena automáticamente con JavaScript -->
+            <div id="dynamicCarouselScroll" class="carousel-scroll">
+                <!-- Las tarjetas se insertan dinámicamente aquí -->
+            </div>
+        </div>
+
+        <!-- Insignias de confianza -->
+        <div class="trust-badges">
+            <div class="badge-item">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Entrega Rápida</span>
+            </div>
+            <div class="badge-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>100% Seguro</span>
+            </div>
+            <div class="badge-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Soporte 24/7</span>
+            </div>
+        </div>
+
+        <!-- Sección 1: Datos del Jugador -->
+        <section class="section-card">
+            <div class="section-header">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>1. Configurar Pedido</span>
+            </div>
+
+            <div class="input-grid">
+                <div class="form-group">
+                    <label for="player-id"><i class="fa-solid fa-id-card"></i> ID de Jugador (Free Fire):</label>
+                    <input type="number" id="player-id" class="form-control" placeholder="Ej: 123456789" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="player-name"><i class="fa-solid fa-signature"></i> Nombre / Apodo en el Juego:</label>
+                    <input type="text" id="player-name" class="form-control" placeholder="Ej: Moreira_FF" required>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 15px;">
+                <label for="whatsapp-contact"><i class="fa-solid fa-headset"></i> Atendido por:</label>
+                <select id="whatsapp-contact" class="form-control">
+                    <option value="5350299740">🇨🇺 ADMIN 1</option>
+                    <option value="17059950436">🇺🇸 ADMIN 2</option>
+                </select>
             </div>
         </section>
 
-        <!-- Selección de Paquetes (Ejemplo base) -->
-        <section>
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-                <i class="fa-solid fa-gem text-amber-400"></i> Paquetes Populares
-            </h2>
-            <div class="grid grid-cols-2 gap-3">
-                <!-- Paquete 1 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden shadow-sm">
-                    <div class="absolute top-0 right-0 bg-amber-500 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-bl font-mono">POPULAR</div>
-                    <div>
-                        <div class="flex items-center space-x-1 text-amber-400 font-bold text-lg mb-1">
-                            <span>341</span> <i class="fa-solid fa-gem text-sm"></i>
-                        </div>
-                        <p class="text-xs text-slate-400 mb-3">Recarga directa por ID</p>
-                    </div>
-                    <div>
-                        <div class="text-sm font-black text-white mb-2">840 CUP</div>
-                        <a href="https://wa.me/+5350299740?text=Hola,%20quiero%20comprar%20el%20paquete%20de%20341%20diamantes." target="_blank" class="block w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-center py-2 rounded-xl text-xs transition shadow-md">
-                            Comprar
-                        </a>
+        <!-- Sección 2: Selección de Paquetes -->
+        <section class="section-card">
+            <div class="section-header">
+                <i class="fa-solid fa-gem"></i>
+                <span>2. Selecciona tus Ofertas (Hasta 10 por opción)</span>
+            </div>
+
+            <!-- Selector de Método de Pago -->
+            <div class="payment-tabs">
+                <button class="tab-btn active" id="tab-saldo" onclick="switchTab('saldo')">
+                    <i class="fa-solid fa-mobile-screen-button"></i> Saldo Móvil
+                </button>
+                <button class="tab-btn" id="tab-tarjeta" onclick="switchTab('tarjeta')">
+                    <i class="fa-solid fa-credit-card"></i> Tarjeta CUP
+                </button>
+            </div>
+
+            <!-- Paquetes Saldo Móvil -->
+            <div class="packages-grid" id="grid-saldo">
+                <div class="pkg-card" id="card-s-0">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">110 Diamantes</div>
+                    <div class="pkg-price">280 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('saldo', 0, '110 Diamantes (Saldo Móvil)', 280, -1)">-</button>
+                        <span class="qty-value" id="qty-s-0">0</span>
+                        <button class="qty-btn" onclick="updateQty('saldo', 0, '110 Diamantes (Saldo Móvil)', 280, 1)">+</button>
                     </div>
                 </div>
 
-                <!-- Paquete 2 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between shadow-sm">
-                    <div>
-                        <div class="flex items-center space-x-1 text-amber-400 font-bold text-lg mb-1">
-                            <span>110</span> <i class="fa-solid fa-gem text-sm"></i>
-                        </div>
-                        <p class="text-xs text-slate-400 mb-3">Recarga directa por ID</p>
+                <div class="pkg-card" id="card-s-1">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">220 Diamantes</div>
+                    <div class="pkg-price">560 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('saldo', 1, '220 Diamantes (Saldo Móvil)', 560, -1)">-</button>
+                        <span class="qty-value" id="qty-s-1">0</span>
+                        <button class="qty-btn" onclick="updateQty('saldo', 1, '220 Diamantes (Saldo Móvil)', 560, 1)">+</button>
                     </div>
-                    <div>
-                        <div class="text-sm font-black text-white mb-2">280 CUP</div>
-                        <a href="https://wa.me/+5350299740?text=Hola,%20quiero%20comprar%20el%20paquete%20de%20110%20diamantes." target="_blank" class="block w-full bg-slate-800 hover:bg-slate-700 text-white font-bold text-center py-2 rounded-xl text-xs border border-slate-700 transition">
-                            Comprar
-                        </a>
+                </div>
+
+                <div class="pkg-card" id="card-s-2">
+                    <span class="badge-popular">Popular</span>
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">341 Diamantes</div>
+                    <div class="pkg-price">840 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('saldo', 2, '341 Diamantes (Saldo Móvil)', 840, -1)">-</button>
+                        <span class="qty-value" id="qty-s-2">0</span>
+                        <button class="qty-btn" onclick="updateQty('saldo', 2, '341 Diamantes (Saldo Móvil)', 840, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-s-3">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">572 Diamantes</div>
+                    <div class="pkg-price">1400 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('saldo', 3, '572 Diamantes (Saldo Móvil)', 1400, -1)">-</button>
+                        <span class="qty-value" id="qty-s-3">0</span>
+                        <button class="qty-btn" onclick="updateQty('saldo', 3, '572 Diamantes (Saldo Móvil)', 1400, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-s-4">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">1166 Diamantes</div>
+                    <div class="pkg-price">2800 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('saldo', 4, '1166 Diamantes (Saldo Móvil)', 2800, -1)">-</button>
+                        <span class="qty-value" id="qty-s-4">0</span>
+                        <button class="qty-btn" onclick="updateQty('saldo', 4, '1166 Diamantes (Saldo Móvil)', 2800, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-s-5">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">2398 Diamantes</div>
+                    <div class="pkg-price">5600 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('saldo', 5, '2398 Diamantes (Saldo Móvil)', 5600, -1)">-</button>
+                        <span class="qty-value" id="qty-s-5">0</span>
+                        <button class="qty-btn" onclick="updateQty('saldo', 5, '2398 Diamantes (Saldo Móvil)', 5600, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-s-6">
+                    <div class="pkg-icon">👑</div>
+                    <div class="pkg-title">M. Semanal</div>
+                    <div class="pkg-price">840 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('saldo', 6, 'Membresía Semanal (Saldo Móvil)', 840, -1)">-</button>
+                        <span class="qty-value" id="qty-s-6">0</span>
+                        <button class="qty-btn" onclick="updateQty('saldo', 6, 'Membresía Semanal (Saldo Móvil)', 840, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-s-7">
+                    <div class="pkg-icon">👑</div>
+                    <div class="pkg-title">M. Mensual</div>
+                    <div class="pkg-price">4200 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('saldo', 7, 'Membresía Mensual (Saldo Móvil)', 4200, -1)">-</button>
+                        <span class="qty-value" id="qty-s-7">0</span>
+                        <button class="qty-btn" onclick="updateQty('saldo', 7, 'Membresía Mensual (Saldo Móvil)', 4200, 1)">+</button>
                     </div>
                 </div>
             </div>
+
+            <!-- Paquetes Tarjeta CUP -->
+            <div class="packages-grid" id="grid-tarjeta" style="display: none;">
+                <div class="pkg-card" id="card-t-0">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">110 Diamantes</div>
+                    <div class="pkg-price">980 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 0, '110 Diamantes (Tarjeta CUP)', 980, -1)">-</button>
+                        <span class="qty-value" id="qty-t-0">0</span>
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 0, '110 Diamantes (Tarjeta CUP)', 980, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-t-1">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">220 Diamantes</div>
+                    <div class="pkg-price">1960 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 1, '220 Diamantes (Tarjeta CUP)', 1960, -1)">-</button>
+                        <span class="qty-value" id="qty-t-1">0</span>
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 1, '220 Diamantes (Tarjeta CUP)', 1960, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-t-2">
+                    <span class="badge-popular">Popular</span>
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">341 Diamantes</div>
+                    <div class="pkg-price">2940 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 2, '341 Diamantes (Tarjeta CUP)', 2940, -1)">-</button>
+                        <span class="qty-value" id="qty-t-2">0</span>
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 2, '341 Diamantes (Tarjeta CUP)', 2940, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-t-3">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">572 Diamantes</div>
+                    <div class="pkg-price">4900 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 3, '572 Diamantes (Tarjeta CUP)', 4900, -1)">-</button>
+                        <span class="qty-value" id="qty-t-3">0</span>
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 3, '572 Diamantes (Tarjeta CUP)', 4900, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-t-4">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">1166 Diamantes</div>
+                    <div class="pkg-price">9800 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 4, '1166 Diamantes (Tarjeta CUP)', 9800, -1)">-</button>
+                        <span class="qty-value" id="qty-t-4">0</span>
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 4, '1166 Diamantes (Tarjeta CUP)', 9800, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-t-5">
+                    <div class="pkg-icon">💎</div>
+                    <div class="pkg-title">2398 Diamantes</div>
+                    <div class="pkg-price">19600 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 5, '2398 Diamantes (Tarjeta CUP)', 19600, -1)">-</button>
+                        <span class="qty-value" id="qty-t-5">0</span>
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 5, '2398 Diamantes (Tarjeta CUP)', 19600, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-t-6">
+                    <div class="pkg-icon">👑</div>
+                    <div class="pkg-title">M. Semanal</div>
+                    <div class="pkg-price">2940 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 6, 'Membresía Semanal (Tarjeta CUP)', 2940, -1)">-</button>
+                        <span class="qty-value" id="qty-t-6">0</span>
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 6, 'Membresía Semanal (Tarjeta CUP)', 2940, 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="pkg-card" id="card-t-7">
+                    <div class="pkg-icon">👑</div>
+                    <div class="pkg-title">M. Mensual</div>
+                    <div class="pkg-price">14700 CUP</div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 7, 'Membresía Mensual (Tarjeta CUP)', 14700, -1)">-</button>
+                        <span class="qty-value" id="qty-t-7">0</span>
+                        <button class="qty-btn" onclick="updateQty('tarjeta', 7, 'Membresía Mensual (Tarjeta CUP)', 14700, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen de selección -->
+            <div class="order-summary">
+                <div class="summary-title"><i class="fa-solid fa-cart-shopping"></i> Resumen Total:</div>
+                <div id="summary-text" style="color: var(--text-muted); font-size: 0.85rem;">Ningún paquete seleccionado.</div>
+                <div id="summary-total" style="font-family: 'Orbitron', sans-serif; font-weight: 800; color: var(--accent); margin-top: 6px; font-size: 1.05rem;">Total: 0 CUP</div>
+            </div>
+
+            <!-- Pasos breves -->
+            <div class="steps-container" style="margin-top: 20px;">
+                <div class="step-box">
+                    <div class="step-number">1</div>
+                    <span>ID y Nombre</span>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">2</div>
+                    <span>Elige cantidad</span>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">3</div>
+                    <span>Envía el pedido</span>
+                </div>
+            </div>
         </section>
+
+        <!-- Botón de Envío -->
+        <button class="btn-order" onclick="sendOrder()">
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i> Pedir por WhatsApp
+        </button>
+
+        <!-- SECCIÓN DE COMUNIDAD / CANAL DE WHATSAPP -->
+        <div class="community-card">
+            <div class="community-img-container">
+                <img src="gamers.jpg" alt="Comunidad Oficial" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=60'">
+            </div>
+            <h3 class="community-title">¡Comunidad Oficial!</h3>
+            <p class="community-desc">
+                Entérate de ofertas exclusivas y mira todas mis referencias de los clientes. Únete a nuestra <a href="https://whatsapp.com/channel/0029VaqrQkTHLHQgIe1LSq3F" target="_blank">Comunidad</a>
+            </p>
+            <a href="https://whatsapp.com/channel/0029VaqrQkTHLHQgIe1LSq3F" target="_blank" class="btn-channel">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Únete a nuestro canal
+            </a>
+        </div>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800 py-4 px-4 text-center text-xs text-slate-500">
-        <p>© 2026 Diamantes Express FF. Todos los derechos reservados.</p>
+    <!-- WIDGET CHATBOT FLOTANTE IA -->
+    <div class="chat-widget-btn" onclick="toggleChat()">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <i class="fa-solid fa-robot" style="color: var(--primary); font-size: 1.2rem;"></i>
+                <div>
+                    <div class="chat-header-title">Express Bot IA</div>
+                    <div class="chat-status"><i class="fa-solid fa-circle" style="font-size: 0.5rem;"></i> En línea</div>
+                </div>
+            </div>
+            <button class="chat-close-btn" onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg msg-bot">¡Hola, crack! 🤖💎 Soy el asistente virtual de <b>Diamantes Express FF</b>. Ojo: no soy una IA 100% oficial y a veces puedo cometer algún error, ¡así que cualquier duda seria consúltala con los admins! ¿Qué te trae por aquí hoy?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Escribe aquí..." onkeypress="handleKeyPress(event)">
+            <button class="chat-send-btn" onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© Diamantes Express FF — Todos los derechos reservados</p>
     </footer>
 
-    <!-- Script para Cargar el Carrusel Dinámico -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedItems = localStorage.getItem("express_carousel_items");
-            const carouselSection = document.getElementById("carousel-section");
-            const carouselContainer = document.getElementById("dynamic-carousel");
+        let cart = {};
+
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedItems = localStorage.getItem('express_carousel_items');
+            const wrapper = document.getElementById('dynamicCarouselWrapper');
+            const scrollContainer = document.getElementById('dynamicCarouselScroll');
 
             if (savedItems) {
                 try {
                     const items = JSON.parse(savedItems);
                     if (items.length > 0) {
-                        carouselSection.classList.remove("hidden");
-                        carouselContainer.innerHTML = "";
-
+                        scrollContainer.innerHTML = '';
                         items.forEach(item => {
-                            const card = document.createElement("div");
-                            card.className = "min-w-[260px] max-w-[260px] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex-shrink-0 snap-start flex flex-col justify-between shadow-md";
-                            
+                            const card = document.createElement('div');
+                            card.className = 'carousel-card';
                             card.innerHTML = `
                                 <div>
-                                    <div class="h-36 w-full bg-slate-950 overflow-hidden relative">
-                                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="p-3">
-                                        <h3 class="font-bold text-sm text-white mb-1 line-clamp-1">${item.title}</h3>
-                                        <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">${item.description}</p>
-                                    </div>
-                                </div>
-                                <div class="p-3 pt-0">
-                                    <a href="https://wa.me/+5350299740?text=Hola,%20me%20interesa%20la%20oferta:%20${encodeURIComponent(item.title)}" target="_blank" class="block w-full bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-center py-2 rounded-xl text-xs border border-slate-700 transition">
-                                        Pedir por WhatsApp
-                                    </a>
+                                    ${item.title ? `<h3 class="carousel-card-title">${item.title}</h3>` : ''}
+                                    ${item.image ? `<img src="${item.image}" class="carousel-card-img" alt="Anuncio">` : ''}
+                                    ${item.description ? `<p class="carousel-card-text">${item.description}</p>` : ''}
                                 </div>
                             `;
-                            carouselContainer.appendChild(card);
+                            scrollContainer.appendChild(card);
                         });
+                        wrapper.style.display = 'block';
                     }
-                } catch (e) {
-                    console.error("Error al cargar los elementos del carrusel", e);
+                } catch(e) {
+                    console.error("Error al cargar carrusel", e);
                 }
             }
         });
+
+        function switchTab(type) {
+            document.getElementById('grid-saldo').style.display = type === 'saldo' ? 'grid' : 'none';
+            document.getElementById('grid-tarjeta').style.display = type === 'tarjeta' ? 'grid' : 'none';
+            
+            document.getElementById('tab-saldo').classList.toggle('active', type === 'saldo');
+            document.getElementById('tab-tarjeta').classList.toggle('active', type === 'tarjeta');
+        }
+
+        function updateQty(type, index, name, unitPrice, change) {
+            let key = type + '-' + index;
+            if (!cart[key]) {
+                cart[key] = { name: name, price: unitPrice, qty: 0, category: type };
+            }
+
+            let newQty = cart[key].qty + change;
+            if (newQty < 0) newQty = 0;
+            if (newQty > 10) {
+                alert("¡Máximo 10 unidades por opción en un mismo pedido!");
+                return;
+            }
+
+            cart[key].qty = newQty;
+            if (cart[key].qty === 0) {
+                delete cart[key];
+            }
+
+            document.getElementById(`qty-${type[0]}-${index}`).innerText = newQty;
+            
+            let cardElement = document.getElementById(`card-${type[0]}-${index}`);
+            if (newQty > 0) {
+                cardElement.classList.add('selected');
+            } else {
+                cardElement.classList.remove('selected');
+            }
+
+            updateSummary();
+        }
+
+        function updateSummary() {
+            let summaryTextEl = document.getElementById('summary-text');
+            let summaryTotalEl = document.getElementById('summary-total');
+            
+            let keys = Object.keys(cart);
+            if (keys.length === 0) {
+                summaryTextEl.innerText = "Ningún paquete seleccionado.";
+                summaryTotalEl.innerText = "Total: 0 CUP";
+                return;
+            }
+
+            let textHtml = "";
+            let totalSaldo = 0;
+            let totalTarjeta = 0;
+
+            keys.forEach(k => {
+                let item = cart[k];
+                let subtotal = item.price * item.qty;
+                if (item.category === 'saldo') {
+                    totalSaldo += subtotal;
+                } else {
+                    totalTarjeta += subtotal;
+                }
+                textHtml += `• ${item.qty}x ${item.name} (${subtotal.toLocaleString()} CUP)<br>`;
+            });
+
+            summaryTextEl.innerHTML = textHtml;
+
+            let totalDisplay = "";
+            if (totalSaldo > 0 && totalTarjeta > 0) {
+                totalDisplay = `📱 Saldo Móvil: ${totalSaldo.toLocaleString()} CUP | 💳 Tarjeta: ${totalTarjeta.toLocaleString()} CUP`;
+            } else if (totalSaldo > 0) {
+                totalDisplay = `Total Saldo Móvil: ${totalSaldo.toLocaleString()} CUP`;
+            } else {
+                totalDisplay = `Total Tarjeta CUP: ${totalTarjeta.toLocaleString()} CUP`;
+            }
+
+            summaryTotalEl.innerText = totalDisplay;
+        }
+
+        function sendOrder() {
+            const phoneNumber = document.getElementById('whatsapp-contact').value;
+            const playerId = document.getElementById('player-id').value.trim();
+            const playerName = document.getElementById('player-name').value.trim();
+
+            if (!playerId) {
+                alert("Por favor, ingresa tu ID de jugador de Free Fire.");
+                return;
+            }
+
+            if (!playerName) {
+                alert("Por favor, ingresa tu Nombre/Apodo del juego.");
+                return;
+            }
+
+            let keys = Object.keys(cart);
+            if (keys.length === 0) {
+                alert("Por favor, selecciona al menos un paquete usando los botones (+).");
+                return;
+            }
+
+            let orderDetails = "";
+            let totalSaldo = 0;
+            let totalTarjeta = 0;
+            let usedMethods = [];
+
+            keys.forEach(k => {
+                let item = cart[k];
+                let subtotal = item.price * item.qty;
+                
+                if (item.category === 'saldo') {
+                    totalSaldo += subtotal;
+                    if (!usedMethods.includes("Saldo Móvil")) usedMethods.push("Saldo Móvil");
+                } else {
+                    totalTarjeta += subtotal;
+                    if (!usedMethods.includes("Tarjeta CUP")) usedMethods.push("Tarjeta CUP");
+                }
+
+                orderDetails += `%0A  - *${item.qty}x* ${item.name} — *${subtotal.toLocaleString()} CUP*`;
+            });
+
+            let totalSection = "";
+            if (totalSaldo > 0 && totalTarjeta > 0) {
+                totalSection = `💰 *TOTAL A PAGAR:*%0A📱 *Saldo Móvil:* *${totalSaldo.toLocaleString()} CUP*%0A💳 *Tarjeta CUP:* *${totalTarjeta.toLocaleString()} CUP*`;
+            } else if (totalSaldo > 0) {
+                totalSection = `💰 *TOTAL SALDO MÓVIL:* *${totalSaldo.toLocaleString()} CUP*`;
+            } else {
+                totalSection = `💰 *TOTAL TARJETA CUP:* *${totalTarjeta.toLocaleString()} CUP*`;
+            }
+
+            const message = `Hola *Diamantes Express FF*! 💎%0AQuiero realizar este pedido:%0A%0A📌 *ID Jugador:* ${playerId}%0A👤 *Nombre en juego:* ${playerName}%0A💳 *Método(s):* ${usedMethods.join(" y ")}%0A📦 *Paquetes:* ${orderDetails}%0A%0A${totalSection}%0A%0A¿Cómo te hago la transferencia/envío?`;
+
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        /* LÓGICA DE APERTURA DEL CHAT */
+        function toggleChat() {
+            document.getElementById('chatWindow').classList.toggle('open');
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            input.value = '';
+
+            setTimeout(() => {
+                let reply = getBotResponse(text);
+                addMessage(reply, 'bot');
+            }, 300);
+        }
+
+        function addMessage(text, sender) {
+            const box = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `msg msg-${sender}`;
+            div.innerHTML = text;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function getRandom(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        /* MOTOR INTELIGENTE BASADO EN INTENCIONES CONCRETAS */
+        function getBotResponse(rawTxt) {
+            let txt = rawTxt.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9\s]/g, "")
+                .trim();
+
+            if (txt.includes("creo") || txt.includes("creador") || txt.includes("dueno") || txt.includes("autor") || txt.includes("darian") || (txt.includes("quien") && (txt.includes("hizo") || txt.includes("crea")))) {
+                return "El dueño absoluto y creador de esta tienda es <b>MR DARIAN YT</b> 👑. ¡Los admins te atienden directamente al WhatsApp para cualquier pedido o duda!";
+            }
+
+            if (txt.includes("id") && (txt.includes("donde") || txt.includes("como") || txt.includes("busco") || txt.includes("encuentro") || txt.includes("consigo") || txt.includes("cual") || txt.includes("ver"))) {
+                return "📌 <b>Cómo ver tu ID en Free Fire:</b><br>1️⃣ Abre el juego.<br>2️⃣ Toca tu foto/perfil arriba a la izquierda.<br>3️⃣ Verás tu <b>ID (números)</b> debajo de tu nombre.<br>4️⃣ Cópialo y pégalo arriba en el formulario.";
+            }
+
+            if (txt.includes("nombre") || txt.includes("apodo") || txt.includes("nick")) {
+                return "👤 <b>Nombre en el juego:</b><br>Es tu nick o apodo visible dentro de Free Fire. Lo usamos para verificar tu cuenta antes de enviarte los diamantes.";
+            }
+
+            if (txt.includes("compro") || txt.includes("comprar") || txt.includes("recargar") || txt.includes("recarga") || txt.includes("proceso") || txt.includes("pasos")) {
+                return "🛒 ¡Es super sencillo bro! Sigue estos 3 pasos arriba en la web:<br>1️⃣ Pon tu <b>ID</b> y tu <b>Nombre</b> de Free Fire.<br>2️⃣ Toca el botón <b>(+)</b> en la oferta que quieras.<br>3️⃣ Toca el botón verde <b>'PEDIR POR WHATSAPP'</b> para confirmar con el admin.";
+            }
+
+            if (txt.includes("precio") || txt.includes("precios") || txt.includes("ofertas") || txt.includes("cuanto sale") || txt.includes("lista")) {
+                return "💎 <b>SALDO MÓVIL:</b><br>110💎=280 CUP | 220💎=560 CUP | 341💎=840 CUP | 572💎=1400 CUP | 1166💎=2800 CUP | 2398💎=5600 CUP<br>• Membresía Semanal: 840 CUP<br>• Membresía Mensual: 4200 CUP<br><br>💳 <b>TARJETA CUP:</b><br>110💎=980 CUP | 220💎=1960 CUP | 341💎=2940 CUP | 572💎=4900 CUP | 1166💎=9800 CUP | 2398💎=19600 CUP<br>• Membresía Semanal: 2940 CUP<br>• Membresía Mensual: 14700 CUP";
+            }
+            if (txt.includes("110")) return "💎 110 Diamantes = 280 CUP por Saldo Móvil / 980 CUP por Tarjeta CUP.";
+            if (txt.includes("220")) return "💎 220 Diamantes = 560 CUP por Saldo Móvil / 1,960 CUP por Tarjeta CUP.";
+            if (txt.includes("341")) return "💎 341 Diamantes = 840 CUP por Saldo Móvil / 2,940 CUP por Tarjeta CUP. ¡La preferida de los clientes! 🔥";
+            if (txt.includes("572")) return "💎 572 Diamantes = 1,400 CUP por Saldo Móvil / 4,900 CUP por Tarjeta CUP.";
+            if (txt.includes("1166")) return "💎 1166 Diamantes = 2,800 CUP por Saldo Móvil / 9,800 CUP por Tarjeta CUP.";
+            if (txt.includes("2398")) return "💎 2398 Diamantes = 5,600 CUP por Saldo Móvil / 19,600 CUP por Tarjeta CUP.";
+
+            if (txt.includes("rebaja") || txt.includes("descuento") || txt.includes("fiado") || txt.includes("barato") || txt.includes("alcanza") || txt.includes("200")) {
+                return "💎 <b>Precios Fijos:</b> Nuestros precios son fijos y no hacemos rebajas ni fiado bro. La oferta mínima es de 110 Diamantes por 280 CUP en Saldo Móvil o 980 CUP por Tarjeta CUP.";
+            }
+
+            if (txt.includes("usdt") || txt.includes("binance") || txt.includes("crypto")) {
+                return "🪙 <b>Pago por USDT:</b> Los pagos por USDT se tratan por privado con el admin en WhatsApp fuera de la página. Arma tu pedido y consúltalo directo con él.";
+            }
+            if (txt.includes("saldo") || txt.includes("133")) {
+                return "📱 <b>Para pagar con Saldo Móvil:</b><br>1. Selecciona tu paquete arriba y dale a Pedir por WhatsApp.<br>2. El admin te dará su número.<br>3. Marcas en tu cel: <code>*133*1*NUMERO*MONTO#</code> y tecla de llamar. ¡Listo!";
+            }
+            if (txt.includes("tarjeta") || txt.includes("transfermovil") || txt.includes("bpa") || txt.includes("bandecc")) {
+                return "💳 <b>Pago por Tarjeta CUP:</b> Haz tu pedido arriba seleccionando la pestaña 'Tarjeta CUP'. Al ir a WhatsApp, el admin te dará la tarjeta para que le transfieras por Transfermóvil.";
+            }
+            if (txt.includes("mlc") || txt.includes("usd") || txt.includes("zelle") || txt.includes("enzona")) {
+                return "⚠️ <b>Aviso:</b> En la web cobramos en <b>CUP</b> (Saldo Móvil o Tarjeta CUP). A veces el admin puede aceptar <b>USDT</b> en privado por WhatsApp, pero no aceptamos MLC, USD en efectivo, Zelle ni Enzona.";
+            }
+
+            if (txt.includes("pase") || txt.includes("booyah")) {
+                return "🎟️ <b>Requisitos para el Pase Booyah:</b><br>• <b>Región Latam (cuesta 300 💎):</b> <i>(Incluye EE.UU y otros países de la región)</i>. Necesitas mínimo <b>341 Diamantes</b> (840 CUP Saldo / 2,940 CUP Tarjeta).<br>• <b>Región Norteamérica (cuesta 450 💎):</b> Necesitas recargar <b>341 + 110 Diamantes</b> (1,120 CUP Saldo / 3,920 CUP Tarjeta).";
+            }
+            if (txt.includes("membresia") || txt.includes("semanal") || txt.includes("mensual")) {
+                return "👑 <b>Membresías FF:</b><br>• <b>Semanal:</b> 840 CUP (Saldo Móvil) / 2,940 CUP (Tarjeta CUP). Te da diamantes instantáneos + diarios por 7 días.<br>• <b>Mensual:</b> 4,200 CUP (Saldo Móvil) / 14,700 CUP (Tarjeta CUP). Recompensas diarias durante 30 días.";
+            }
+
+            if (txt.includes("demora") || txt.includes("tarda") || txt.includes("tiempo") || txt.includes("rapido")) {
+                return "⚡ ¡La recarga cae rapidísimo! Una vez que confirmes el pago con el admin por WhatsApp, tus diamantes llegan en menos de 5 minutos.";
+            }
+            if (txt.includes("confiable") || txt.includes("estafa") || txt.includes("seguro") || txt.includes("referencias")) {
+                return "🛡️ ¡100% Legal y Seguro! Jamás pedimos tu contraseña ni correo, solo tu ID. Puedes revisar cientos de referencias reales de clientes satisfechos en nossa Comunidad oficial de WhatsApp.";
+            }
+
+            if (txt === "hola" || txt === "buenas" || txt === "klk" || txt === "epa" || txt === "saludos" || txt === "que tal" || txt === "bro" || txt === "hola bro") {
+                return getRandom(["¡Qué onda máquina! 😎 ¿Listo para recargar tus diamantes?", "¡Epa leyenda! 💎 ¿Qué oferta te vas a llevar hoy?", "¡Klk bro! Dime qué recarga te armamos al toque."]);
+            }
+            if (txt === "gracias" || txt === "chao" || txt === "adios" || txt === "nos vemos" || txt === "listo") {
+                return getRandom(["¡De nada, máquina! 🔥 Para eso estamos. Suerte en clasificatoria 💎", "¡A ti, leyenda! Cuando quieras recargar, aquí estoy 😎", "¡Dale bro, un placer! Que disfrutes los diamantes 🚀"]);
+            }
+
+            return getRandom([
+                "¡Entendido bro! Para una atención personalizada con tus recargas, completa tu ID arriba y presiona el botón verde de WhatsApp para hablar directo con un admin. 🚀",
+                "¡Atento máquina! Puedes seleccionar arriba tu oferta preferida y tocar 'PEDIR POR WHATSAPP' para atenderte al instante. 💎"
+            ]);
+        }
     </script>
 </body>
 </html>
