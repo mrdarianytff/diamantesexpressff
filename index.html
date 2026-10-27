@@ -124,6 +124,44 @@
             color: #e2e8f0;
         }
 
+        /* ESTILOS DE LA SECCIÓN ESPECIAL DINÁMICA */
+        .special-offer-card {
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.15), rgba(0, 240, 255, 0.15));
+            border: 2px solid var(--secondary);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.3);
+            text-align: center;
+        }
+
+        .special-offer-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+        }
+
+        .special-offer-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 14px;
+            border: 2px solid rgba(0, 240, 255, 0.4);
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        .special-offer-text {
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+            white-space: pre-line;
+            margin-bottom: 15px;
+        }
+
         /* Secciones principales */
         .section-card {
             background: var(--card-bg);
@@ -147,9 +185,7 @@
             padding-bottom: 10px;
         }
 
-        .section-header i {
-            color: var(--primary);
-        }
+        .section-header i { color: var(--primary); }
 
         /* Formulario Inputs */
         .input-grid {
@@ -158,9 +194,7 @@
             gap: 15px;
         }
 
-        @media (max-width: 600px) {
-            .input-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 600px) { .input-grid { grid-template-columns: 1fr; } }
 
         .form-group {
             display: flex;
@@ -192,10 +226,7 @@
             box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
         }
 
-        select.form-control option {
-            background: #101424;
-            color: #fff;
-        }
+        select.form-control option { background: #101424; color: #fff; }
 
         /* Tabs Método Pago */
         .payment-tabs {
@@ -259,8 +290,7 @@
 
         .pkg-card .badge-popular {
             position: absolute;
-            top: -8px;
-            right: 50%;
+            top: -8px; right: 50%;
             transform: translateX(50%);
             background: var(--secondary);
             color: #fff;
@@ -273,28 +303,10 @@
             z-index: 2;
         }
 
-        .pkg-icon {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-            color: var(--primary);
-        }
+        .pkg-icon { font-size: 1.5rem; margin-bottom: 4px; color: var(--primary); }
+        .pkg-title { font-size: 0.8rem; font-weight: 700; margin-bottom: 2px; color: #fff; }
+        .pkg-price { font-size: 0.95rem; font-family: 'Orbitron', sans-serif; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
 
-        .pkg-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 2px;
-            color: #fff;
-        }
-
-        .pkg-price {
-            font-size: 0.95rem;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-
-        /* Controles de cantidad (+ / -) */
         .quantity-control {
             display: flex;
             align-items: center;
@@ -321,21 +333,9 @@
             transition: 0.2s;
         }
 
-        .qty-btn:hover {
-            background: var(--primary);
-            color: #0a0c16;
-        }
+        .qty-btn:hover { background: var(--primary); color: #0a0c16; }
+        .qty-value { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; color: #fff; min-width: 20px; text-align: center; }
 
-        .qty-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #fff;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        /* Resumen de pedido */
         .order-summary {
             background: rgba(0, 240, 255, 0.05);
             border: 1px dashed var(--primary);
@@ -345,17 +345,8 @@
             font-size: 0.9rem;
         }
 
-        .summary-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            color: var(--primary);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .summary-title { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 
-        /* SECCIÓN COMUNIDAD / CANAL DE WHATSAPP */
         .community-card {
             background: linear-gradient(135deg, rgba(22, 27, 46, 0.9), rgba(10, 12, 22, 0.95));
             border: 1px solid var(--primary);
@@ -367,278 +358,61 @@
         }
 
         .community-img-container {
-            width: 100%;
-            max-width: 280px;
-            margin: 0 auto 15px;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 2px solid rgba(0, 240, 255, 0.3);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            width: 100%; max-width: 280px; margin: 0 auto 15px; border-radius: 14px; overflow: hidden; border: 2px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
         }
 
-        .community-img-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .community-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        .community-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 18px;
-            line-height: 1.4;
-        }
-
-        .community-desc a {
-            color: var(--primary);
-            text-decoration: underline;
-            font-weight: 600;
-        }
+        .community-img-container img { width: 100%; height: auto; display: block; }
+        .community-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #fff; margin-bottom: 8px; }
+        .community-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.4; }
+        .community-desc a { color: var(--primary); text-decoration: underline; font-weight: 600; }
 
         .btn-channel {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(90deg, #25D366, #128C7E);
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-            transition: 0.3s;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(90deg, #25D366, #128C7E); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-family: 'Orbitron', sans-serif; font-size: 0.95rem; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); transition: 0.3s;
         }
 
-        .btn-channel:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
-        }
+        .btn-channel:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5); }
 
-        /* Banner Pasos de Compra */
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-            text-align: center;
-        }
+        .steps-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; text-align: center; }
+        .step-box { font-size: 0.75rem; color: var(--text-muted); }
+        .step-number { width: 24px; height: 24px; background: rgba(0, 240, 255, 0.15); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-weight: 700; font-size: 0.8rem; }
 
-        .step-box {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .step-number {
-            width: 24px;
-            height: 24px;
-            background: rgba(0, 240, 255, 0.15);
-            color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 6px;
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-
-        /* Action Button */
         .btn-order {
-            width: 100%;
-            background: linear-gradient(90deg, #25D366, #128C7E);
-            color: #fff;
-            border: none;
-            padding: 16px;
-            border-radius: 14px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
+            width: 100%; background: linear-gradient(90deg, #25D366, #128C7E); color: #fff; border: none; padding: 16px; border-radius: 14px; font-size: 1.1rem; font-weight: 700; font-family: 'Orbitron', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;
         }
 
-        .btn-order:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
-        }
+        .btn-order:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5); }
 
-        /* ESTILOS DEL CHATBOT FLOTANTE IA */
         .chat-widget-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: 2px solid #fff;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
-            color: #fff;
-            font-size: 1.6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 9999;
-            transition: transform 0.3s ease;
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: 2px solid #fff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.6); color: #fff; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; transition: transform 0.3s ease;
         }
 
-        .chat-widget-btn:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
+        .chat-widget-btn:hover { transform: scale(1.1) rotate(10deg); }
 
         .chat-window {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 330px;
-            max-width: calc(100vw - 40px);
-            height: 450px;
-            background: rgba(10, 12, 22, 0.95);
-            border: 1px solid var(--primary);
-            border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 9998;
-            backdrop-filter: blur(15px);
-            transition: all 0.3s ease;
-            transform: scale(0);
-            transform-origin: bottom right;
+            position: fixed; bottom: 90px; right: 20px; width: 330px; max-width: calc(100vw - 40px); height: 450px; background: rgba(10, 12, 22, 0.95); border: 1px solid var(--primary); border-radius: 18px; box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3); display: flex; flex-direction: column; overflow: hidden; z-index: 9998; backdrop-filter: blur(15px); transition: all 0.3s ease; transform: scale(0); transform-origin: bottom right;
         }
 
-        .chat-window.open {
-            transform: scale(1);
-        }
+        .chat-window.open { transform: scale(1); }
 
         .chat-header {
-            background: linear-gradient(90deg, rgba(0,240,255,0.2), rgba(255,0,127,0.2));
-            padding: 12px 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            background: linear-gradient(90deg, rgba(0,240,255,0.2), rgba(255,0,127,0.2)); padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;
         }
 
-        .chat-header-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .chat-header-info { display: flex; align-items: center; gap: 10px; }
+        .chat-header-title { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: #fff; font-weight: 700; }
+        .chat-status { font-size: 0.7rem; color: #25D366; display: flex; align-items: center; gap: 4px; }
+        .chat-close-btn { background: none; border: none; color: #a0aec0; font-size: 1.2rem; cursor: pointer; }
 
-        .chat-header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            color: #fff;
-            font-weight: 700;
-        }
+        .chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem; user-select: text; }
+        .msg { max-width: 82%; padding: 10px 12px; border-radius: 12px; line-height: 1.4; }
+        .msg-bot { background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.3); color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-user { background: linear-gradient(135deg, var(--secondary), #7928ca); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
 
-        .chat-status {
-            font-size: 0.7rem;
-            color: #25D366;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+        .chat-input-area { display: flex; padding: 8px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); }
+        .chat-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-size: 0.85rem; outline: none; user-select: text; }
+        .chat-send-btn { background: var(--primary); border: none; color: #0a0c16; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
 
-        .chat-close-btn {
-            background: none;
-            border: none;
-            color: #a0aec0;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 12px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            font-size: 0.85rem;
-            user-select: text;
-        }
-
-        .msg {
-            max-width: 82%;
-            padding: 10px 12px;
-            border-radius: 12px;
-            line-height: 1.4;
-        }
-
-        .msg-bot {
-            background: rgba(0, 240, 255, 0.15);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            color: #fff;
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-        }
-
-        .msg-user {
-            background: linear-gradient(135deg, var(--secondary), #7928ca);
-            color: #fff;
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-        }
-
-        .chat-input-area {
-            display: flex;
-            padding: 8px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            background: rgba(0,0,0,0.4);
-        }
-
-        .chat-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #fff;
-            padding: 8px;
-            font-size: 0.85rem;
-            outline: none;
-            user-select: text;
-        }
-
-        .chat-send-btn {
-            background: var(--primary);
-            border: none;
-            color: #0a0c16;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
+        footer { text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -656,6 +430,13 @@
     </header>
 
     <main class="container">
+
+        <!-- BLOQUE DE OFERTA ESPECIAL / EVENTO (SE ACTIVA DESDE ADMIN.HTML) -->
+        <div id="dynamicOfferSection" class="special-offer-card" style="display: none;">
+            <h2 id="dynamicOfferTitle" class="special-offer-title"></h2>
+            <img id="dynamicOfferImg" class="special-offer-img" alt="Promoción Especial" style="display: none;">
+            <p id="dynamicOfferText" class="special-offer-text"></p>
+        </div>
 
         <!-- Insignias de confianza -->
         <div class="trust-badges">
@@ -978,6 +759,43 @@
 
     <script>
         let cart = {};
+
+        // Cargar ofertas creadas dinámicamente desde admin.html
+        window.addEventListener('DOMContentLoaded', () => {
+            const offerData = localStorage.getItem('express_special_offer');
+            if (offerData) {
+                const parsed = JSON.parse(offerData);
+                if (parsed.active) {
+                    const offerSection = document.getElementById('dynamicOfferSection');
+                    const offerTitle = document.getElementById('dynamicOfferTitle');
+                    const offerImg = document.getElementById('dynamicOfferImg');
+                    const offerText = document.getElementById('dynamicOfferText');
+
+                    if (parsed.title) {
+                        offerTitle.innerText = parsed.title;
+                        offerTitle.style.display = 'block';
+                    } else {
+                        offerTitle.style.display = 'none';
+                    }
+
+                    if (parsed.image) {
+                        offerImg.src = parsed.image;
+                        offerImg.style.display = 'inline-block';
+                    } else {
+                        offerImg.style.display = 'none';
+                    }
+
+                    if (parsed.text) {
+                        offerText.innerText = parsed.text;
+                        offerText.style.display = 'block';
+                    } else {
+                        offerText.style.display = 'none';
+                    }
+
+                    offerSection.style.display = 'block';
+                }
+            }
+        });
 
         function switchTab(type) {
             document.getElementById('grid-saldo').style.display = type === 'saldo' ? 'grid' : 'none';
