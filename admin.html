@@ -3,304 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración | Diamantes Express FF</title>
+    <title>Panel de Administración - Diamantes Express FF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #00f0ff;
-            --secondary: #ff007f;
-            --accent: #ffe600;
-            --bg-dark: #0a0c16;
-            --card-bg: rgba(22, 27, 46, 0.9);
-            --card-border: rgba(0, 240, 255, 0.3);
-            --text: #ffffff;
-            --text-muted: #a0aec0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 20px 15px 40px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        .admin-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 25px;
-            width: 100%;
-            max-width: 550px;
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .admin-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 12px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 18px;
-        }
-
-        label {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .form-control {
-            background: rgba(10, 12, 22, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 12px;
-            color: #fff;
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        /* Checkbox Switch Custom */
-        .switch-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .switch-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 26px;
-        }
-
-        .switch input { opacity: 0; width: 0; height: 0; }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #333;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider { background-color: #25D366; }
-        input:checked + .slider:before { transform: translateX(24px); }
-
-        /* Contenedor de Galería */
-        .file-upload-btn {
-            background: rgba(0, 240, 255, 0.15);
-            border: 2px dashed var(--primary);
-            border-radius: 12px;
-            padding: 18px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .file-upload-btn:hover {
-            background: rgba(0, 240, 255, 0.25);
-        }
-
-        #preview-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin-top: 10px;
-            display: none;
-            border: 1px solid var(--primary);
-        }
-
-        .btn-save {
-            width: 100%;
-            background: linear-gradient(90deg, #25D366, #128C7E);
-            color: #fff;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .btn-save:hover {
-            transform: scale(1.02);
-        }
-
-        .login-box {
-            text-align: center;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; }
     </style>
 </head>
-<body>
+<body class="bg-slate-950 min-h-screen flex flex-col justify-between">
 
-    <div class="admin-card">
-        <!-- Pantalla de Login -->
-        <div id="loginSection" class="login-box">
-            <h2 class="admin-title"><i class="fa-solid fa-lock"></i> Acceso Administrador</h2>
-            <div class="form-group">
-                <label for="adminPass">Contraseña de Dueño:</label>
-                <input type="password" id="adminPass" class="form-control" placeholder="Ingresa tu clave...">
-            </div>
-            <button class="btn-save" onclick="checkPassword()" style="background: linear-gradient(90deg, var(--primary), #0072ff);">Entrar al Panel</button>
+    <!-- Header Admin -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-2">
+            <span class="bg-amber-500 text-slate-950 font-black px-2 py-1 rounded text-sm tracking-wider">ADM</span>
+            <h1 class="font-extrabold text-lg tracking-wide text-white">PANEL <span class="text-amber-400">CONTROL</span></h1>
         </div>
+        <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-700 transition">
+            <i class="fa-solid fa-store mr-1"></i> Ver Tienda
+        </a>
+    </header>
 
-        <!-- Formulario del Panel (Oculto al inicio) -->
-        <div id="adminPanel" style="display: none;">
-            <h2 class="admin-title"><i class="fa-solid fa-sliders"></i> Publicar Oferta / Evento</h2>
+    <!-- Main Content -->
+    <main class="max-w-md mx-auto w-full p-4 space-y-6 mb-12">
 
-            <div class="switch-container">
-                <span class="switch-title"><i class="fa-solid fa-power-off"></i> Mostrar en la tienda</span>
-                <label class="switch">
-                    <input type="checkbox" id="offerActive">
-                    <span class="slider"></span>
-                </label>
-            </div>
+        <!-- Formulario para Agregar Nueva Oferta o Agenda -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-md">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-circle-plus"></i> Publicar Nuevo Anuncio
+            </h2>
 
-            <div class="form-group">
-                <label for="offerTitle"><i class="fa-solid fa-heading"></i> Título de la sección (Opcional):</label>
-                <input type="text" id="offerTitle" class="form-control" placeholder="Ej: 🔥 ¡BOMBAZO DEL DÍA! 🔥 o 📅 AGENDA SEMANAL">
-            </div>
-
-            <div class="form-group">
-                <label><i class="fa-solid fa-image"></i> Imagen / Afiche (Elige de tu Galería):</label>
-                <div class="file-upload-btn" onclick="document.getElementById('fileInput').click()">
-                    <i class="fa-solid fa-image-letter-case" style="font-size: 1.5rem; margin-bottom: 5px; display: block; color: var(--primary);"></i>
-                    Toca aquí para elegir foto de la galería
+            <form id="offer-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Título del Anuncio</label>
+                    <input type="text" id="title" required placeholder="Ej: Agenda Semanal / Oferta 2x1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
                 </div>
-                <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
-                <img id="preview-img" alt="Vista previa">
-            </div>
 
-            <div class="form-group">
-                <label for="offerText"><i class="fa-solid fa-align-left"></i> Texto / Descripción de la Oferta (Opcional):</label>
-                <textarea id="offerText" class="form-control" placeholder="Escribe aquí los detalles, cupos disponibles, precios o instrucciones de la oferta..."></textarea>
-            </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">URL de la Imagen (Poster / Afiche)</label>
+                    <input type="url" id="image" required placeholder="Pega el enlace de la imagen" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
+                </div>
 
-            <button class="btn-save" onclick="saveOffer()"><i class="fa-solid fa-floppy-disk"></i> Guardar y Publicar</button>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Descripción corta</label>
+                    <textarea id="description" rows="2" required placeholder="Detalles de la oferta o eventos de la semana..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition shadow-md">
+                    <i class="fa-solid fa-upload mr-1"></i> Agregar al Carrusel
+                </button>
+            </form>
         </div>
-    </div>
 
+        <!-- Lista de Anuncios Activos -->
+        <div>
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+                <i class="fa-solid fa-list-check text-amber-400"></i> Anuncios Publicados Actualmente
+            </h2>
+            <div id="active-items-list" class="space-y-3">
+                <!-- Se llena con JavaScript -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Script de Gestión -->
     <script>
-        // CONTRASEÑA POR DEFECTO: 1234 (Puedes cambiarla en la línea de abajo)
-        const SECRET_KEY = "darian090827ff";
-        let base64ImageData = "";
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("offer-form");
+            const listContainer = document.getElementById("active-items-list");
 
-        function checkPassword() {
-            const pass = document.getElementById('adminPass').value;
-            if (pass === SECRET_KEY) {
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                loadCurrentData();
-            } else {
-                alert("❌ Contraseña incorrecta, bro.");
+            function getItems() {
+                const data = localStorage.getItem("express_carousel_items");
+                return data ? JSON.parse(data) : [];
             }
-        }
 
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    base64ImageData = e.target.result;
-                    const imgPreview = document.getElementById('preview-img');
-                    imgPreview.src = base64ImageData;
-                    imgPreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
+            function saveItems(items) {
+                localStorage.setItem("express_carousel_items", JSON.stringify(items));
             }
-        }
 
-        function saveOffer() {
-            const active = document.getElementById('offerActive').checked;
-            const title = document.getElementById('offerTitle').value.trim();
-            const text = document.getElementById('offerText').value.trim();
+            function renderList() {
+                const items = getItems();
+                listContainer.innerHTML = "";
 
-            const offerData = {
-                active: active,
-                title: title,
-                text: text,
-                image: base64ImageData
+                if (items.length === 0) {
+                    listContainer.innerHTML = `<div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center text-xs text-slate-500">No hay anuncios activos en este momento.</div>`;
+                    return;
+                }
+
+                items.forEach((item, index) => {
+                    const card = document.createElement("div");
+                    card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-3 flex items-center justify-between gap-3 shadow-sm";
+                    
+                    card.innerHTML = `
+                        <div class="flex items-center space-x-3 overflow-hidden">
+                            <img src="${item.image}" alt="${item.title}" class="w-12 h-12 object-cover rounded-xl bg-slate-950 flex-shrink-0">
+                            <div class="overflow-hidden">
+                                <h3 class="font-bold text-xs text-white truncate">${item.title}</h3>
+                                <p class="text-[11px] text-slate-400 truncate">${item.description}</p>
+                            </div>
+                        </div>
+                        <button onclick="deleteItem(${index})" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-3 py-2 rounded-xl text-xs transition flex-shrink-0 border border-red-500/20">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    `;
+                    listContainer.appendChild(card);
+                });
+            }
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const title = document.getElementById("title").value;
+                const image = document.getElementById("image").value;
+                const description = document.getElementById("description").value;
+
+                const items = getItems();
+                items.push({ title, image, description });
+                saveItems(items);
+
+                form.reset();
+                renderList();
+                alert("¡Anuncio agregado con éxito al carrusel!");
+            });
+
+            window.deleteItem = function(index) {
+                if (confirm("¿Estás seguro de eliminar este anuncio?")) {
+                    const items = getItems();
+                    items.splice(index, 1);
+                    saveItems(items);
+                    renderList();
+                }
             };
 
-            try {
-                localStorage.setItem('express_special_offer', JSON.stringify(offerData));
-                alert("✅ ¡Oferta publicada y guardada exitosamente en la web!");
-            } catch(e) {
-                alert("⚠️ La foto seleccionada es muy pesada para guardar directamente. Intenta recortarla o usar una de menor peso.");
-            }
-        }
-
-        function loadCurrentData() {
-            const data = localStorage.getItem('express_special_offer');
-            if (data) {
-                const parsed = JSON.parse(data);
-                document.getElementById('offerActive').checked = parsed.active || false;
-                document.getElementById('offerTitle').value = parsed.title || "";
-                document.getElementById('offerText').value = parsed.text || "";
-                if (parsed.image) {
-                    base64ImageData = parsed.image;
-                    const imgPreview = document.getElementById('preview-img');
-                    imgPreview.src = parsed.image;
-                    imgPreview.style.display = 'block';
-                }
-            }
-        }
+            renderList();
+        });
     </script>
 </body>
 </html>
