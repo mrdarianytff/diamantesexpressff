@@ -124,7 +124,7 @@
             color: #e2e8f0;
         }
 
-        /* CARRUSEL HORIZONTAL DINÁMICO OPTIMIZADO */
+        /* CARRUSEL HORIZONTAL DINÁMICO VERTICALIZADO */
         .carousel-container-wrapper {
             margin-bottom: 25px;
         }
@@ -147,8 +147,8 @@
         }
 
         .carousel-card {
-            min-width: 300px;
-            max-width: 300px;
+            min-width: 310px;
+            max-width: 310px;
             flex-shrink: 0;
             scroll-snap-align: start;
             background: linear-gradient(135deg, rgba(255, 0, 127, 0.15), rgba(0, 240, 255, 0.15));
@@ -166,21 +166,22 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1rem;
             color: #fff;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
             text-align: center;
         }
 
-        /* CONTENEDOR DE IMAGEN FIJO PARA QUE NO SE CORTE */
+        /* CONTENEDOR VERTICAL OPTIMIZADO PARA AFICHES */
         .carousel-img-box {
             width: 100%;
-            height: 160px;
-            background: #000;
+            height: auto;
+            max-height: 380px;
+            background: transparent;
             border-radius: 12px;
             border: 2px solid rgba(0, 240, 255, 0.4);
             overflow: hidden;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -188,8 +189,9 @@
 
         .carousel-card-img {
             width: 100%;
-            height: 100%;
-            object-fit: contain;
+            height: auto;
+            max-height: 380px;
+            object-fit: cover;
         }
 
         .carousel-card-text {
@@ -198,7 +200,7 @@
             line-height: 1.35;
             white-space: pre-line;
             margin-bottom: 10px;
-            max-height: 140px;
+            max-height: 120px;
             overflow-y: auto;
         }
 
@@ -471,10 +473,10 @@
 
     <main class="container">
 
-        <!-- CARRUSEL DINÁMICO MULTI-ANUNCIO -->
+        <!-- CARRUSEL DINÁMICO MULTI-ANUNCIO (SIN TEXTO DE DESLIZAR) -->
         <div id="dynamicCarouselWrapper" class="carousel-container-wrapper" style="display: none;">
             <div style="font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-bullhorn"></i> Novedades y Ofertas (Desliza 👉)
+                <i class="fa-solid fa-bullhorn"></i> Novedades y Ofertas
             </div>
             <div id="dynamicCarouselScroll" class="carousel-scroll">
                 <!-- Las tarjetas se insertan dinámicamente aquí -->
@@ -803,7 +805,7 @@
     <script>
         let cart = {};
 
-        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con imagen completa
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal adaptados a formato vertical
         window.addEventListener('DOMContentLoaded', () => {
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
