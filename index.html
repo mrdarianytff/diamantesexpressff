@@ -124,7 +124,7 @@
             color: #e2e8f0;
         }
 
-        /* CARRUSEL HORIZONTAL DINÁMICO VERTICALIZADO */
+        /* CARRUSEL HORIZONTAL DINÁMICO */
         .carousel-container-wrapper {
             margin-bottom: 25px;
         }
@@ -172,12 +172,11 @@
             text-align: center;
         }
 
-        /* CONTENEDOR VERTICAL OPTIMIZADO PARA AFICHES */
+        /* CONTENEDOR PARA MOSTRAR LA FOTO 100% COMPLETA */
         .carousel-img-box {
             width: 100%;
             height: auto;
-            max-height: 380px;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 12px;
             border: 2px solid rgba(0, 240, 255, 0.4);
             overflow: hidden;
@@ -190,8 +189,9 @@
         .carousel-card-img {
             width: 100%;
             height: auto;
-            max-height: 380px;
-            object-fit: cover;
+            max-height: 420px;
+            object-fit: contain;
+            display: block;
         }
 
         .carousel-card-text {
@@ -473,7 +473,7 @@
 
     <main class="container">
 
-        <!-- CARRUSEL DINÁMICO MULTI-ANUNCIO (SIN TEXTO DE DESLIZAR) -->
+        <!-- CARRUSEL DINÁMICO MULTI-ANUNCIO -->
         <div id="dynamicCarouselWrapper" class="carousel-container-wrapper" style="display: none;">
             <div style="font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                 <i class="fa-solid fa-bullhorn"></i> Novedades y Ofertas
@@ -805,7 +805,7 @@
     <script>
         let cart = {};
 
-        // Cargar múltiples anuncios dinámicos en el carrusel horizontal adaptados a formato vertical
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con imagen completa
         window.addEventListener('DOMContentLoaded', () => {
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
