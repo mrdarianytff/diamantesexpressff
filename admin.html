@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración | Diamantes Express FF</title>
-    <!-- FontAwesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Fuentes modernas de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -20,12 +18,7 @@
             --text-muted: #a0aec0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         body {
             background-color: var(--bg-dark);
@@ -38,233 +31,89 @@
             padding-bottom: 80px;
         }
 
-        /* Pantalla de Bloqueo / Contraseña */
         #auth-screen {
-            position: fixed;
-            inset: 0;
-            background: rgba(10, 12, 22, 0.98);
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(15px);
+            position: fixed; inset: 0; background: rgba(10, 12, 22, 0.98); z-index: 99999;
+            display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(15px);
         }
 
         .auth-card {
-            background: var(--card-bg);
-            border: 2px solid var(--primary);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 350px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            background: var(--card-bg); border: 2px solid var(--primary); border-radius: 20px;
+            padding: 30px; max-width: 350px; width: 100%; text-align: center; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
         }
 
         .auth-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            color: var(--primary);
-            font-size: 1.5rem;
+            width: 60px; height: 60px; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--primary); font-size: 1.5rem;
         }
 
-        /* Header Admin */
         header {
-            text-align: center;
-            padding: 25px 20px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto;
+            text-align: center; padding: 25px 20px 15px; display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto;
         }
 
         .logo-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: var(--primary);
-            text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; color: var(--primary); text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
         }
 
         .btn-store {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff;
+            padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: 0.3s;
         }
 
         .btn-store:hover { border-color: var(--primary); color: var(--primary); }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
+        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
 
         .section-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 22px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px;
+            padding: 22px; margin-bottom: 20px; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .section-header {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            color: #fff;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 8px;
+            font-family: 'Orbitron', sans-serif; font-size: 1rem; color: #fff; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 8px;
         }
 
         .section-header i { color: var(--primary); }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+        .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
 
         .form-control {
-            background: rgba(10, 12, 22, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            padding: 10px 12px;
-            color: #fff;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.3s;
-            width: 100%;
+            background: rgba(10, 12, 22, 0.8); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px; padding: 10px 12px; color: #fff; font-size: 0.9rem; outline: none; transition: 0.3s; width: 100%;
         }
 
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-        }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 240, 255, 0.3); }
 
-        /* Estilo especial para selector de archivos */
-        input[type="file"] {
-            padding: 8px;
-            cursor: pointer;
-        }
+        input[type="file"] { padding: 8px; cursor: pointer; }
         input[type="file"]::file-selector-button {
-            background: var(--primary);
-            color: var(--bg-dark);
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-right: 10px;
-            transition: 0.2s;
+            background: var(--primary); color: var(--bg-dark); border: none; padding: 6px 12px;
+            border-radius: 6px; font-weight: 700; cursor: pointer; margin-right: 10px; transition: 0.2s;
         }
-        input[type="file"]::file-selector-button:hover {
-            background: #00d2df;
-        }
+        input[type="file"]::file-selector-button:hover { background: #00d2df; }
 
         .btn-action {
-            width: 100%;
-            background: linear-gradient(90deg, var(--primary), #0099ff);
-            color: #0a0c16;
-            border: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 800;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 5px;
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+            width: 100%; background: linear-gradient(90deg, var(--primary), #0099ff); color: #0a0c16; border: none;
+            padding: 12px; border-radius: 12px; font-size: 0.95rem; font-weight: 800; font-family: 'Orbitron', sans-serif;
+            cursor: pointer; transition: 0.3s; margin-top: 5px; box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
         }
 
         .btn-action:hover { transform: scale(1.02); }
 
-        /* Lista de anuncios en admin */
         .admin-item {
-            background: rgba(10, 12, 22, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 10px;
+            background: rgba(10, 12, 22, 0.6); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px;
         }
 
-        .admin-item-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            overflow: hidden;
-        }
-
-        .admin-item-img {
-            width: 45px;
-            height: 45px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid var(--primary);
-            flex-shrink: 0;
-        }
-
-        .admin-item-text h4 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #fff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .admin-item-text p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        .admin-item-info { display: flex; align-items: center; gap: 10px; overflow: hidden; }
+        .admin-item-img { width: 45px; height: 45px; object-fit: cover; border-radius: 8px; border: 1px solid var(--primary); flex-shrink: 0; }
+        .admin-item-text h4 { font-size: 0.85rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .admin-item-text p { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         .btn-delete {
-            background: rgba(255, 0, 127, 0.15);
-            border: 1px solid var(--secondary);
-            color: var(--secondary);
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.85rem;
+            background: rgba(255, 0, 127, 0.15); border: 1px solid var(--secondary); color: var(--secondary);
+            padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.85rem;
         }
-
         .btn-delete:hover { background: var(--secondary); color: #fff; }
 
         footer { text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.75rem; }
@@ -272,12 +121,9 @@
 </head>
 <body>
 
-    <!-- Pantalla de Contraseña Segura -->
     <div id="auth-screen">
         <div class="auth-card">
-            <div class="auth-icon">
-                <i class="fa-solid fa-lock"></i>
-            </div>
+            <div class="auth-icon"><i class="fa-solid fa-lock"></i></div>
             <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 5px;">Panel Protegido</h2>
             <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Ingresa tu clave de administrador</p>
             <form id="auth-form" style="display: flex; flex-direction: column; gap: 10px;">
@@ -294,7 +140,6 @@
     </header>
 
     <main class="container">
-        <!-- Formulario para Publicar -->
         <section class="section-card">
             <div class="section-header">
                 <i class="fa-solid fa-circle-plus"></i>
@@ -307,7 +152,6 @@
                     <input type="text" id="title" class="form-control" placeholder="Ej: Agenda Semanal / Oferta 2x1" required>
                 </div>
                 
-                <!-- Selector desde la Galería del Dispositivo -->
                 <div class="form-group">
                     <label for="imageFile">Seleccionar Imagen de la Galería</label>
                     <input type="file" id="imageFile" accept="image/*" class="form-control" required>
@@ -315,7 +159,7 @@
 
                 <div class="form-group">
                     <label for="description">Descripción Corta</label>
-                    <textarea id="description" class="form-control" rows="2" placeholder="Detalles de la oferta o eventos..." required></textarea>
+                    <textarea id="description" class="form-control" rows="4" placeholder="Detalles de la oferta o eventos..." required></textarea>
                 </div>
                 
                 <button type="submit" class="btn-action">
@@ -324,15 +168,12 @@
             </form>
         </section>
 
-        <!-- Lista de Anuncios Activos -->
         <section class="section-card">
             <div class="section-header">
                 <i class="fa-solid fa-list-check"></i>
                 <span>Anuncios Activos en el Carrusel</span>
             </div>
-            <div id="active-items-list">
-                <!-- Se llena con JS -->
-            </div>
+            <div id="active-items-list"></div>
         </section>
     </main>
 
@@ -341,7 +182,6 @@
     </footer>
 
     <script>
-        // CONTRASEÑA CONFIGURADA
         const ADMIN_PASSWORD = "darian090827ff"; 
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -404,6 +244,7 @@
                 });
             }
 
+            // Función para comprimir la imagen automáticamente antes de guardarla
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 const title = document.getElementById("title").value;
@@ -413,15 +254,43 @@
                 if (fileInput.files && fileInput.files[0]) {
                     const reader = new FileReader();
                     reader.onload = function(event) {
-                        const base64Image = event.target.result;
-                        
-                        const items = getItems();
-                        items.push({ title, image: base64Image, description });
-                        saveItems(items);
+                        const img = new Image();
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const MAX_WIDTH = 800;
+                            const MAX_HEIGHT = 800;
+                            let width = img.width;
+                            let height = img.height;
 
-                        form.reset();
-                        renderList();
-                        alert("¡Anuncio subido desde tu galería con éxito!");
+                            if (width > height) {
+                                if (width > MAX_WIDTH) {
+                                    height *= MAX_WIDTH / width;
+                                    width = MAX_WIDTH;
+                                }
+                            } else {
+                                if (height > MAX_HEIGHT) {
+                                    width *= MAX_HEIGHT / height;
+                                    height = MAX_HEIGHT;
+                                }
+                            }
+
+                            canvas.width = width;
+                            canvas.height = height;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, width, height);
+
+                            // Comprimir a formato JPEG optimizado
+                            const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+
+                            const items = getItems();
+                            items.push({ title, image: compressedDataUrl, description });
+                            saveItems(items);
+
+                            form.reset();
+                            renderList();
+                            alert("¡Anuncio publicado y guardado con éxito!");
+                        };
+                        img.src = event.target.result;
                     };
                     reader.readAsDataURL(fileInput.files[0]);
                 } else {
