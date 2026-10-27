@@ -170,6 +170,26 @@
             box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
 
+        /* Estilo especial para selector de archivos */
+        input[type="file"] {
+            padding: 8px;
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button {
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.2s;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: #00d2df;
+        }
+
         .btn-action {
             width: 100%;
             background: linear-gradient(90deg, var(--primary), #0099ff);
@@ -286,16 +306,20 @@
                     <label for="title">Título del Anuncio</label>
                     <input type="text" id="title" class="form-control" placeholder="Ej: Agenda Semanal / Oferta 2x1" required>
                 </div>
+                
+                <!-- Selector desde la Galería del Dispositivo -->
                 <div class="form-group">
-                    <label for="image">URL de la Imagen (Poster / Afiche)</label>
-                    <input type="url" id="image" class="form-control" placeholder="https://..." required>
+                    <label for="imageFile">Seleccionar Imagen de la Galería</label>
+                    <input type="file" id="imageFile" accept="image/*" class="form-control" required>
                 </div>
+
                 <div class="form-group">
                     <label for="description">Descripción Corta</label>
                     <textarea id="description" class="form-control" rows="2" placeholder="Detalles de la oferta o eventos..." required></textarea>
                 </div>
+                
                 <button type="submit" class="btn-action">
-                    <i class="fa-solid fa-upload" style="margin-right: 5px;"></i> Agregar al Carrusel
+                    <i class="fa-solid fa-upload" style="margin-right: 5px;"></i> Guardar y Publicar
                 </button>
             </form>
         </section>
@@ -383,16 +407,26 @@
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 const title = document.getElementById("title").value;
-                const image = document.getElementById("image").value;
                 const description = document.getElementById("description").value;
+                const fileInput = document.getElementById("imageFile");
 
-                const items = getItems();
-                items.push({ title, image, description });
-                saveItems(items);
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const base64Image = event.target.result;
+                        
+                        const items = getItems();
+                        items.push({ title, image: base64Image, description });
+                        saveItems(items);
 
-                form.reset();
-                renderList();
-                alert("¡Anuncio agregado con éxito al carrusel!");
+                        form.reset();
+                        renderList();
+                        alert("¡Anuncio subido desde tu galería con éxito!");
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    alert("Por favor selecciona una imagen de tu galería.");
+                }
             });
 
             window.deleteItem = function(index) {
