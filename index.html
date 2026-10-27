@@ -124,7 +124,7 @@
             color: #e2e8f0;
         }
 
-        /* CARRUSEL HORIZONTAL DINÁMICO */
+        /* CARRUSEL HORIZONTAL DINÁMICO OPTIMIZADO */
         .carousel-container-wrapper {
             margin-bottom: 25px;
         }
@@ -147,14 +147,14 @@
         }
 
         .carousel-card {
-            min-width: 280px;
-            max-width: 280px;
+            min-width: 300px;
+            max-width: 300px;
             flex-shrink: 0;
             scroll-snap-align: start;
             background: linear-gradient(135deg, rgba(255, 0, 127, 0.15), rgba(0, 240, 255, 0.15));
             border: 2px solid var(--secondary);
             border-radius: 18px;
-            padding: 18px;
+            padding: 16px;
             backdrop-filter: blur(12px);
             box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
             display: flex;
@@ -164,29 +164,42 @@
 
         .carousel-card-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+            text-align: center;
+        }
+
+        /* CONTENEDOR DE IMAGEN FIJO PARA QUE NO SE CORTE */
+        .carousel-img-box {
+            width: 100%;
+            height: 160px;
+            background: #000;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 240, 255, 0.4);
+            overflow: hidden;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .carousel-card-img {
             width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid rgba(0, 240, 255, 0.4);
-            margin-bottom: 10px;
+            height: 100%;
+            object-fit: contain;
         }
 
         .carousel-card-text {
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             color: #e2e8f0;
-            line-height: 1.4;
+            line-height: 1.35;
             white-space: pre-line;
-            margin-bottom: 12px;
-            flex-grow: 1;
+            margin-bottom: 10px;
+            max-height: 140px;
+            overflow-y: auto;
         }
 
         /* Secciones principales */
@@ -790,7 +803,7 @@
     <script>
         let cart = {};
 
-        // Cargar múltiples anuncios dinámicos en el carrusel horizontal
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con imagen completa
         window.addEventListener('DOMContentLoaded', () => {
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
@@ -807,7 +820,11 @@
                             card.innerHTML = `
                                 <div>
                                     ${item.title ? `<h3 class="carousel-card-title">${item.title}</h3>` : ''}
-                                    ${item.image ? `<img src="${item.image}" class="carousel-card-img" alt="Anuncio">` : ''}
+                                    ${item.image ? `
+                                        <div class="carousel-img-box">
+                                            <img src="${item.image}" class="carousel-card-img" alt="Anuncio">
+                                        </div>
+                                    ` : ''}
                                     ${item.description ? `<p class="carousel-card-text">${item.description}</p>` : ''}
                                 </div>
                             `;
@@ -1052,7 +1069,7 @@
                 return "⚡ ¡La recarga cae rapidísimo! Una vez que confirmes el pago con el admin por WhatsApp, tus diamantes llegan en menos de 5 minutos.";
             }
             if (txt.includes("confiable") || txt.includes("estafa") || txt.includes("seguro") || txt.includes("referencias")) {
-                return "🛡️ ¡100% Legal y Seguro! Jamás pedimos tu contraseña ni correo, solo tu ID. Puedes revisar cientos de referencias reales de clientes satisfechos en nossa Comunidad oficial de WhatsApp.";
+                return "🛡️ ¡100% Legal y Seguro! Jamás pedimos tu contraseña ni correo, solo tu ID. Puedes revisar cientos de referencias reales de clientes satisfechos en nuestra Comunidad oficial de WhatsApp.";
             }
 
             if (txt === "hola" || txt === "buenas" || txt === "klk" || txt === "epa" || txt === "saludos" || txt === "que tal" || txt === "bro" || txt === "hola bro") {
