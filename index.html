@@ -172,36 +172,32 @@
             text-align: center;
         }
 
-        /* CONTENEDOR PARA MOSTRAR LA FOTO 100% COMPLETA */
+        /* CONTENEDOR ADAPTABLE AL TAMAÑO REAL DE CADA FOTO */
         .carousel-img-box {
             width: 100%;
             height: auto;
-            background: rgba(0, 0, 0, 0.3);
+            background: transparent;
             border-radius: 12px;
             border: 2px solid rgba(0, 240, 255, 0.4);
             overflow: hidden;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin-bottom: 15px;
+            display: block;
         }
 
         .carousel-card-img {
             width: 100%;
             height: auto;
-            max-height: 420px;
-            object-fit: contain;
+            max-height: none;
+            object-fit: initial;
             display: block;
         }
 
         .carousel-card-text {
             font-size: 0.78rem;
             color: #e2e8f0;
-            line-height: 1.35;
+            line-height: 1.4;
             white-space: pre-line;
-            margin-bottom: 10px;
-            max-height: 120px;
-            overflow-y: auto;
+            margin-top: 5px;
         }
 
         /* Secciones principales */
@@ -805,7 +801,7 @@
     <script>
         let cart = {};
 
-        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con imagen completa
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con tamaño nativo
         window.addEventListener('DOMContentLoaded', () => {
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
