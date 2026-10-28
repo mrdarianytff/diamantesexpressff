@@ -173,23 +173,25 @@
             text-align: center;
         }
 
+        /* CONTENEDOR LIMPIO SIN FONDO NEGRO */
         .carousel-img-box {
             width: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            border: 2px solid rgba(0, 240, 255, 0.4);
-            overflow: hidden;
+            height: auto;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
             margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: visible;
         }
 
         .carousel-card-img {
             width: 100%;
             height: auto;
-            max-height: 450px;
-            object-fit: contain;
+            max-height: none;
+            object-fit: fill;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 240, 255, 0.4);
             display: block;
         }
 
