@@ -173,25 +173,25 @@
             text-align: center;
         }
 
-        /* CONTENEDOR LIMPIO SIN FONDO NEGRO */
+        /* CAJA CON ALTURA FIJA Y PERFECTA */
         .carousel-img-box {
             width: 100%;
-            height: auto;
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 0;
-            margin-bottom: 12px;
-            overflow: visible;
-        }
-
-        .carousel-card-img {
-            width: 100%;
-            height: auto;
-            max-height: none;
-            object-fit: fill;
+            height: 380px;
+            background: #000;
             border-radius: 12px;
             border: 2px solid rgba(0, 240, 255, 0.4);
+            overflow: hidden;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* LLENA EL ESPACIO Y ELIMINA LOS BORDES NEGROS DE LA FOTO */
+        .carousel-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
 
@@ -804,7 +804,7 @@
     <script>
         let cart = {};
 
-        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con tamaño adaptable
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con tamaño uniforme
         window.addEventListener('DOMContentLoaded', () => {
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
