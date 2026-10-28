@@ -124,7 +124,7 @@
             color: #e2e8f0;
         }
 
-        /* CARRUSEL HORIZONTAL MÁS COMPACTO Y ESTÉTICO */
+        /* CARRUSEL HORIZONTAL COMPACTO */
         .carousel-container-wrapper {
             margin-bottom: 25px;
         }
@@ -173,25 +173,25 @@
             text-align: center;
         }
 
-        /* CAJA ADAPTABLE AL TAMAÑO NATURAL DE LA FOTO (MÁS COMPACTA) */
+        /* CAJA CON ALTURA CONTROLADA PARA QUE NO QUEDE LARGA */
         .carousel-img-box {
             width: 100%;
-            height: auto;
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            overflow: visible;
+            height: 320px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            overflow: hidden;
             margin-bottom: 8px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* FOTO COMPLETA SIN RECORTES */
         .carousel-card-img {
             width: 100%;
-            height: auto;
-            max-height: none;
-            object-fit: initial;
-            border-radius: 10px;
-            border: 2px solid rgba(0, 240, 255, 0.4);
+            height: 100%;
+            object-fit: contain;
             display: block;
         }
 
@@ -200,6 +200,8 @@
             color: #e2e8f0;
             line-height: 1.3;
             white-space: pre-line;
+            max-height: 70px;
+            overflow-y: auto;
             margin-top: 4px;
         }
 
@@ -472,7 +474,7 @@
 
     <main class="container">
 
-        <!-- CARRUSEL DINÁMICO MULTI-ANUNCIO (MÁS COMPACTO) -->
+        <!-- CARRUSEL DINÁMICO MULTI-ANUNCIO COMPACTO -->
         <div id="dynamicCarouselWrapper" class="carousel-container-wrapper" style="display: none;">
             <div style="font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                 <i class="fa-solid fa-bullhorn"></i> Novedades y Ofertas
@@ -543,7 +545,7 @@
                 </button>
             </div>
 
-            <!-- Paquetes Saldo Móvil (Nuevos Precios) -->
+            <!-- Paquetes Saldo Móvil -->
             <div class="packages-grid" id="grid-saldo">
                 <div class="pkg-card" id="card-s-0">
                     <div class="pkg-icon">💎</div>
@@ -635,7 +637,7 @@
                 </div>
             </div>
 
-            <!-- Paquetes Tarjeta CUP (Nuevos Precios) -->
+            <!-- Paquetes Tarjeta CUP -->
             <div class="packages-grid" id="grid-tarjeta" style="display: none;">
                 <div class="pkg-card" id="card-t-0">
                     <div class="pkg-icon">💎</div>
@@ -804,7 +806,7 @@
     <script>
         let cart = {};
 
-        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con tamaño natural y compacto
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con altura controlada
         window.addEventListener('DOMContentLoaded', () => {
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
@@ -1009,7 +1011,6 @@
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        /* MOTOR INTELIGENTE CON NUEVOS PRECIOS ACTUALIZADOS */
         function getBotResponse(rawTxt) {
             let txt = rawTxt.toLowerCase()
                 .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -1055,7 +1056,7 @@
             if (txt.includes("tarjeta") || txt.includes("transfermovil") || txt.includes("bpa") || txt.includes("bandecc")) {
                 return "💳 <b>Pago por Tarjeta CUP:</b> Haz tu pedido arriba seleccionando la pestaña 'Tarjeta CUP'. Al ir a WhatsApp, el admin te dará la tarjeta para que le transfieras por Transfermóvil.";
             }
-            if (txt.includes("mlc") || txt.includes("usd") || txt.includes("zelle") || txt.includes("enzona")) {
+            if (txt.includes("mlc") || txt.includes("usd") || txt.numbers || txt.includes("zelle") || txt.includes("enzona")) {
                 return "⚠️ <b>Aviso:</b> En la web cobramos en <b>CUP</b> (Saldo Móvil o Tarjeta CUP). A veces el admin puede aceptar <b>USDT</b> en privado por WhatsApp, pero no aceptamos MLC, USD en efectivo, Zelle ni Enzona.";
             }
 
