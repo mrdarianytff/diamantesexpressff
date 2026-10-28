@@ -124,7 +124,7 @@
             color: #e2e8f0;
         }
 
-        /* CARRUSEL HORIZONTAL DINÁMICO ADAPTABLE */
+        /* CARRUSEL HORIZONTAL DINÁMICO */
         .carousel-container-wrapper {
             margin-bottom: 25px;
         }
@@ -173,25 +173,25 @@
             text-align: center;
         }
 
-        /* CAJA CON ALTURA FIJA Y PERFECTA */
+        /* CAJA ADAPTABLE AL TAMAÑO NATURAL DE LA FOTO */
         .carousel-img-box {
             width: 100%;
-            height: 380px;
-            background: #000;
-            border-radius: 12px;
-            border: 2px solid rgba(0, 240, 255, 0.4);
-            overflow: hidden;
+            height: auto;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
             margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: block;
         }
 
-        /* LLENA EL ESPACIO Y ELIMINA LOS BORDES NEGROS DE LA FOTO */
         .carousel-card-img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            max-height: none;
+            object-fit: initial;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 240, 255, 0.4);
             display: block;
         }
 
@@ -804,7 +804,7 @@
     <script>
         let cart = {};
 
-        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con tamaño uniforme
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con tamaño natural
         window.addEventListener('DOMContentLoaded', () => {
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
