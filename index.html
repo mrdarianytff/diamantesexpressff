@@ -124,7 +124,7 @@
             color: #e2e8f0;
         }
 
-        /* CARRUSEL HORIZONTAL DINÁMICO */
+        /* CARRUSEL HORIZONTAL DINÁMICO ADAPTABLE */
         .carousel-container-wrapper {
             margin-bottom: 25px;
         }
@@ -147,8 +147,9 @@
         }
 
         .carousel-card {
-            min-width: 310px;
-            max-width: 310px;
+            min-width: 280px;
+            width: 82vw;
+            max-width: 320px;
             flex-shrink: 0;
             scroll-snap-align: start;
             background: linear-gradient(135deg, rgba(255, 0, 127, 0.15), rgba(0, 240, 255, 0.15));
@@ -172,25 +173,23 @@
             text-align: center;
         }
 
-        /* CONTENEDOR ADAPTABLE SIN MARCOS INTERNOS */
         .carousel-img-box {
             width: 100%;
-            height: auto;
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            overflow: visible;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            border: 2px solid rgba(0, 240, 255, 0.4);
+            overflow: hidden;
             margin-bottom: 12px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .carousel-card-img {
             width: 100%;
             height: auto;
-            max-height: none;
-            object-fit: initial;
-            border-radius: 12px;
-            border: 2px solid rgba(0, 240, 255, 0.4);
+            max-height: 450px;
+            object-fit: contain;
             display: block;
         }
 
@@ -803,7 +802,7 @@
     <script>
         let cart = {};
 
-        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con tamaño nativo
+        // Cargar múltiples anuncios dinámicos en el carrusel horizontal con tamaño adaptable
         window.addEventListener('DOMContentLoaded', () => {
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
