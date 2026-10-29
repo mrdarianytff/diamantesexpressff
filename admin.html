@@ -100,6 +100,13 @@
 
         .btn-action:hover { transform: scale(1.02); }
 
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.1); color: #fff; border: none;
+            padding: 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 700;
+            cursor: pointer; transition: 0.3s; margin-top: 8px; width: 100%; display: none;
+        }
+        .btn-cancel:hover { background: rgba(255, 255, 255, 0.2); }
+
         .admin-item {
             background: rgba(10, 12, 22, 0.6); border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px;
@@ -110,9 +117,17 @@
         .admin-item-text h4 { font-size: 0.85rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .admin-item-text p { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+        .admin-actions { display: flex; gap: 6px; align-items: center; }
+
+        .btn-tool {
+            background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff;
+            padding: 8px 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.8rem;
+        }
+        .btn-tool:hover { background: var(--primary); color: var(--bg-dark); border-color: var(--primary); }
+
         .btn-delete {
             background: rgba(255, 0, 127, 0.15); border: 1px solid var(--secondary); color: var(--secondary);
-            padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.85rem;
+            padding: 8px 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.8rem;
         }
         .btn-delete:hover { background: var(--secondary); color: #fff; }
 
@@ -141,30 +156,38 @@
 
     <main class="container">
         <section class="section-card">
-            <div class="section-header">
+            <div class="section-header" id="form-section-title">
                 <i class="fa-solid fa-circle-plus"></i>
                 <span>Publicar Nuevo Anuncio / Agenda</span>
             </div>
 
             <form id="offer-form">
+                <input type="hidden" id="edit-index" value="-1">
+                
                 <div class="form-group">
                     <label for="title">Título del Anuncio</label>
                     <input type="text" id="title" class="form-control" placeholder="Ej: Agenda Semanal / Oferta 2x1" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="imageFile">Seleccionar Imagen de la Galería</label>
-                    <input type="file" id="imageFile" accept="image/*" class="form-control" required>
+                    <label for="imageFile">Seleccionar Imagen <span id="img-optional-label" style="font-size: 0.7rem; color: var(--text-muted);">(Obligatoria para nuevo)</span></label>
+                    <input type="file" id="imageFile" accept="image/*" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="description">Descripción Corta</label>
                     <textarea id="description" class="form-control" rows="4" placeholder="Detalles de la oferta o eventos..." required></textarea>
                 </div>
+
+                <div class="form-group">
+                    <label for="expireDate">Fecha y Hora de Expiración (Opcional - Se borra solo)</label>
+                    <input type="datetime-local" id="expireDate" class="form-control">
+                </div>
                 
-                <button type="submit" class="btn-action">
+                <button type="submit" id="btn-submit" class="btn-action">
                     <i class="fa-solid fa-upload" style="margin-right: 5px;"></i> Guardar y Publicar
                 </button>
+                <button type="button" id="btn-cancel" class="btn-cancel" onclick="cancelEdit()">Cancelar Edición</button>
             </form>
         </section>
 
@@ -206,17 +229,37 @@
 
             const form = document.getElementById("offer-form");
             const listContainer = document.getElementById("active-items-list");
+            const editIndexInput = document.getElementById("edit-index");
+            const btnSubmit = document.getElementById("btn-submit");
+            const btnCancel = document.getElementById("btn-cancel");
+            const formSectionTitle = document.getElementById("form-section-title");
+            const imgOptionalLabel = document.getElementById("img-optional-label");
 
             function getItems() {
                 const data = localStorage.getItem("express_carousel_items");
-                return data ? JSON.parse(data) : [];
+                let items = data ? JSON.parse(data) : [];
+
+                // Validar y ejecutar el borrado automático por fecha de expiración
+                const now = new Date().getTime();
+                const filteredItems = items.filter(item => {
+                    if (item.expireAt && now > item.expireAt) {
+                        return false; // Expiró, se elimina
+                    }
+                    return true;
+                });
+
+                if (filteredItems.length !== items.length) {
+                    localStorage.setItem("express_carousel_items", JSON.stringify(filteredItems));
+                }
+
+                return filteredItems;
             }
 
             function saveItems(items) {
                 localStorage.setItem("express_carousel_items", JSON.stringify(items));
             }
 
-            function renderList() {
+            window.renderList = function() {
                 const items = getItems();
                 listContainer.innerHTML = "";
 
@@ -228,28 +271,69 @@
                 items.forEach((item, index) => {
                     const card = document.createElement("div");
                     card.className = "admin-item";
+                    
+                    // Mostrar tiempo restante si tiene expiración
+                    let expireText = "";
+                    if (item.expireAt) {
+                        const timeLeft = Math.max(0, Math.floor((item.expireAt - new Date().getTime()) / 60000)); // en minutos
+                        if (timeLeft < 60) {
+                            expireText = ` ⏱️ Expira en ${timeLeft} min`;
+                        } else {
+                            expireText = ` ⏱️ Expira en ${Math.floor(timeLeft / 60)} hrs`;
+                        }
+                    }
+
                     card.innerHTML = `
                         <div class="admin-item-info">
                             <img src="${item.image}" class="admin-item-img" alt="Img">
                             <div class="admin-item-text">
                                 <h4>${item.title}</h4>
-                                <p>${item.description}</p>
+                                <p>${item.description} <span style="color: var(--accent); font-size: 0.7rem;">${expireText}</span></p>
                             </div>
                         </div>
-                        <button onclick="deleteItem(${index})" class="btn-delete" title="Eliminar">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                        <div class="admin-actions">
+                            ${index > 0 ? `<button onclick="moveItem(${index}, -1)" class="btn-tool" title="Subir"><i class="fa-solid fa-arrow-up"></i></button>` : ''}
+                            ${index < items.length - 1 ? `<button onclick="moveItem(${index}, 1)" class="btn-tool" title="Bajar"><i class="fa-solid fa-arrow-down"></i></button>` : ''}
+                            <button onclick="editItem(${index})" class="btn-tool" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteItem(${index})" class="btn-delete" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                        </div>
                     `;
                     listContainer.appendChild(card);
                 });
             }
 
-            // Función para comprimir la imagen automáticamente antes de guardarla
+            // Publicar o actualizar anuncio
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 const title = document.getElementById("title").value;
                 const description = document.getElementById("description").value;
                 const fileInput = document.getElementById("imageFile");
+                const expireInputVal = document.getElementById("expireDate").value;
+                const editIdx = parseInt(editIndexInput.value);
+
+                const expireAt = expireInputVal ? new Date(expireInputVal).getTime() : null;
+                const items = getItems();
+
+                function processAndSave(imageUrl) {
+                    if (editIdx > -1) {
+                        // Modo Edición
+                        items[editIdx].title = title;
+                        items[editIdx].description = description;
+                        items[editIdx].expireAt = expireAt;
+                        if (imageUrl) {
+                            items[editIdx].image = imageUrl;
+                        }
+                        alert("¡Anuncio actualizado con éxito!");
+                    } else {
+                        // Modo Nuevo Anuncio
+                        items.push({ title, image: imageUrl, description, expireAt });
+                        alert("¡Anuncio publicado y guardado con éxito!");
+                    }
+
+                    saveItems(items);
+                    cancelEdit();
+                    renderList();
+                }
 
                 if (fileInput.files && fileInput.files[0]) {
                     const reader = new FileReader();
@@ -263,15 +347,9 @@
                             let height = img.height;
 
                             if (width > height) {
-                                if (width > MAX_WIDTH) {
-                                    height *= MAX_WIDTH / width;
-                                    width = MAX_WIDTH;
-                                }
+                                if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
                             } else {
-                                if (height > MAX_HEIGHT) {
-                                    width *= MAX_HEIGHT / height;
-                                    height = MAX_HEIGHT;
-                                }
+                                if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
                             }
 
                             canvas.width = width;
@@ -279,24 +357,70 @@
                             const ctx = canvas.getContext('2d');
                             ctx.drawImage(img, 0, 0, width, height);
 
-                            // Comprimir a formato JPEG optimizado
                             const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
-
-                            const items = getItems();
-                            items.push({ title, image: compressedDataUrl, description });
-                            saveItems(items);
-
-                            form.reset();
-                            renderList();
-                            alert("¡Anuncio publicado y guardado con éxito!");
+                            processAndSave(compressedDataUrl);
                         };
                         img.src = event.target.result;
                     };
                     reader.readAsDataURL(fileInput.files[0]);
                 } else {
-                    alert("Por favor selecciona una imagen de tu galería.");
+                    if (editIdx > -1) {
+                        processAndSave(null); // Mantener la imagen vieja si no se subió una nueva al editar
+                    } else {
+                        alert("Por favor selecciona una imagen de tu galería.");
+                    }
                 }
             });
+
+            // Función para Cargar Datos al Formulario para Editar
+            window.editItem = function(index) {
+                const items = getItems();
+                const item = items[index];
+
+                document.getElementById("title").value = item.title;
+                document.getElementById("description").value = item.description;
+                editIndexInput.value = index;
+
+                if (item.expireAt) {
+                    const dateObj = new Date(item.expireAt);
+                    // Formatear a yyyy-MM-ddThh:mm para el input datetime-local
+                    const localIso = new Date(dateObj.getTime() - (dateObj.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+                    document.getElementById("expireDate").value = localIso;
+                } else {
+                    document.getElementById("expireDate").value = "";
+                }
+
+                formSectionTitle.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> <span>Editando Anuncio #${index + 1}</span>`;
+                btnSubmit.innerHTML = `<i class="fa-solid fa-floppy-disk" style="margin-right: 5px;"></i> Guardar Cambios`;
+                btnCancel.style.display = "block";
+                imgOptionalLabel.innerText = "(Opcional: déjalo vacío para conservar la foto actual)";
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            // Cancelar Edición
+            window.cancelEdit = function() {
+                form.reset();
+                editIndexInput.value = "-1";
+                formSectionTitle.innerHTML = `<i class="fa-solid fa-circle-plus"></i> <span>Publicar Nuevo Anuncio / Agenda</span>`;
+                btnSubmit.innerHTML = `<i class="fa-solid fa-upload" style="margin-right: 5px;"></i> Guardar y Publicar`;
+                btnCancel.style.display = "none";
+                imgOptionalLabel.innerText = "(Obligatoria para nuevo)";
+            };
+
+            // Mover posición (Subir o Bajar orden)
+            window.moveItem = function(index, direction) {
+                const items = getItems();
+                const newIndex = index + direction;
+
+                if (newIndex >= 0 && newIndex < items.length) {
+                    const temp = items[index];
+                    items[index] = items[newIndex];
+                    items[newIndex] = temp;
+                    saveItems(items);
+                    renderList();
+                }
+            };
 
             window.deleteItem = function(index) {
                 if (confirm("¿Estás seguro de eliminar este anuncio?")) {
