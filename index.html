@@ -806,12 +806,15 @@
     <script>
         let cart = {};
 
-        // Registrar visita automáticamente al abrir la tienda
-        async function registrarVisita() {
+        // Registrar visita localmente de forma infalible
+        function registrarVisita() {
             try {
-                await fetch('https://api.countapi.xyz/hit/mrdarianytff-diamantes/visitas');
+                let totalVisitas = localStorage.getItem('diamantes_total_visitas');
+                totalVisitas = totalVisitas ? parseInt(totalVisitas) + 1 : 1;
+                localStorage.setItem('diamantes_total_visitas', totalVisitas);
+                console.log("Visita registrada localmente:", totalVisitas);
             } catch (error) {
-                console.log("Contador en modo local o sin conexión");
+                console.log("Error al registrar visita local");
             }
         }
 
@@ -1059,7 +1062,7 @@
             }
 
             if (txt.includes("usdt") || txt.includes("binance") || txt.includes("crypto")) {
-                return "🪙 <b>Pago por USDT:</b> Los pagos por USDT se tratan por privado con el admin in WhatsApp fuera de la página. Arma tu pedido y consúltalo directo con él.";
+                return "🪙 <b>Pago por USDT:</b> Los pagos por USDT se tratan por privado con el admin en WhatsApp fuera de la página. Arma tu pedido y consúltalo directo con él.";
             }
             if (txt.includes("saldo") || txt.includes("133")) {
                 return "📱 <b>Para pagar con Saldo Móvil:</b><br>1. Selecciona tu paquete arriba y dale a Pedir por WhatsApp.<br>2. El admin te dará su número.<br>3. Marcas en tu cel: <code>*133*1*NUMERO*MONTO#</code> y tecla de llamar. ¡Listo!";
