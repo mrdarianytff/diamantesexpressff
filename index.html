@@ -870,9 +870,16 @@
 
         function switchGame(game) {
             currentGame = game;
+            cart = {}; // Limpia el carrito al cambiar de juego para evitar mezclas
+            updateSummary();
+
             ['ff', 'bs', 'ml'].forEach(g => {
                 document.getElementById(`gtab-${g}`).classList.toggle('active', g === game);
             });
+
+            // Resetea contadores visuales en pantalla
+            document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
+            document.querySelectorAll('.pkg-card').forEach(el => el.classList.remove('selected'));
 
             const idLabel = document.getElementById('label-player-id');
             const serverGroup = document.getElementById('group-server-id');
@@ -901,8 +908,16 @@
 
         function switchMlServer(serverType) {
             currentMlServer = serverType;
+            cart = {}; // Limpia el carrito al cambiar de servidor de ML
+            updateSummary();
+
             document.getElementById('stab-ml-usa').classList.toggle('active', serverType === 'usa');
             document.getElementById('stab-ml-gen').classList.toggle('active', serverType === 'gen');
+
+            // Resetea contadores visuales al cambiar de servidor
+            document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
+            document.querySelectorAll('.pkg-card').forEach(el => el.classList.remove('selected'));
+
             updateMlPlaceholder();
             updatePayGrids();
         }
