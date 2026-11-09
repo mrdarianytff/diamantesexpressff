@@ -608,9 +608,9 @@
                     <input type="text" id="server-id" class="form-control" placeholder="Ej: 12345">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="group-player-name">
                     <label for="player-name"><i class="fa-solid fa-signature"></i> Nombre / Apodo en el Juego:</label>
-                    <input type="text" id="player-name" class="form-control" placeholder="Ej: Moreira_FF" required>
+                    <input type="text" id="player-name" class="form-control" placeholder="Ej: Moreira_FF">
                 </div>
             </div>
 
@@ -757,7 +757,7 @@
             <div class="steps-container" style="margin-top: 20px;">
                 <div class="step-box">
                     <div class="step-number">1</div>
-                    <span>ID y Nombre</span>
+                    <span>ID y Datos</span>
                 </div>
                 <div class="step-box">
                     <div class="step-number">2</div>
@@ -876,19 +876,23 @@
 
             const idLabel = document.getElementById('label-player-id');
             const serverGroup = document.getElementById('group-server-id');
+            const nameGroup = document.getElementById('group-player-name');
             const mlServerContainer = document.getElementById('ml-server-container');
 
             if (game === 'ff') {
                 idLabel.innerHTML = '<i class="fa-solid fa-id-card"></i> ID de Jugador (Free Fire):';
                 serverGroup.style.display = 'none';
+                nameGroup.style.display = 'flex';
                 mlServerContainer.style.display = 'none';
             } else if (game === 'bs') {
                 idLabel.innerHTML = '<i class="fa-solid fa-id-card"></i> ID de Jugador (Blood Strike):';
                 serverGroup.style.display = 'none';
+                nameGroup.style.display = 'flex';
                 mlServerContainer.style.display = 'none';
             } else if (game === 'ml') {
                 idLabel.innerHTML = '<i class="fa-solid fa-id-card"></i> ID de Jugador (Mobile Legends):';
                 serverGroup.style.display = 'flex';
+                nameGroup.style.display = 'none'; // Oculta el nombre en ML
                 mlServerContainer.style.display = 'block';
                 updateMlPlaceholder();
             }
@@ -920,7 +924,6 @@
         }
 
         function updatePayGrids() {
-            // Ocultar todos los grids
             ['ff', 'bs', 'ml-usa', 'ml-gen'].forEach(g => {
                 let sGrid = document.getElementById(`grid-${g}-saldo`);
                 let tGrid = document.getElementById(`grid-${g}-tarjeta`);
@@ -928,13 +931,11 @@
                 if (tGrid) tGrid.style.display = 'none';
             });
 
-            // Ocultar todas las secciones contenedoras
             document.getElementById('game-section-ff').style.display = 'none';
             document.getElementById('game-section-bs').style.display = 'none';
             document.getElementById('game-section-ml-usa').style.display = 'none';
             document.getElementById('game-section-ml-gen').style.display = 'none';
 
-            // Mostrar el activo
             let activeTarget = currentGame;
             if (currentGame === 'ml') {
                 activeTarget = (currentMlServer === 'usa') ? 'ml-usa' : 'ml-gen';
@@ -1029,7 +1030,7 @@
                 alert("Por favor, ingresa tu Server ID de Mobile Legends.");
                 return;
             }
-            if (!playerName) {
+            if (currentGame !== 'ml' && !playerName) {
                 alert("Por favor, ingresa tu Nombre/Apodo del juego.");
                 return;
             }
@@ -1076,8 +1077,9 @@
             }
 
             let serverInfo = serverId ? `%0A🌐 *Server ID:* ${serverId}` : '';
+            let nameInfo = (currentGame !== 'ml' && playerName) ? `%0A👤 *Nombre en juego:* ${playerName}` : '';
 
-            const message = `Hola *Diamantes Express FF*! 💎%0AQuiero realizar este pedido:%0A%0A🎮 *Juego:* ${gameNames[currentGame]}%0A📌 *ID Jugador:* ${playerId}${serverInfo}%0A👤 *Nombre en juego:* ${playerName}%0A💳 *Método(s):* ${usedMethods.join(" y ")}%0A📦 *Paquetes:* ${orderDetails}%0A%0A${totalSection}%0A%0A¿Cómo te hago la transferencia/envío?`;
+            const message = `Hola *Diamantes Express FF*! 💎%0AQuiero realizar este pedido:%0A%0A🎮 *Juego:* ${gameNames[currentGame]}%0A📌 *ID Jugador:* ${playerId}${serverInfo}${nameInfo}%0A💳 *Método(s):* ${usedMethods.join(" y ")}%0A📦 *Paquetes:* ${orderDetails}%0A%0A${totalSection}%0A%0A¿Cómo te hago la transferencia/envío?`;
 
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
             window.open(whatsappUrl, '_blank');
