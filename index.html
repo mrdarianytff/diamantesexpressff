@@ -35,7 +35,7 @@
                 radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 85% 80%, rgba(255, 0, 127, 0.08) 0%, transparent 40%);
             background-attachment: fixed;
-            padding-bottom: 80px;
+            padding-bottom: 60px;
             overflow-x: hidden;
         }
 
@@ -438,7 +438,7 @@
         .qty-btn:hover { background: var(--primary); color: #0a0c16; }
         .qty-value { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; color: #fff; min-width: 20px; text-align: center; }
 
-        /* CALCULADORA PLEGABLE (ACORDEÓN) */
+        /* CALCULADORA PLEGABLE BIDIRECCIONAL (ACORDEÓN) */
         .calculator-card {
             background: linear-gradient(135deg, rgba(22, 27, 46, 0.9), rgba(10, 12, 22, 0.95));
             border: 1px solid rgba(255, 230, 0, 0.4);
@@ -455,13 +455,15 @@
             border: none;
             color: var(--accent);
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 4px;
+            text-align: left;
+            gap: 8px;
         }
 
         .calculator-body {
@@ -475,15 +477,45 @@
             display: block;
         }
 
+        .calc-mode-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 5px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 230, 0, 0.2);
+        }
+
+        .calc-mode-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 6px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+            text-align: center;
+        }
+
+        .calc-mode-btn.active {
+            background: var(--accent);
+            color: #0a0c16;
+            box-shadow: 0 0 10px rgba(255, 230, 0, 0.35);
+        }
+
         .calculator-desc {
             font-size: 0.8rem;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .calculator-result {
-            background: rgba(10, 12, 22, 0.8);
-            border: 1px solid rgba(255, 230, 0, 0.3);
+            background: rgba(10, 12, 22, 0.85);
+            border: 1px solid rgba(255, 230, 0, 0.35);
             border-radius: 12px;
             padding: 14px;
             margin-top: 15px;
@@ -502,7 +534,7 @@
             font-family: 'Orbitron', sans-serif;
             cursor: pointer;
             transition: 0.3s;
-            margin-top: 12px;
+            margin-top: 10px;
             box-shadow: 0 4px 15px rgba(255, 230, 0, 0.3);
         }
 
@@ -556,36 +588,6 @@
         }
 
         .btn-order:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5); }
-
-        .chat-widget-btn {
-            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: 2px solid #fff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.6); color: #fff; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; transition: transform 0.3s ease;
-        }
-
-        .chat-widget-btn:hover { transform: scale(1.1) rotate(10deg); }
-
-        .chat-window {
-            position: fixed; bottom: 90px; right: 20px; width: 330px; max-width: calc(100vw - 40px); height: 450px; background: rgba(10, 12, 22, 0.95); border: 1px solid var(--primary); border-radius: 18px; box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3); display: flex; flex-direction: column; overflow: hidden; z-index: 9998; backdrop-filter: blur(15px); transition: all 0.3s ease; transform: scale(0); transform-origin: bottom right;
-        }
-
-        .chat-window.open { transform: scale(1); }
-
-        .chat-header {
-            background: linear-gradient(90deg, rgba(0,240,255,0.2), rgba(255,0,127,0.2)); padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;
-        }
-
-        .chat-header-info { display: flex; align-items: center; gap: 10px; }
-        .chat-header-title { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: #fff; font-weight: 700; }
-        .chat-status { font-size: 0.7rem; color: #25D366; display: flex; align-items: center; gap: 4px; }
-        .chat-close-btn { background: none; border: none; color: #a0aec0; font-size: 1.2rem; cursor: pointer; }
-
-        .chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem; user-select: text; }
-        .msg { max-width: 82%; padding: 10px 12px; border-radius: 12px; line-height: 1.4; }
-        .msg-bot { background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.3); color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .msg-user { background: linear-gradient(135deg, var(--secondary), #7928ca); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
-
-        .chat-input-area { display: flex; padding: 8px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); }
-        .chat-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-size: 0.85rem; outline: none; user-select: text; }
-        .chat-send-btn { background: var(--primary); border: none; color: #0a0c16; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
 
         footer { text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.8rem; }
     </style>
@@ -696,24 +698,34 @@
             </div>
         </section>
 
-        <!-- CALCULADORA INTELIGENTE PLEGABLE (ACORDEÓN) -->
+        <!-- CALCULADORA INTELIGENTE BIDIRECCIONAL PLEGABLE -->
         <div class="calculator-card" id="calculatorCardContainer">
             <button class="calculator-toggle-btn" onclick="toggleCalculadora()">
-                <span><i class="fa-solid fa-calculator" style="margin-right: 6px;"></i> ¿Tienes un presupuesto exacto? Toca aquí 🧮</span>
+                <span><i class="fa-solid fa-calculator" style="margin-right: 6px;"></i> Calculadora Inteligente (Dinero o Diamantes) 🧮</span>
                 <i class="fa-solid fa-chevron-down" id="calcChevron"></i>
             </button>
             
             <div class="calculator-body">
-                <p class="calculator-desc">Escribe tu presupuesto y la calculadora se actualizará sola con la mejor opción.</p>
+                <!-- Selector de Modo: Por Dinero o Por Diamantes/Oro -->
+                <div class="calc-mode-tabs">
+                    <button class="calc-mode-btn active" id="cmode-money" onclick="switchCalcMode('money')">
+                        💰 Por Dinero (CUP)
+                    </button>
+                    <button class="calc-mode-btn" id="cmode-amount" onclick="switchCalcMode('amount')">
+                        <span id="cmode-amount-label">💎 Por Diamantes</span>
+                    </button>
+                </div>
+
+                <p class="calculator-desc" id="calcModeDesc">Escribe cuánto dinero tienes y te armamos la mejor combinación al instante.</p>
                 
                 <div class="input-grid">
                     <div class="form-group">
-                        <label style="color: var(--accent);">Tu Presupuesto (CUP):</label>
-                        <input type="number" id="calcBudget" class="form-control" placeholder="Ej: 1500" oninput="ejecutarCalculadoraPresupuesto()">
+                        <label style="color: var(--accent);" id="calcInputLabel">Tu Presupuesto (CUP):</label>
+                        <input type="number" id="calcValueInput" class="form-control" placeholder="Ej: 1500" oninput="ejecutarCalculadoraInteligente()">
                     </div>
                     <div class="form-group">
                         <label style="color: var(--accent);">Método de Pago:</label>
-                        <select id="calcPayMethod" class="form-control" onchange="ejecutarCalculadoraPresupuesto()">
+                        <select id="calcPayMethod" class="form-control" onchange="ejecutarCalculadoraInteligente()">
                             <option value="saldo">Saldo Móvil</option>
                             <option value="tarjeta">Tarjeta CUP</option>
                         </select>
@@ -894,39 +906,15 @@
 
     </main>
 
-    <!-- WIDGET CHATBOT FLOTANTE IA -->
-    <div class="chat-widget-btn" onclick="toggleChat()">
-        <i class="fa-solid fa-robot"></i>
-    </div>
-
-    <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-            <div class="chat-header-info">
-                <i class="fa-solid fa-robot" style="color: var(--primary); font-size: 1.2rem;"></i>
-                <div>
-                    <div class="chat-header-title">Express Bot IA</div>
-                    <div class="chat-status"><i class="fa-solid fa-circle" style="font-size: 0.5rem;"></i> En línea</div>
-                </div>
-            </div>
-            <button class="chat-close-btn" onclick="toggleChat()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="msg msg-bot">¡Hola, crack! 🤖💎 Soy el asistente virtual de <b>Diamantes Express FF</b>. ¿Necesitas ayuda para encontrar tu ID o Server ID de Free Fire, Blood Strike o Mobile Legends? ¡Pregúntame!</div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Escribe aquí (ej: como busco mi id)..." onkeypress="handleKeyPress(event)">
-            <button class="chat-send-btn" onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </div>
-
     <footer>
         <p>© Diamantes Express FF — Todos los derechos reservados</p>
     </footer>
 
     <script>
         let currentGame = 'ff';
-        let currentMlServer = 'usa'; // 'usa' or 'gen'
+        let currentMlServer = 'usa'; // 'usa' o 'gen'
         let currentPay = 'saldo';
+        let currentCalcMode = 'money'; // 'money' o 'amount'
         let cart = {};
         let ultimaCombinacionCalculada = null;
 
@@ -996,11 +984,44 @@
             
             if (container.classList.contains('open')) {
                 chevron.className = "fa-solid fa-chevron-up";
-                if(document.getElementById('calcBudget').value.trim() !== "") {
-                    ejecutarCalculadoraPresupuesto();
+                if(document.getElementById('calcValueInput').value.trim() !== "") {
+                    ejecutarCalculadoraInteligente();
                 }
             } else {
                 chevron.className = "fa-solid fa-chevron-down";
+            }
+        }
+
+        // Cambiar modo de calculadora (Por Dinero vs Por Diamantes/Oro)
+        function switchCalcMode(mode) {
+            currentCalcMode = mode;
+            document.getElementById('cmode-money').classList.toggle('active', mode === 'money');
+            document.getElementById('cmode-amount').classList.toggle('active', mode === 'amount');
+            
+            actualizarTextosCalculadora();
+
+            if (document.getElementById('calcValueInput').value.trim() !== "") {
+                ejecutarCalculadoraInteligente();
+            }
+        }
+
+        function actualizarTextosCalculadora() {
+            const currencyName = currentGame === 'bs' ? 'Oro' : 'Diamantes';
+            const currencyIcon = currentGame === 'bs' ? '🔫' : '💎';
+            document.getElementById('cmode-amount-label').innerText = `${currencyIcon} Por ${currencyName}`;
+
+            const descEl = document.getElementById('calcModeDesc');
+            const labelEl = document.getElementById('calcInputLabel');
+            const inputEl = document.getElementById('calcValueInput');
+
+            if (currentCalcMode === 'money') {
+                descEl.innerText = 'Escribe cuánto dinero tienes y te armamos la mejor combinación al instante.';
+                labelEl.innerText = 'Tu Presupuesto (CUP):';
+                inputEl.placeholder = 'Ej: 1500';
+            } else {
+                descEl.innerText = `Escribe cuántos ${currencyName} necesitas y calculamos los paquetes exactos y cuánto te cuesta.`;
+                labelEl.innerText = `${currencyName} que necesitas:`;
+                inputEl.placeholder = currentGame === 'bs' ? 'Ej: 1000' : 'Ej: 1500';
             }
         }
 
@@ -1039,10 +1060,10 @@
                 updateMlPlaceholder();
             }
             updatePayGrids();
+            actualizarTextosCalculadora();
             
-            // Recalcular si la calculadora está abierta al cambiar de juego
             if (document.getElementById('calculatorCardContainer').classList.contains('open')) {
-                ejecutarCalculadoraPresupuesto();
+                ejecutarCalculadoraInteligente();
             }
         }
 
@@ -1061,7 +1082,7 @@
             updatePayGrids();
             
             if (document.getElementById('calculatorCardContainer').classList.contains('open')) {
-                ejecutarCalculadoraPresupuesto();
+                ejecutarCalculadoraInteligente();
             }
         }
 
@@ -1079,13 +1100,12 @@
             document.getElementById('tab-saldo').classList.toggle('active', pay === 'saldo');
             document.getElementById('tab-tarjeta').classList.toggle('active', pay === 'tarjeta');
             
-            // Sincronizar select de la calculadora también si cambia arriba
             document.getElementById('calcPayMethod').value = pay;
 
             updatePayGrids();
             
             if (document.getElementById('calculatorCardContainer').classList.contains('open')) {
-                ejecutarCalculadoraPresupuesto();
+                ejecutarCalculadoraInteligente();
             }
         }
 
@@ -1182,26 +1202,25 @@
             summaryTotalEl.innerText = totalDisplay;
         }
 
-        // 2. CALCULADORA INTELIGENTE CON ACTUALIZACIÓN AUTOMÁTICA
-        function ejecutarCalculadoraPresupuesto() {
-            const presupuestoVal = document.getElementById('calcBudget').value.trim();
+        // 2. CALCULADORA INTELIGENTE BIDIRECCIONAL (POR DINERO O POR DIAMANTES/ORO)
+        function ejecutarCalculadoraInteligente() {
+            const valStr = document.getElementById('calcValueInput').value.trim();
             const resultDiv = document.getElementById('calculatorResult');
 
-            if (!presupuestoVal || presupuestoVal === "") {
+            if (!valStr || valStr === "") {
                 resultDiv.style.display = 'none';
                 ultimaCombinacionCalculada = null;
                 return;
             }
 
-            const presupuesto = parseInt(presupuestoVal);
+            const valorUsuario = parseInt(valStr);
             const metodoCalc = document.getElementById('calcPayMethod').value;
 
-            // Sincronizar solapa superior de pago si el usuario cambia el método en la calculadora
             if (metodoCalc !== currentPay) {
                 switchPayTab(metodoCalc);
             }
 
-            if (isNaN(presupuesto) || presupuesto <= 0) {
+            if (isNaN(valorUsuario) || valorUsuario <= 0) {
                 resultDiv.style.display = 'block';
                 resultDiv.innerHTML = `<span style="color: #ff4d4d; font-weight: 600;">⚠️ Escribe una cantidad válida.</span>`;
                 return;
@@ -1224,66 +1243,135 @@
                 const priceEl = card.querySelector('.pkg-price');
                 if (titleEl && priceEl) {
                     const name = titleEl.innerText;
-                    const priceText = priceEl.innerText.replace(/[^0-9]/g, '');
-                    const price = parseInt(priceText);
-                    productosDisponibles.push({ index: idx, name: name, price: price });
+                    const price = parseInt(priceEl.innerText.replace(/[^0-9]/g, ''));
+                    // Extraer cantidad numérica de diamantes u oro (ej: "110 Diamantes" -> 110)
+                    const amountMatch = name.match(/^(\d+)/);
+                    const amount = amountMatch ? parseInt(amountMatch[1]) : 0;
+                    productosDisponibles.push({ index: idx, name: name, price: price, amount: amount });
                 }
             });
 
-            productosDisponibles.sort((a, b) => b.price - a.price);
+            resultDiv.style.display = 'block';
 
-            let mejorOpcion = null;
-            let menorSobrante = presupuesto + 1;
+            // MODO A: CALCULAR POR PRESUPUESTO EN DINERO (CUP)
+            if (currentCalcMode === 'money') {
+                const presupuesto = valorUsuario;
+                const ordenadosPrecio = [...productosDisponibles].sort((a, b) => b.price - a.price);
 
-            for (let i = 0; i < productosDisponibles.length; i++) {
-                if (productosDisponibles[i].price <= presupuesto) {
-                    const sobrante = presupuesto - productosDisponibles[i].price;
-                    if (sobrante < menorSobrante) {
-                        menorSobrante = sobrante;
-                        mejorOpcion = {
-                            items: [{ ...productosDisponibles[i], qty: 1 }],
-                            total: productosDisponibles[i].price,
-                            sobrante: sobrante
-                        };
-                    }
+                let mejorOpcion = null;
+                let menorSobrante = presupuesto + 1;
 
-                    for (let j = i; j < productosDisponibles.length; j++) {
-                        const sumaDoble = productosDisponibles[i].price + productosDisponibles[j].price;
-                        if (sumaDoble <= presupuesto) {
-                            const sobranteDoble = presupuesto - sumaDoble;
-                            if (sobranteDoble < menorSobrante) {
-                                menorSobrante = sobranteDoble;
-                                let itemsComb = [{ ...productosDisponibles[i], qty: 1 }];
-                                if (i === j) {
-                                    itemsComb[0].qty = 2;
-                                } else {
-                                    itemsComb.push({ ...productosDisponibles[j], qty: 1 });
+                for (let i = 0; i < ordenadosPrecio.length; i++) {
+                    if (ordenadosPrecio[i].price <= presupuesto) {
+                        const sobrante = presupuesto - ordenadosPrecio[i].price;
+                        if (sobrante < menorSobrante) {
+                            menorSobrante = sobrante;
+                            mejorOpcion = {
+                                items: [{ ...ordenadosPrecio[i], qty: 1 }],
+                                total: ordenadosPrecio[i].price,
+                                sobrante: sobrante
+                            };
+                        }
+
+                        for (let j = i; j < ordenadosPrecio.length; j++) {
+                            const sumaDoble = ordenadosPrecio[i].price + ordenadosPrecio[j].price;
+                            if (sumaDoble <= presupuesto) {
+                                const sobranteDoble = presupuesto - sumaDoble;
+                                if (sobranteDoble < menorSobrante) {
+                                    menorSobrante = sobranteDoble;
+                                    let itemsComb = [{ ...ordenadosPrecio[i], qty: 1 }];
+                                    if (i === j) {
+                                        itemsComb[0].qty = 2;
+                                    } else {
+                                        itemsComb.push({ ...ordenadosPrecio[j], qty: 1 });
+                                    }
+                                    mejorOpcion = {
+                                        items: itemsComb,
+                                        total: sumaDoble,
+                                        sobrante: sobranteDoble
+                                    };
                                 }
-                                mejorOpcion = {
-                                    items: itemsComb,
-                                    total: sumaDoble,
-                                    sobrante: sobranteDoble
-                                };
                             }
                         }
                     }
                 }
-            }
 
-            resultDiv.style.display = 'block';
+                if (!mejorOpcion) {
+                    const masBarato = ordenadosPrecio[ordenadosPrecio.length - 1];
+                    resultDiv.innerHTML = `<span style="color: #ffaa00; font-weight: 600;">⚠️ Presupuesto muy bajo (Mínimo ${masBarato ? masBarato.price : 0} CUP).</span>`;
+                    ultimaCombinacionCalculada = null;
+                } else {
+                    ultimaCombinacionCalculada = { items: mejorOpcion.items, metodo: metodoCalc };
+                    let htmlItems = mejorOpcion.items.map(it => `• ${it.qty}x ${it.name}`).join('<br>');
+                    resultDiv.innerHTML = `
+                        <div style="color: var(--primary); font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-lightbulb"></i> ¡Esto es lo que te alcanza!</div>
+                        <div style="color: #fff; margin-bottom: 6px;">${htmlItems}</div>
+                        <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 6px;">
+                            Gasto total: <b style="color: var(--accent);">${mejorOpcion.total.toLocaleString()} CUP</b> | Te sobran: <b style="color: #25D366;">${mejorOpcion.sobrante.toLocaleString()} CUP</b>
+                        </div>
+                        <button class="btn-calculate" style="padding: 8px; font-size: 0.8rem; margin-top: 0;" onclick="aplicarCombinacionCalculada()">
+                            👉 Elegir esta combinación
+                        </button>
+                    `;
+                }
 
-            if (!mejorOpcion) {
-                const masBarato = productosDisponibles[productosDisponibles.length - 1];
-                resultDiv.innerHTML = `<span style="color: #ffaa00; font-weight: 600;">⚠️ Presupuesto muy bajo (Mínimo ${masBarato ? masBarato.price : 0} CUP).</span>`;
-                ultimaCombinacionCalculada = null;
+            // MODO B: CALCULAR POR CANTIDAD DE DIAMANTES U ORO DESEADOS
             } else {
-                ultimaCombinacionCalculada = { items: mejorOpcion.items, metodo: metodoCalc };
-                let htmlItems = mejorOpcion.items.map(it => `• ${it.qty}x ${it.name}`).join('<br>');
+                const meta = valorUsuario;
+                const currencyName = currentGame === 'bs' ? 'Oro' : 'Diamantes';
+                // Filtrar solo paquetes que den diamantes/oro (amount > 0) y ordenar de mayor a menor
+                const paquetesMoneda = productosDisponibles.filter(p => p.amount > 0).sort((a, b) => b.amount - a.amount);
+
+                if (paquetesMoneda.length === 0) return;
+
+                // Algoritmo voraz (Greedy) con ajuste final óptimo
+                let restante = meta;
+                let seleccion = {};
+                let totalMonedas = 0;
+                let totalCosto = 0;
+
+                for (let i = 0; i < paquetesMoneda.length; i++) {
+                    const pkg = paquetesMoneda[i];
+                    if (restante >= pkg.amount) {
+                        const count = Math.min(10, Math.floor(restante / pkg.amount));
+                        if (count > 0) {
+                            seleccion[pkg.index] = { ...pkg, qty: count };
+                            restante -= count * pkg.amount;
+                            totalMonedas += count * pkg.amount;
+                            totalCosto += count * pkg.price;
+                        }
+                    }
+                }
+
+                // Si aún falta un pico para llegar o superar la meta, agregar 1 del paquete más pequeño que lo cubra
+                if (restante > 0) {
+                    const masPequeno = paquetesMoneda[paquetesMoneda.length - 1];
+                    if (seleccion[masPequeno.index]) {
+                        if (seleccion[masPequeno.index].qty < 10) {
+                            seleccion[masPequeno.index].qty += 1;
+                            totalMonedas += masPequeno.amount;
+                            totalCosto += masPequeno.price;
+                        }
+                    } else {
+                        seleccion[masPequeno.index] = { ...masPequeno, qty: 1 };
+                        totalMonedas += masPequeno.amount;
+                        totalCosto += masPequeno.price;
+                    }
+                }
+
+                const itemsResultado = Object.values(seleccion);
+                ultimaCombinacionCalculada = { items: itemsResultado, metodo: metodoCalc };
+
+                let htmlItems = itemsResultado.map(it => `• ${it.qty}x ${it.name} (${(it.price * it.qty).toLocaleString()} CUP)`).join('<br>');
+                const extraMonedas = totalMonedas - meta;
+                const notaExtra = extraMonedas > 0 ? `(+${extraMonedas.toLocaleString()} ${currencyName} extra)` : '(Exacto)';
+
                 resultDiv.innerHTML = `
-                    <div style="color: var(--primary); font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-lightbulb"></i> ¡Opción sugerida para tu dinero!</div>
+                    <div style="color: var(--primary); font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-gem"></i> Combinación recomendada para ${meta.toLocaleString()} ${currencyName}:</div>
                     <div style="color: #fff; margin-bottom: 6px;">${htmlItems}</div>
-                    <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; border-top: 1px dashed rgba(255,255,255,0.15); pt-4px;">
-                        Gasto total: <b style="color: var(--accent);">${mejorOpcion.total} CUP</b> | Vuelto libre: <b style="color: #25D366;">${mejorOpcion.sobrante} CUP</b>
+                    <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 6px;">
+                        Recibes: <b style="color: #25D366;">${totalMonedas.toLocaleString()} ${currencyName}</b> <span style="font-size:0.72rem;">${notaExtra}</span><br>
+                        Total a pagar: <b style="color: var(--accent); font-size: 0.9rem;">${totalCosto.toLocaleString()} CUP</b> (${metodoCalc === 'saldo' ? 'Saldo Móvil' : 'Tarjeta CUP'})
                     </div>
                     <button class="btn-calculate" style="padding: 8px; font-size: 0.8rem; margin-top: 0;" onclick="aplicarCombinacionCalculada()">
                         👉 Elegir esta combinación
@@ -1393,65 +1481,6 @@
 
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
             window.open(whatsappUrl, '_blank');
-        }
-
-        function toggleChat() {
-            document.getElementById('chatWindow').classList.toggle('open');
-        }
-
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') sendChatMessage();
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const text = input.value.trim();
-            if (!text) return;
-
-            addMessage(text, 'user');
-            input.value = '';
-
-            setTimeout(() => {
-                let reply = getBotResponse(text);
-                addMessage(reply, 'bot');
-            }, 300);
-        }
-
-        function addMessage(text, sender) {
-            const box = document.getElementById('chatMessages');
-            const div = document.createElement('div');
-            div.className = `msg msg-${sender}`;
-            div.innerHTML = text;
-            box.appendChild(div);
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function getBotResponse(rawTxt) {
-            let txt = rawTxt.toLowerCase()
-                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                .replace(/[^a-z0-9\s]/g, "")
-                .trim();
-
-            if (txt.includes("creo") || txt.includes("dueno") || txt.includes("darian")) {
-                return "El dueño y creador de esta tienda es <b>MR DARIAN YT</b> 👑.";
-            }
-
-            if (txt.includes("mobile legends") || txt.includes("ml") || txt.includes("servidor") || txt.includes("server") || txt.includes("id")) {
-                if (txt.includes("servidor") || txt.includes("server") || txt.includes("para que") || txt.includes("sirve")) {
-                    return "🌐 <b>¿Para qué es el Server ID en Mobile Legends?</b><br>Es totalmente necesario para hacer la recarga.<br><br>• <b>Servidor EE.UU:</b> Tiene 5 dígitos en paréntesis, ej: <b>(12345)</b>.<br>• <b>Servidor General:</b> Tiene 4 dígitos en paréntesis, ej: <b>(1234)</b>.<br><br>⚠️ <b>¡IMPORTANTE!</b> Por favor, <b>verifiquen bien su servidor y el Server ID</b> antes de hacer el pedido.";
-                }
-                return "⚔️ <b>¿Cómo encontrar tu ID y Server ID en Mobile Legends?</b><br>1️⃣ Abre el juego y toca tu <b>Perfil / Avatar</b> arriba a la izquierda.<br>2️⃣ Verás tu ID numérico y al lado entre paréntesis el <b>Server ID</b>.<br>• 🇺🇸 EE.UU tiene <b>5 dígitos</b> (ej: 12345).<br>• 🌍 General tiene <b>4 dígitos</b> (ej: 1234).<br><br>⚠️ <i>¡Revisa bien cuál es tu servidor antes de seleccionar la oferta!</i>";
-            }
-
-            if (txt.includes("free fire") || txt.includes("ff")) {
-                return "🔥 <b>¿Cómo encontrar tu ID en Free Fire?</b><br>1️⃣ Entra al juego y toca tu perfil en la esquina superior izquierda.<br>2️⃣ Tu ID de jugador son los números que aparecen debajo de tu nombre. ¡Cópialo y pégalo en la tienda!";
-            }
-
-            if (txt.includes("blood strike") || txt.includes("strike")) {
-                return "🔫 <b>¿Cómo encontrar tu ID en Blood Strike?</b><br>1️⃣ Entra al menú principal del juego.<br>2️⃣ Toca tu perfil o avatar arriba a la izquierda para ver tu ID de jugador numérico.";
-            }
-
-            return "¡Hola crack! 💎 Pregúntame por:\n• ¿Cómo buscar mi ID de Free Fire, Blood Strike o Mobile Legends?\n• ¿Diferencia entre Servidor EE.UU (12345) y General (1234)?";
         }
     </script>
 </body>
