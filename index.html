@@ -438,51 +438,47 @@
         .qty-btn:hover { background: var(--primary); color: #0a0c16; }
         .qty-value { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; color: #fff; min-width: 20px; text-align: center; }
 
-        /* NUEVOS ESTILOS: CALCULADORA DE PRESUPUESTO INTELIGENTE */
+        /* CALCULADORA PLEGABLE (ACORDEÓN) */
         .calculator-card {
             background: linear-gradient(135deg, rgba(22, 27, 46, 0.9), rgba(10, 12, 22, 0.95));
-            border: 1px solid var(--accent);
+            border: 1px solid rgba(255, 230, 0, 0.4);
             border-radius: 18px;
-            padding: 20px;
+            padding: 16px;
             margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(255, 230, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(255, 230, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
-        .calculator-header {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+        .calculator-toggle-btn {
+            width: 100%;
+            background: transparent;
+            border: none;
             color: var(--accent);
-            margin-bottom: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            padding: 4px;
+        }
+
+        .calculator-body {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(255, 230, 0, 0.2);
+        }
+
+        .calculator-card.open .calculator-body {
+            display: block;
         }
 
         .calculator-desc {
             font-size: 0.8rem;
             color: var(--text-muted);
             margin-bottom: 15px;
-        }
-
-        .btn-calculate {
-            width: 100%;
-            background: linear-gradient(90deg, var(--accent), #ffaa00);
-            color: #0a0c16;
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(255, 230, 0, 0.3);
-        }
-
-        .btn-calculate:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(255, 230, 0, 0.5);
         }
 
         .calculator-result {
@@ -492,7 +488,27 @@
             padding: 14px;
             margin-top: 15px;
             font-size: 0.85rem;
-            display: none;
+        }
+
+        .btn-calculate {
+            width: 100%;
+            background: linear-gradient(90deg, var(--accent), #ffaa00);
+            color: #0a0c16;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 12px;
+            box-shadow: 0 4px 15px rgba(255, 230, 0, 0.3);
+        }
+
+        .btn-calculate:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(255, 230, 0, 0.5);
         }
 
         .order-summary {
@@ -680,33 +696,33 @@
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN: CALCULADORA DE PRESUPUESTO INTELIGENTE -->
-        <div class="calculator-card">
-            <div class="calculator-header">
-                <i class="fa-solid fa-calculator"></i> ¿Qué me alcanza con mi dinero?
-            </div>
-            <p class="calculator-desc">Escribe tu presupuesto en CUP y la calculadora te sugerirá automáticamente el mejor paquete o combinación mixta.</p>
-            
-            <div class="input-grid">
-                <div class="form-group">
-                    <label style="color: var(--accent);">Tu Presupuesto (CUP):</label>
-                    <input type="number" id="calcBudget" class="form-control" placeholder="Ej: 1500">
-                </div>
-                <div class="form-group">
-                    <label style="color: var(--accent);">Método de Pago:</label>
-                    <select id="calcPayMethod" class="form-control">
-                        <option value="saldo">Saldo Móvil</option>
-                        <option value="tarjeta">Tarjeta CUP</option>
-                    </select>
-                </div>
-            </div>
-            
-            <button class="btn-calculate" onclick="ejecutarCalculadoraPresupuesto()">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Calcular Mejor Combinación
+        <!-- CALCULADORA INTELIGENTE PLEGABLE (ACORDEÓN) -->
+        <div class="calculator-card" id="calculatorCardContainer">
+            <button class="calculator-toggle-btn" onclick="toggleCalculadora()">
+                <span><i class="fa-solid fa-calculator" style="margin-right: 6px;"></i> ¿Tienes un presupuesto exacto? Toca aquí 🧮</span>
+                <i class="fa-solid fa-chevron-down" id="calcChevron"></i>
             </button>
+            
+            <div class="calculator-body">
+                <p class="calculator-desc">Escribe tu presupuesto y la calculadora se actualizará sola con la mejor opción.</p>
+                
+                <div class="input-grid">
+                    <div class="form-group">
+                        <label style="color: var(--accent);">Tu Presupuesto (CUP):</label>
+                        <input type="number" id="calcBudget" class="form-control" placeholder="Ej: 1500" oninput="ejecutarCalculadoraPresupuesto()">
+                    </div>
+                    <div class="form-group">
+                        <label style="color: var(--accent);">Método de Pago:</label>
+                        <select id="calcPayMethod" class="form-control" onchange="ejecutarCalculadoraPresupuesto()">
+                            <option value="saldo">Saldo Móvil</option>
+                            <option value="tarjeta">Tarjeta CUP</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div id="calculatorResult" class="calculator-result">
-                <!-- Aquí se inyecta el resultado dinámico -->
+                <div id="calculatorResult" class="calculator-result" style="display: none;">
+                    <!-- Resultado dinámico -->
+                </div>
             </div>
         </div>
 
@@ -909,7 +925,7 @@
 
     <script>
         let currentGame = 'ff';
-        let currentMlServer = 'usa'; // 'usa' o 'gen'
+        let currentMlServer = 'usa'; // 'usa' or 'gen'
         let currentPay = 'saldo';
         let cart = {};
         let ultimaCombinacionCalculada = null;
@@ -971,6 +987,23 @@
             }
         }
 
+        // Abrir/Cerrar Calculadora (Acordeón)
+        function toggleCalculadora() {
+            const container = document.getElementById('calculatorCardContainer');
+            const chevron = document.getElementById('calcChevron');
+            
+            container.classList.toggle('open');
+            
+            if (container.classList.contains('open')) {
+                chevron.className = "fa-solid fa-chevron-up";
+                if(document.getElementById('calcBudget').value.trim() !== "") {
+                    ejecutarCalculadoraPresupuesto();
+                }
+            } else {
+                chevron.className = "fa-solid fa-chevron-down";
+            }
+        }
+
         function switchGame(game) {
             currentGame = game;
             cart = {}; 
@@ -1006,6 +1039,11 @@
                 updateMlPlaceholder();
             }
             updatePayGrids();
+            
+            // Recalcular si la calculadora está abierta al cambiar de juego
+            if (document.getElementById('calculatorCardContainer').classList.contains('open')) {
+                ejecutarCalculadoraPresupuesto();
+            }
         }
 
         function switchMlServer(serverType) {
@@ -1021,6 +1059,10 @@
 
             updateMlPlaceholder();
             updatePayGrids();
+            
+            if (document.getElementById('calculatorCardContainer').classList.contains('open')) {
+                ejecutarCalculadoraPresupuesto();
+            }
         }
 
         function updateMlPlaceholder() {
@@ -1036,7 +1078,15 @@
             currentPay = pay;
             document.getElementById('tab-saldo').classList.toggle('active', pay === 'saldo');
             document.getElementById('tab-tarjeta').classList.toggle('active', pay === 'tarjeta');
+            
+            // Sincronizar select de la calculadora también si cambia arriba
+            document.getElementById('calcPayMethod').value = pay;
+
             updatePayGrids();
+            
+            if (document.getElementById('calculatorCardContainer').classList.contains('open')) {
+                ejecutarCalculadoraPresupuesto();
+            }
         }
 
         function updatePayGrids() {
@@ -1132,25 +1182,36 @@
             summaryTotalEl.innerText = totalDisplay;
         }
 
-        // 2. CALCULADORA DE PRESUPUESTO INTELIGENTE CON COMBINACIONES
+        // 2. CALCULADORA INTELIGENTE CON ACTUALIZACIÓN AUTOMÁTICA
         function ejecutarCalculadoraPresupuesto() {
-            const presupuesto = parseInt(document.getElementById('calcBudget').value);
-            const metodoCalc = document.getElementById('calcPayMethod').value;
+            const presupuestoVal = document.getElementById('calcBudget').value.trim();
             const resultDiv = document.getElementById('calculatorResult');
 
-            if (!presupuesto || presupuesto <= 0) {
-                resultDiv.style.display = 'block';
-                resultDiv.innerHTML = `<span style="color: #ff4d4d; font-weight: 600;">⚠️ Por favor, ingresa una cantidad válida de dinero.</span>`;
+            if (!presupuestoVal || presupuestoVal === "") {
+                resultDiv.style.display = 'none';
+                ultimaCombinacionCalculada = null;
                 return;
             }
 
-            // Obtener los paquetes activos del juego actual y método seleccionado
+            const presupuesto = parseInt(presupuestoVal);
+            const metodoCalc = document.getElementById('calcPayMethod').value;
+
+            // Sincronizar solapa superior de pago si el usuario cambia el método en la calculadora
+            if (metodoCalc !== currentPay) {
+                switchPayTab(metodoCalc);
+            }
+
+            if (isNaN(presupuesto) || presupuesto <= 0) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `<span style="color: #ff4d4d; font-weight: 600;">⚠️ Escribe una cantidad válida.</span>`;
+                return;
+            }
+
             let activeTarget = currentGame;
             if (currentGame === 'ml') {
                 activeTarget = (currentMlServer === 'usa') ? 'ml-usa' : 'ml-gen';
             }
 
-            // Extraer dinámicamente las tarjetas de paquetes de la sección actual en pantalla
             const gridId = `grid-${activeTarget}-${metodoCalc}`;
             const grid = document.getElementById(gridId);
             if (!grid) return;
@@ -1169,13 +1230,11 @@
                 }
             });
 
-            // Ordenar de mayor a menor precio
             productosDisponibles.sort((a, b) => b.price - a.price);
 
             let mejorOpcion = null;
             let menorSobrante = presupuesto + 1;
 
-            // Buscar la mejor combinación o paquete único
             for (let i = 0; i < productosDisponibles.length; i++) {
                 if (productosDisponibles[i].price <= presupuesto) {
                     const sobrante = presupuesto - productosDisponibles[i].price;
@@ -1188,7 +1247,6 @@
                         };
                     }
 
-                    // Probar doble combinación
                     for (let j = i; j < productosDisponibles.length; j++) {
                         const sumaDoble = productosDisponibles[i].price + productosDisponibles[j].price;
                         if (sumaDoble <= presupuesto) {
@@ -1216,7 +1274,8 @@
 
             if (!mejorOpcion) {
                 const masBarato = productosDisponibles[productosDisponibles.length - 1];
-                resultDiv.innerHTML = `<span style="color: #ffaa00; font-weight: 600;">⚠️ Con ${presupuesto} CUP no te alcanza para el paquete más económico (${masBarato ? masBarato.name : 'N/A'} cuesta ${masBarato ? masBarato.price : 0} CUP).</span>`;
+                resultDiv.innerHTML = `<span style="color: #ffaa00; font-weight: 600;">⚠️ Presupuesto muy bajo (Mínimo ${masBarato ? masBarato.price : 0} CUP).</span>`;
+                ultimaCombinacionCalculada = null;
             } else {
                 ultimaCombinacionCalculada = { items: mejorOpcion.items, metodo: metodoCalc };
                 let htmlItems = mejorOpcion.items.map(it => `• ${it.qty}x ${it.name}`).join('<br>');
@@ -1236,12 +1295,10 @@
         function aplicarCombinacionCalculada() {
             if (!ultimaCombinacionCalculada) return;
 
-            // Cambiar método de pago si no coincide
             if (currentPay !== ultimaCombinacionCalculada.metodo) {
                 switchPayTab(ultimaCombinacionCalculada.metodo);
             }
 
-            // Limpiar carrito previo e insertar la combinación
             cart = {};
             document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
             document.querySelectorAll('.pkg-card').forEach(el => el.classList.remove('selected'));
@@ -1255,8 +1312,18 @@
                 updateQty(activeTarget, ultimaCombinacionCalculada.metodo, it.index, it.name, it.price, it.qty);
             });
 
-            // Auto-scroll suave hacia el resumen
-            document.getElementById('resumen-seccion').scrollIntoView({ behavior: 'smooth' });
+            // Scroll suave hacia el resumen sin irse hasta el fondo de la página
+            const resumenEl = document.getElementById('resumen-seccion');
+            const offset = 100;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = resumenEl.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
         }
 
         function sendOrder() {
