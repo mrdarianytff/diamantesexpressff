@@ -68,7 +68,7 @@
             padding: 22px; margin-bottom: 20px; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* ESTILOS PARA EL MENÚ PLEGABLE DE PORTADAS */
+        /* ACORDEÓN DE PORTADAS */
         .accordion-card {
             background: linear-gradient(135deg, rgba(22, 27, 46, 0.9), rgba(10, 12, 22, 0.95));
             border: 1px solid rgba(0, 240, 255, 0.4);
@@ -208,7 +208,7 @@
             </div>
         </div>
 
-        <!-- MENÚ PLEGABLE: GESTIÓN DE PORTADAS DE LOS JUEGOS -->
+        <!-- MENÚ PLEGABLE: GESTIÓN DE PORTADAS DE LOS JUEGOS CON SELECTOR DE GALERÍA -->
         <div class="accordion-card" id="coversAccordionCard">
             <button class="accordion-toggle-btn" onclick="togglePortadasMenu()">
                 <span><i class="fa-solid fa-image" style="margin-right: 6px;"></i> Administrar Portadas de Juegos (Oculto)</span>
@@ -216,25 +216,28 @@
             </button>
             
             <div class="accordion-body">
+                <!-- Free Fire -->
                 <div class="form-group">
-                    <label>Enlace de imagen (URL) para Free Fire:</label>
-                    <input type="text" id="input-ff" class="form-control" placeholder="https://ejemplo.com/ff.jpg" oninput="actualizarPreview('ff')">
+                    <label>Portada para Free Fire (Galería):</label>
+                    <input type="file" id="file-ff" accept="image/*" class="form-control" onchange="cargarPortadaGaleria(event, 'ff')">
                     <div class="preview-box">
                         <img id="prev-ff" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" alt="Preview FF">
                     </div>
                 </div>
 
+                <!-- Blood Strike -->
                 <div class="form-group" style="margin-top: 15px;">
-                    <label>Enlace de imagen (URL) para Blood Strike:</label>
-                    <input type="text" id="input-bs" class="form-control" placeholder="https://ejemplo.com/bs.jpg" oninput="actualizarPreview('bs')">
+                    <label>Portada para Blood Strike (Galería):</label>
+                    <input type="file" id="file-bs" accept="image/*" class="form-control" onchange="cargarPortadaGaleria(event, 'bs')">
                     <div class="preview-box">
                         <img id="prev-bs" src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" alt="Preview BS">
                     </div>
                 </div>
 
+                <!-- Mobile Legends -->
                 <div class="form-group" style="margin-top: 15px;">
-                    <label>Enlace de imagen (URL) para Mobile Legends:</label>
-                    <input type="text" id="input-ml" class="form-control" placeholder="https://ejemplo.com/ml.jpg" oninput="actualizarPreview('ml')">
+                    <label>Portada para Mobile Legends (Galería):</label>
+                    <input type="file" id="file-ml" accept="image/*" class="form-control" onchange="cargarPortadaGaleria(event, 'ml')">
                     <div class="preview-box">
                         <img id="prev-ml" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" alt="Preview ML">
                     </div>
@@ -298,6 +301,7 @@
 
     <script>
         const ADMIN_PASSWORD = "darian090827ff"; 
+        let tempCovers = {}; // Objeto temporal para guardar las portadas antes de pulsar guardar
 
         function cargarVisitasAdmin() {
             try {
@@ -312,7 +316,6 @@
             }
         }
 
-        // Función para abrir/cerrar el menú desplegable de portadas
         function togglePortadasMenu() {
             const card = document.getElementById('coversAccordionCard');
             const chevron = document.getElementById('coversChevron');
@@ -346,20 +349,12 @@
                 }
             });
 
-            // Cargar portadas guardadas
+            // Cargar portadas guardadas previamente
             const savedImages = JSON.parse(localStorage.getItem('diamantes_game_covers')) || {};
-            if (savedImages.ff) {
-                document.getElementById('input-ff').value = savedImages.ff;
-                document.getElementById('prev-ff').src = savedImages.ff;
-            }
-            if (savedImages.bs) {
-                document.getElementById('input-bs').value = savedImages.bs;
-                document.getElementById('prev-bs').src = savedImages.bs;
-            }
-            if (savedImages.ml) {
-                document.getElementById('input-ml').value = savedImages.ml;
-                document.getElementById('prev-ml').src = savedImages.ml;
-            }
+            tempCovers = savedImages;
+            if (savedImages.ff) document.getElementById('prev-ff').src = savedImages.ff;
+            if (savedImages.bs) document.getElementById('prev-bs').src = savedImages.bs;
+            if (savedImages.ml) document.getElementById('prev-ml').src = savedImages.ml;
 
             const form = document.getElementById("offer-form");
             const listContainer = document.getElementById("active-items-list");
@@ -548,20 +543,43 @@
             renderList();
         });
 
-        function actualizarPreview(game) {
-            const url = document.getElementById(`input-${game}`).value.trim();
-            if (url) {
-                document.getElementById(`prev-${game}`).src = url;
+        // Función para cargar portadas desde la galería con compresión automática
+        function cargarPortadaGaleria(event, game) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 600;
+                        const MAX_HEIGHT = 600;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                        } else {
+                            if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                        tempCovers[game] = compressedBase64;
+                        document.getElementById(`prev-${game}`).src = compressedBase64;
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
             }
         }
 
         function guardarPortadas() {
-            const covers = {
-                ff: document.getElementById('input-ff').value.trim(),
-                bs: document.getElementById('input-bs').value.trim(),
-                ml: document.getElementById('input-ml').value.trim()
-            };
-            localStorage.setItem('diamantes_game_covers', JSON.stringify(covers));
+            localStorage.setItem('diamantes_game_covers', JSON.stringify(tempCovers));
             
             const alertBox = document.getElementById('alertSuccess');
             alertBox.style.display = 'block';
