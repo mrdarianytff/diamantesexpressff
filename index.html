@@ -228,36 +228,6 @@
 
         .section-header i { color: var(--primary); }
 
-        /* PESTAÑAS PRINCIPALES DE JUEGOS */
-        .game-tabs {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .game-tab-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 4px;
-            border-radius: 12px;
-            color: var(--text-muted);
-            font-weight: 700;
-            font-size: 0.78rem;
-            cursor: pointer;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .game-tab-btn.active {
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 0, 127, 0.2));
-            border-color: var(--primary);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-        }
-
-        .game-tab-btn i { display: block; font-size: 1.2rem; margin-bottom: 4px; color: var(--primary); }
-
         /* SUB-TABS SERVIDORES ML */
         .server-subtabs {
             display: grid;
@@ -634,52 +604,48 @@
             </div>
         </div>
 
-        <!-- SECCIÓN 1: CONFIGURAR PEDIDO Y SELECCIÓN DE JUEGO (CON PORTADAS DINÁMICAS ESTILO TU FOTO) -->
-        <section class="section-card">
+        <!-- SECCIÓN DE SELECCIÓN DE JUEGOS (ARRIBA) -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px;" id="game-image-cards">
+            <!-- Free Fire -->
+            <div onclick="switchGameAndScroll('ff')" id="card-btn-ff" style="cursor: pointer; border: 2px solid var(--primary); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);" class="game-select-card">
+                <div style="width: 100%; height: 110px; background: #000;">
+                    <img id="img-cover-ff" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Free Fire">
+                </div>
+                <div style="padding: 8px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
+                    FREE FIRE <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
+                </div>
+            </div>
+
+            <!-- Blood Strike -->
+            <div onclick="switchGameAndScroll('bs')" id="card-btn-bs" style="cursor: pointer; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card">
+                <div style="width: 100%; height: 110px; background: #000;">
+                    <img id="img-cover-bs" src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Blood Strike">
+                </div>
+                <div style="padding: 8px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
+                    BLOOD STRIKE <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
+                </div>
+            </div>
+
+            <!-- Mobile Legends -->
+            <div onclick="switchGameAndScroll('ml')" id="card-btn-ml" style="cursor: pointer; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card">
+                <div style="width: 100%; height: 110px; background: #000;">
+                    <img id="img-cover-ml" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Mobile Legends">
+                </div>
+                <div style="padding: 8px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
+                    MOBILE LEGENDS <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1: CONFIGURAR PEDIDÓ (AQUÍ SALTA CUANDO TOCAN UN JUEGO) -->
+        <section class="section-card" id="seccion-configurar">
             <div class="section-header">
                 <i class="fa-solid fa-user-gear"></i>
                 <span>1. Configurar Pedido</span>
             </div>
 
-            <!-- Pestañas de Selección de Juego con Portadas -->
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label style="margin-bottom: 10px;"><i class="fa-solid fa-gamepad"></i> Selecciona el Juego:</label>
-                
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;" id="game-image-cards">
-                    <!-- Free Fire Card -->
-                    <div onclick="switchGame('ff')" id="card-btn-ff" style="cursor: pointer; border: 2px solid var(--primary); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card active">
-                        <div style="width: 100%; height: 90px; background: #000;">
-                            <img id="img-cover-ff" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Free Fire">
-                        </div>
-                        <div style="padding: 6px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
-                            FREE FIRE <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
-                        </div>
-                    </div>
-
-                    <!-- Blood Strike Card -->
-                    <div onclick="switchGame('bs')" id="card-btn-bs" style="cursor: pointer; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card">
-                        <div style="width: 100%; height: 90px; background: #000;">
-                            <img id="img-cover-bs" src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Blood Strike">
-                        </div>
-                        <div style="padding: 6px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
-                            BLOOD STRIKE <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
-                        </div>
-                    </div>
-
-                    <!-- Mobile Legends Card -->
-                    <div onclick="switchGame('ml')" id="card-btn-ml" style="cursor: pointer; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card">
-                        <div style="width: 100%; height: 90px; background: #000;">
-                            <img id="img-cover-ml" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Mobile Legends">
-                        </div>
-                        <div style="padding: 6px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
-                            MOBILE LEGENDS <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- SUB-SELECTOR DE SERVIDOR (SOLO MOBILE LEGENDS) -->
-            <div id="ml-server-container" style="display: none;">
+            <div id="ml-server-container" style="display: none; margin-bottom: 15px;">
                 <label style="font-size: 0.8rem; font-weight: 700; color: var(--accent); display: block; margin-bottom: 6px;">
                     ⚠️ Tenemos 2 servidores, revisa bien el tuyo antes de pedir:
                 </label>
@@ -934,7 +900,6 @@
             } catch (error) {}
         }
 
-        // CARGAR PORTADAS Y DATOS AL ABRIR LA WEB
         window.addEventListener('DOMContentLoaded', () => {
             registrarVisita();
 
@@ -944,7 +909,6 @@
             if (savedImages.ml) document.getElementById('img-cover-ml').src = savedImages.ml;
             if (savedImages.bs) document.getElementById('img-cover-bs').src = savedImages.bs;
 
-            // Carrusel dinámico si lo tienes
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
             const scrollContainer = document.getElementById('dynamicCarouselScroll');
@@ -1022,12 +986,18 @@
             }
         }
 
+        // CAMBIAR JUEGO Y HACER SCROLL AUTOMÁTICO A CONFIGURAR PEDIDO
+        function switchGameAndScroll(game) {
+            switchGame(game);
+            const seccionConfig = document.getElementById('seccion-configurar');
+            seccionConfig.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         function switchGame(game) {
             currentGame = game;
             cart = {}; 
             updateSummary();
 
-            // Actualizar diseño visual de las tarjetas estilo foto
             ['ff', 'bs', 'ml'].forEach(g => {
                 const cardEl = document.getElementById(`card-btn-${g}`);
                 if (cardEl) {
