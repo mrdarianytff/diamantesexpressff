@@ -634,26 +634,47 @@
             </div>
         </div>
 
-        <!-- Sección 1: Configurar Pedido y Selección de Juego -->
+        <!-- SECCIÓN 1: CONFIGURAR PEDIDO Y SELECCIÓN DE JUEGO (CON PORTADAS DINÁMICAS ESTILO TU FOTO) -->
         <section class="section-card">
             <div class="section-header">
                 <i class="fa-solid fa-user-gear"></i>
                 <span>1. Configurar Pedido</span>
             </div>
 
-            <!-- Pestañas de Selección de Juego -->
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label><i class="fa-solid fa-gamepad"></i> Selecciona el Juego:</label>
-                <div class="game-tabs">
-                    <button class="game-tab-btn active" id="gtab-ff" onclick="switchGame('ff')">
-                        <i class="fa-solid fa-gem"></i> Free Fire
-                    </button>
-                    <button class="game-tab-btn" id="gtab-bs" onclick="switchGame('bs')">
-                        <i class="fa-solid fa-crosshairs"></i> Blood Strike
-                    </button>
-                    <button class="game-tab-btn" id="gtab-ml" onclick="switchGame('ml')">
-                        <i class="fa-solid fa-shield-sword"></i> Mobile Legends
-                    </button>
+            <!-- Pestañas de Selección de Juego con Portadas -->
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label style="margin-bottom: 10px;"><i class="fa-solid fa-gamepad"></i> Selecciona el Juego:</label>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;" id="game-image-cards">
+                    <!-- Free Fire Card -->
+                    <div onclick="switchGame('ff')" id="card-btn-ff" style="cursor: pointer; border: 2px solid var(--primary); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card active">
+                        <div style="width: 100%; height: 90px; background: #000;">
+                            <img id="img-cover-ff" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Free Fire">
+                        </div>
+                        <div style="padding: 6px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
+                            FREE FIRE <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
+                        </div>
+                    </div>
+
+                    <!-- Blood Strike Card -->
+                    <div onclick="switchGame('bs')" id="card-btn-bs" style="cursor: pointer; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card">
+                        <div style="width: 100%; height: 90px; background: #000;">
+                            <img id="img-cover-bs" src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Blood Strike">
+                        </div>
+                        <div style="padding: 6px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
+                            BLOOD STRIKE <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Legends Card -->
+                    <div onclick="switchGame('ml')" id="card-btn-ml" style="cursor: pointer; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card">
+                        <div style="width: 100%; height: 90px; background: #000;">
+                            <img id="img-cover-ml" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Mobile Legends">
+                        </div>
+                        <div style="padding: 6px; text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 800; color: #fff;">
+                            MOBILE LEGENDS <i class="fa-solid fa-chevron-right" style="color: var(--primary);"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -706,7 +727,6 @@
             </button>
             
             <div class="calculator-body">
-                <!-- Selector de Modo: Por Dinero o Por Diamantes/Oro -->
                 <div class="calc-mode-tabs">
                     <button class="calc-mode-btn active" id="cmode-money" onclick="switchCalcMode('money')">
                         💰 Por Dinero (CUP)
@@ -732,9 +752,7 @@
                     </div>
                 </div>
 
-                <div id="calculatorResult" class="calculator-result" style="display: none;">
-                    <!-- Resultado dinámico -->
-                </div>
+                <div id="calculatorResult" class="calculator-result" style="display: none;"></div>
             </div>
         </div>
 
@@ -868,20 +886,10 @@
                 <div id="summary-total" style="font-family: 'Orbitron', sans-serif; font-weight: 800; color: var(--accent); margin-top: 6px; font-size: 1.05rem;">Total: 0 CUP</div>
             </div>
 
-            <!-- Pasos breves -->
             <div class="steps-container" style="margin-top: 20px;">
-                <div class="step-box">
-                    <div class="step-number">1</div>
-                    <span>ID y Datos</span>
-                </div>
-                <div class="step-box">
-                    <div class="step-number">2</div>
-                    <span>Elige cantidad</span>
-                </div>
-                <div class="step-box">
-                    <div class="step-number">3</div>
-                    <span>Envía el pedido</span>
-                </div>
+                <div class="step-box"><div class="step-number">1</div><span>ID y Datos</span></div>
+                <div class="step-box"><div class="step-number">2</div><span>Elige cantidad</span></div>
+                <div class="step-box"><div class="step-number">3</div><span>Envía el pedido</span></div>
             </div>
         </section>
 
@@ -890,7 +898,7 @@
             <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i> Pedir por WhatsApp
         </button>
 
-        <!-- SECCIÓN DE COMUNIDAD / CANAL DE WHATSAPP -->
+        <!-- SECCIÓN DE COMUNIDAD -->
         <div class="community-card">
             <div class="community-img-container">
                 <img src="gamers.jpg" alt="Comunidad Oficial" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=60'">
@@ -912,9 +920,9 @@
 
     <script>
         let currentGame = 'ff';
-        let currentMlServer = 'usa'; // 'usa' o 'gen'
+        let currentMlServer = 'usa';
         let currentPay = 'saldo';
-        let currentCalcMode = 'money'; // 'money' o 'amount'
+        let currentCalcMode = 'money';
         let cart = {};
         let ultimaCombinacionCalculada = null;
 
@@ -926,14 +934,22 @@
             } catch (error) {}
         }
 
+        // CARGAR PORTADAS Y DATOS AL ABRIR LA WEB
         window.addEventListener('DOMContentLoaded', () => {
             registrarVisita();
 
+            // Cargar portadas dinámicas desde el panel de admin
+            const savedImages = JSON.parse(localStorage.getItem('diamantes_game_covers')) || {};
+            if (savedImages.ff) document.getElementById('img-cover-ff').src = savedImages.ff;
+            if (savedImages.ml) document.getElementById('img-cover-ml').src = savedImages.ml;
+            if (savedImages.bs) document.getElementById('img-cover-bs').src = savedImages.bs;
+
+            // Carrusel dinámico si lo tienes
             const savedItems = localStorage.getItem('express_carousel_items');
             const wrapper = document.getElementById('dynamicCarouselWrapper');
             const scrollContainer = document.getElementById('dynamicCarouselScroll');
 
-            if (savedItems) {
+            if (savedItems && wrapper && scrollContainer) {
                 try {
                     const items = JSON.parse(savedItems);
                     if (items.length > 0) {
@@ -944,11 +960,7 @@
                             card.innerHTML = `
                                 <div>
                                     ${item.title ? `<h3 class="carousel-card-title">${item.title}</h3>` : ''}
-                                    ${item.image ? `
-                                        <div class="carousel-img-box">
-                                            <img src="${item.image}" class="carousel-card-img" alt="Anuncio">
-                                        </div>
-                                    ` : ''}
+                                    ${item.image ? `<div class="carousel-img-box"><img src="${item.image}" class="carousel-card-img" alt="Anuncio"></div>` : ''}
                                     ${item.description ? `<p class="carousel-card-text">${item.description}</p>` : ''}
                                 </div>
                             `;
@@ -960,49 +972,34 @@
             }
         });
 
-        // 1. DETECCIÓN AUTOMÁTICA DE SERVIDOR ML (4 vs 5 dígitos)
         function detectarServidorMLAutomatico(valor) {
             if (currentGame !== 'ml') return;
             const limpio = valor.trim();
             if (limpio.length === 4) {
-                if (currentMlServer !== 'gen') {
-                    switchMlServer('gen');
-                }
+                if (currentMlServer !== 'gen') switchMlServer('gen');
             } else if (limpio.length === 5) {
-                if (currentMlServer !== 'usa') {
-                    switchMlServer('usa');
-                }
+                if (currentMlServer !== 'usa') switchMlServer('usa');
             }
         }
 
-        // Abrir/Cerrar Calculadora (Acordeón)
         function toggleCalculadora() {
             const container = document.getElementById('calculatorCardContainer');
             const chevron = document.getElementById('calcChevron');
-            
             container.classList.toggle('open');
-            
             if (container.classList.contains('open')) {
                 chevron.className = "fa-solid fa-chevron-up";
-                if(document.getElementById('calcValueInput').value.trim() !== "") {
-                    ejecutarCalculadoraInteligente();
-                }
+                if(document.getElementById('calcValueInput').value.trim() !== "") ejecutarCalculadoraInteligente();
             } else {
                 chevron.className = "fa-solid fa-chevron-down";
             }
         }
 
-        // Cambiar modo de calculadora (Por Dinero vs Por Diamantes/Oro)
         function switchCalcMode(mode) {
             currentCalcMode = mode;
             document.getElementById('cmode-money').classList.toggle('active', mode === 'money');
             document.getElementById('cmode-amount').classList.toggle('active', mode === 'amount');
-            
             actualizarTextosCalculadora();
-
-            if (document.getElementById('calcValueInput').value.trim() !== "") {
-                ejecutarCalculadoraInteligente();
-            }
+            if (document.getElementById('calcValueInput').value.trim() !== "") ejecutarCalculadoraInteligente();
         }
 
         function actualizarTextosCalculadora() {
@@ -1030,8 +1027,18 @@
             cart = {}; 
             updateSummary();
 
+            // Actualizar diseño visual de las tarjetas estilo foto
             ['ff', 'bs', 'ml'].forEach(g => {
-                document.getElementById(`gtab-${g}`).classList.toggle('active', g === game);
+                const cardEl = document.getElementById(`card-btn-${g}`);
+                if (cardEl) {
+                    if (g === game) {
+                        cardEl.style.borderColor = 'var(--primary)';
+                        cardEl.style.boxShadow = '0 0 15px rgba(0, 240, 255, 0.4)';
+                    } else {
+                        cardEl.style.borderColor = 'rgba(255,255,255,0.15)';
+                        cardEl.style.boxShadow = 'none';
+                    }
+                }
             });
 
             document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
@@ -1099,14 +1106,9 @@
             currentPay = pay;
             document.getElementById('tab-saldo').classList.toggle('active', pay === 'saldo');
             document.getElementById('tab-tarjeta').classList.toggle('active', pay === 'tarjeta');
-            
             document.getElementById('calcPayMethod').value = pay;
-
             updatePayGrids();
-            
-            if (document.getElementById('calculatorCardContainer').classList.contains('open')) {
-                ejecutarCalculadoraInteligente();
-            }
+            if (document.getElementById('calculatorCardContainer').classList.contains('open')) ejecutarCalculadoraInteligente();
         }
 
         function updatePayGrids() {
@@ -1146,9 +1148,7 @@
             }
 
             cart[key].qty = newQty;
-            if (cart[key].qty === 0) {
-                delete cart[key];
-            }
+            if (cart[key].qty === 0) delete cart[key];
 
             let qtyDisplay = document.getElementById(`qty-${game}-${payType[0]}-${index}`);
             if (qtyDisplay) qtyDisplay.innerText = newQty;
@@ -1180,11 +1180,8 @@
             keys.forEach(k => {
                 let item = cart[k];
                 let subtotal = item.price * item.qty;
-                if (item.category === 'saldo') {
-                    totalSaldo += subtotal;
-                } else {
-                    totalTarjeta += subtotal;
-                }
+                if (item.category === 'saldo') totalSaldo += subtotal;
+                else totalTarjeta += subtotal;
                 textHtml += `• ${item.qty}x ${item.name} (${subtotal.toLocaleString()} CUP)<br>`;
             });
 
@@ -1202,7 +1199,6 @@
             summaryTotalEl.innerText = totalDisplay;
         }
 
-        // 2. CALCULADORA INTELIGENTE BIDIRECCIONAL (POR DINERO O POR DIAMANTES/ORO)
         function ejecutarCalculadoraInteligente() {
             const valStr = document.getElementById('calcValueInput').value.trim();
             const resultDiv = document.getElementById('calculatorResult');
@@ -1216,9 +1212,7 @@
             const valorUsuario = parseInt(valStr);
             const metodoCalc = document.getElementById('calcPayMethod').value;
 
-            if (metodoCalc !== currentPay) {
-                switchPayTab(metodoCalc);
-            }
+            if (metodoCalc !== currentPay) switchPayTab(metodoCalc);
 
             if (isNaN(valorUsuario) || valorUsuario <= 0) {
                 resultDiv.style.display = 'block';
@@ -1227,9 +1221,7 @@
             }
 
             let activeTarget = currentGame;
-            if (currentGame === 'ml') {
-                activeTarget = (currentMlServer === 'usa') ? 'ml-usa' : 'ml-gen';
-            }
+            if (currentGame === 'ml') activeTarget = (currentMlServer === 'usa') ? 'ml-usa' : 'ml-gen';
 
             const gridId = `grid-${activeTarget}-${metodoCalc}`;
             const grid = document.getElementById(gridId);
@@ -1252,11 +1244,9 @@
 
             resultDiv.style.display = 'block';
 
-            // MODO A: CALCULAR POR PRESUPUESTO EN DINERO (CUP)
             if (currentCalcMode === 'money') {
                 const presupuesto = valorUsuario;
                 const ordenadosPrecio = [...productosDisponibles].sort((a, b) => b.price - a.price);
-
                 let mejorOpcion = null;
                 let menorSobrante = presupuesto + 1;
 
@@ -1265,13 +1255,8 @@
                         const sobrante = presupuesto - ordenadosPrecio[i].price;
                         if (sobrante < menorSobrante) {
                             menorSobrante = sobrante;
-                            mejorOpcion = {
-                                items: [{ ...ordenadosPrecio[i], qty: 1 }],
-                                total: ordenadosPrecio[i].price,
-                                sobrante: sobrante
-                            };
+                            mejorOpcion = { items: [{ ...ordenadosPrecio[i], qty: 1 }], total: ordenadosPrecio[i].price, sobrante: sobrante };
                         }
-
                         for (let j = i; j < ordenadosPrecio.length; j++) {
                             const sumaDoble = ordenadosPrecio[i].price + ordenadosPrecio[j].price;
                             if (sumaDoble <= presupuesto) {
@@ -1279,16 +1264,9 @@
                                 if (sobranteDoble < menorSobrante) {
                                     menorSobrante = sobranteDoble;
                                     let itemsComb = [{ ...ordenadosPrecio[i], qty: 1 }];
-                                    if (i === j) {
-                                        itemsComb[0].qty = 2;
-                                    } else {
-                                        itemsComb.push({ ...ordenadosPrecio[j], qty: 1 });
-                                    }
-                                    mejorOpcion = {
-                                        items: itemsComb,
-                                        total: sumaDoble,
-                                        sobrante: sobranteDoble
-                                    };
+                                    if (i === j) itemsComb[0].qty = 2;
+                                    else itemsComb.push({ ...ordenadosPrecio[j], qty: 1 });
+                                    mejorOpcion = { items: itemsComb, total: sumaDoble, sobrante: sobranteDoble };
                                 }
                             }
                         }
@@ -1308,18 +1286,13 @@
                         <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 6px;">
                             Gasto total: <b style="color: var(--accent);">${mejorOpcion.total.toLocaleString()} CUP</b> | Te sobran: <b style="color: #25D366;">${mejorOpcion.sobrante.toLocaleString()} CUP</b>
                         </div>
-                        <button class="btn-calculate" style="padding: 8px; font-size: 0.8rem; margin-top: 0;" onclick="aplicarCombinacionCalculada()">
-                            👉 Elegir esta combinación
-                        </button>
+                        <button class="btn-calculate" style="padding: 8px; font-size: 0.8rem; margin-top: 0;" onclick="aplicarCombinacionCalculada()">👉 Elegir esta combinación</button>
                     `;
                 }
-
-            // MODO B: CALCULAR POR CANTIDAD DE DIAMANTES U ORO DESEADOS
             } else {
                 const meta = valorUsuario;
                 const currencyName = currentGame === 'bs' ? 'Oro' : 'Diamantes';
                 const paquetesMoneda = productosDisponibles.filter(p => p.amount > 0).sort((a, b) => b.amount - a.amount);
-
                 if (paquetesMoneda.length === 0) return;
 
                 let restante = meta;
@@ -1369,45 +1342,28 @@
                         Recibes: <b style="color: #25D366;">${totalMonedas.toLocaleString()} ${currencyName}</b> <span style="font-size:0.72rem;">${notaExtra}</span><br>
                         Total a pagar: <b style="color: var(--accent); font-size: 0.9rem;">${totalCosto.toLocaleString()} CUP</b> (${metodoCalc === 'saldo' ? 'Saldo Móvil' : 'Tarjeta CUP'})
                     </div>
-                    <button class="btn-calculate" style="padding: 8px; font-size: 0.8rem; margin-top: 0;" onclick="aplicarCombinacionCalculada()">
-                        👉 Elegir esta combinación
-                    </button>
+                    <button class="btn-calculate" style="padding: 8px; font-size: 0.8rem; margin-top: 0;" onclick="aplicarCombinacionCalculada()">👉 Elegir esta combinación</button>
                 `;
             }
         }
 
         function aplicarCombinacionCalculada() {
             if (!ultimaCombinacionCalculada) return;
-
-            if (currentPay !== ultimaCombinacionCalculada.metodo) {
-                switchPayTab(ultimaCombinacionCalculada.metodo);
-            }
+            if (currentPay !== ultimaCombinacionCalculada.metodo) switchPayTab(ultimaCombinacionCalculada.metodo);
 
             cart = {};
             document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
             document.querySelectorAll('.pkg-card').forEach(el => el.classList.remove('selected'));
 
             let activeTarget = currentGame;
-            if (currentGame === 'ml') {
-                activeTarget = (currentMlServer === 'usa') ? 'ml-usa' : 'ml-gen';
-            }
+            if (currentGame === 'ml') activeTarget = (currentMlServer === 'usa') ? 'ml-usa' : 'ml-gen';
 
             ultimaCombinacionCalculada.items.forEach(it => {
                 updateQty(activeTarget, ultimaCombinacionCalculada.metodo, it.index, it.name, it.price, it.qty);
             });
 
-            // Scroll suave hacia el resumen sin irse hasta el fondo de la página
             const resumenEl = document.getElementById('resumen-seccion');
-            const offset = 100;
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const elementRect = resumenEl.getBoundingClientRect().top;
-            const elementPosition = elementRect - bodyRect;
-            const offsetPosition = elementPosition - offset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: resumenEl.getBoundingClientRect().top + window.pageYOffset - 100, behavior: 'smooth' });
         }
 
         function sendOrder() {
@@ -1416,24 +1372,12 @@
             const serverId = document.getElementById('server-id').value.trim();
             const playerName = document.getElementById('player-name').value.trim();
 
-            if (!playerId) {
-                alert("Por favor, ingresa tu ID de jugador.");
-                return;
-            }
-            if (currentGame === 'ml' && !serverId) {
-                alert("Por favor, ingresa tu Server ID de Mobile Legends.");
-                return;
-            }
-            if (currentGame !== 'ml' && !playerName) {
-                alert("Por favor, ingresa tu Nombre/Apodo del juego.");
-                return;
-            }
+            if (!playerId) { alert("Por favor, ingresa tu ID de jugador."); return; }
+            if (currentGame === 'ml' && !serverId) { alert("Por favor, ingresa tu Server ID de Mobile Legends."); return; }
+            if (currentGame !== 'ml' && !playerName) { alert("Por favor, ingresa tu Nombre/Apodo del juego."); return; }
 
             let keys = Object.keys(cart);
-            if (keys.length === 0) {
-                alert("Por favor, selecciona al menos un paquete usando los botones (+).");
-                return;
-            }
+            if (keys.length === 0) { alert("Por favor, selecciona al menos un paquete usando los botones (+)."); return; }
 
             let orderDetails = "";
             let totalSaldo = 0;
@@ -1449,7 +1393,6 @@
             keys.forEach(k => {
                 let item = cart[k];
                 let subtotal = item.price * item.qty;
-                
                 if (item.category === 'saldo') {
                     totalSaldo += subtotal;
                     if (!usedMethods.includes("Saldo Móvil")) usedMethods.push("Saldo Móvil");
@@ -1457,7 +1400,6 @@
                     totalTarjeta += subtotal;
                     if (!usedMethods.includes("Tarjeta CUP")) usedMethods.push("Tarjeta CUP");
                 }
-
                 orderDetails += `%0A  - *${item.qty}x* ${item.name} — *${subtotal.toLocaleString()} CUP*`;
             });
 
@@ -1475,8 +1417,7 @@
 
             const message = `Hola *Diamantes Express FF*! 💎%0AQuiero realizar este pedido:%0A%0A🎮 *Juego:* ${gameNames[currentGame]}%0A📌 *ID Jugador:* ${playerId}${serverInfo}${nameInfo}%0A💳 *Método(s):* ${usedMethods.join(" y ")}%0A📦 *Paquetes:* ${orderDetails}%0A%0A${totalSection}%0A%0A¿Cómo te hago la transferencia/envío?`;
 
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
     </script>
 </body>
