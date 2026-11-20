@@ -408,6 +408,53 @@
         .qty-btn:hover { background: var(--primary); color: #0a0c16; }
         .qty-value { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; color: #fff; min-width: 20px; text-align: center; }
 
+        /* OVERLAY DE MANTENIMIENTO */
+        .maintenance-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .maintenance-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 12, 22, 0.78);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+        }
+
+        .maintenance-icon {
+            font-size: 3.2rem;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+        }
+
+        .maintenance-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.25;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .maintenance-desc {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            max-width: 280px;
+            line-height: 1.5;
+        }
+
         /* CALCULADORA PLEGABLE BIDIRECCIONAL (ACORDEÓN) */
         .calculator-card {
             background: linear-gradient(135deg, rgba(22, 27, 46, 0.9), rgba(10, 12, 22, 0.95));
@@ -583,30 +630,18 @@
             <div style="font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                 <i class="fa-solid fa-bullhorn"></i> Novedades y Ofertas
             </div>
-            <div id="dynamicCarouselScroll" class="carousel-scroll">
-                <!-- Las tarjetas se insertan dinámicamente aquí -->
-            </div>
+            <div id="dynamicCarouselScroll" class="carousel-scroll"></div>
         </div>
 
         <!-- Insignias de confianza -->
         <div class="trust-badges">
-            <div class="badge-item">
-                <i class="fa-solid fa-bolt"></i>
-                <span>Entrega Rápida</span>
-            </div>
-            <div class="badge-item">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>100% Seguro</span>
-            </div>
-            <div class="badge-item">
-                <i class="fa-solid fa-headset"></i>
-                <span>Soporte 24/7</span>
-            </div>
+            <div class="badge-item"><i class="fa-solid fa-bolt"></i><span>Entrega Rápida</span></div>
+            <div class="badge-item"><i class="fa-solid fa-shield-halved"></i><span>100% Seguro</span></div>
+            <div class="badge-item"><i class="fa-solid fa-headset"></i><span>Soporte 24/7</span></div>
         </div>
 
         <!-- SECCIÓN DE SELECCIÓN DE JUEGOS (ARRIBA) -->
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px;" id="game-image-cards">
-            <!-- Free Fire -->
             <div onclick="switchGameAndScroll('ff')" id="card-btn-ff" style="cursor: pointer; border: 2px solid var(--primary); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);" class="game-select-card">
                 <div style="width: 100%; height: 110px; background: #000;">
                     <img id="img-cover-ff" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Free Fire">
@@ -616,7 +651,6 @@
                 </div>
             </div>
 
-            <!-- Blood Strike -->
             <div onclick="switchGameAndScroll('bs')" id="card-btn-bs" style="cursor: pointer; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card">
                 <div style="width: 100%; height: 110px; background: #000;">
                     <img id="img-cover-bs" src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Blood Strike">
@@ -626,7 +660,6 @@
                 </div>
             </div>
 
-            <!-- Mobile Legends -->
             <div onclick="switchGameAndScroll('ml')" id="card-btn-ml" style="cursor: pointer; border: 2px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; background: rgba(10,12,22,0.8); transition: 0.3s;" class="game-select-card">
                 <div style="width: 100%; height: 110px; background: #000;">
                     <img id="img-cover-ml" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" style="width: 100%; height: 100%; object-fit: cover;" alt="Mobile Legends">
@@ -637,7 +670,7 @@
             </div>
         </div>
 
-        <!-- SECCIÓN 1: CONFIGURAR PEDIDÓ (AQUÍ SALTA CUANDO TOCAN UN JUEGO) -->
+        <!-- SECCIÓN 1: CONFIGURAR PEDIDO -->
         <section class="section-card" id="seccion-configurar">
             <div class="section-header">
                 <i class="fa-solid fa-user-gear"></i>
@@ -650,11 +683,11 @@
                     ⚠️ Tenemos 2 servidores, revisa bien el tuyo antes de pedir:
                 </label>
                 <div class="server-subtabs">
-                    <button class="server-subtab-btn active" id="stab-ml-usa" onclick="switchMlServer('usa')">
-                        🇺🇸 SERVIDOR EE.UU (5 dígitos)
-                    </button>
-                    <button class="server-subtab-btn" id="stab-ml-gen" onclick="switchMlServer('gen')">
+                    <button class="server-subtab-btn active" id="stab-ml-gen" onclick="switchMlServer('gen')">
                         🌍 SERVIDOR GENERAL (4 dígitos)
+                    </button>
+                    <button class="server-subtab-btn" id="stab-ml-usa" onclick="switchMlServer('usa')" style="color: #ff6b6b;">
+                        🇺🇸 SERVIDOR EE.UU (🚫 PAUSADO)
                     </button>
                 </div>
             </div>
@@ -667,7 +700,7 @@
 
                 <div class="form-group" id="group-server-id" style="display: none;">
                     <label for="server-id" id="label-server-id"><i class="fa-solid fa-server"></i> Server ID (Mobile Legends):</label>
-                    <input type="text" id="server-id" class="form-control" placeholder="Ej: 12345" oninput="detectarServidorMLAutomatico(this.value)">
+                    <input type="text" id="server-id" class="form-control" placeholder="Ej: 1234" oninput="detectarServidorMLAutomatico(this.value)">
                 </div>
 
                 <div class="form-group" id="group-player-name">
@@ -793,55 +826,66 @@
                 </div>
             </div>
 
-            <!-- ===== BLOQUE MOBILE LEGENDS SERVIDOR EE.UU ===== -->
+            <!-- ===== BLOQUE MOBILE LEGENDS SERVIDOR EE.UU (PAUSADO POR MANTENIMIENTO) ===== -->
             <div id="game-section-ml-usa" style="display: none;">
-                <div class="packages-grid" id="grid-ml-usa-saldo">
-                    <div class="pkg-card" id="card-ml-usa-s-0"><div class="pkg-icon">⚔️</div><div class="pkg-title">56 Diamantes</div><div class="pkg-price">350 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 0, '56 Diamantes ML EE.UU', 350, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-0">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 0, '56 Diamantes ML EE.UU', 350, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-1"><div class="pkg-icon">⚔️</div><div class="pkg-title">278 Diamantes</div><div class="pkg-price">1700 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 1, '278 Diamantes ML EE.UU', 1700, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-1">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 1, '278 Diamantes ML EE.UU', 1700, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-2"><div class="pkg-icon">⚔️</div><div class="pkg-title">571 Diamantes</div><div class="pkg-price">3550 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 2, '571 Diamantes ML EE.UU', 3550, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-2">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 2, '571 Diamantes ML EE.UU', 3550, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-3"><div class="pkg-icon">⚔️</div><div class="pkg-title">1192 Diamantes</div><div class="pkg-price">7050 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 3, '1192 Diamantes ML EE.UU', 7050, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-3">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 3, '1192 Diamantes ML EE.UU', 7050, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-4"><div class="pkg-icon">⚔️</div><div class="pkg-title">1788 Diamantes</div><div class="pkg-price">10500 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 4, '1788 Diamantes ML EE.UU', 10500, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-4">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 4, '1788 Diamantes ML EE.UU', 10500, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-5"><div class="pkg-icon">⚔️</div><div class="pkg-title">3005 Diamantes</div><div class="pkg-price">17600 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 5, '3005 Diamantes ML EE.UU', 17600, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-5">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 5, '3005 Diamantes ML EE.UU', 17600, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-6"><div class="pkg-icon">⚔️</div><div class="pkg-title">3606 Diamantes</div><div class="pkg-price">21100 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 6, '3606 Diamantes ML EE.UU', 21100, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-6">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 6, '3606 Diamantes ML EE.UU', 21100, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-7"><div class="pkg-icon">⚔️</div><div class="pkg-title">4810 Diamantes</div><div class="pkg-price">28200 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 7, '4810 Diamantes ML EE.UU', 28200, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-7">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 7, '4810 Diamantes ML EE.UU', 28200, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-8"><div class="pkg-icon">⚔️</div><div class="pkg-title">6012 Diamantes</div><div class="pkg-price">35250 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 8, '6012 Diamantes ML EE.UU', 35250, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-8">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 8, '6012 Diamantes ML EE.UU', 35250, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-s-9"><span class="badge-popular">Popular</span><div class="pkg-icon">👑</div><div class="pkg-title">Pase Semanal EE.UU</div><div class="pkg-price">710 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 9, 'Pase Semanal ML EE.UU', 710, -1)">-</button><span class="qty-value" id="qty-ml-usa-s-9">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'saldo', 9, 'Pase Semanal ML EE.UU', 710, 1)">+</button></div></div>
-                </div>
+                <div class="maintenance-wrapper">
+                    <div class="maintenance-overlay">
+                        <div class="maintenance-icon">🛠️</div>
+                        <div class="maintenance-title">En mantenimiento</div>
+                        <div class="maintenance-desc">
+                            🚫 PAUSADO POR MANTENIMIENTO 🚫<br>
+                            Estamos resolviendo un inconveniente con este servidor. En cuanto vuelva avisamos.
+                        </div>
+                    </div>
 
-                <div class="packages-grid" id="grid-ml-usa-tarjeta" style="display: none;">
-                    <div class="pkg-card" id="card-ml-usa-t-0"><div class="pkg-icon">⚔️</div><div class="pkg-title">56 Diamantes</div><div class="pkg-price">1250 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 0, '56 Diamantes ML EE.UU (Tarjeta)', 1250, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-0">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 0, '56 Diamantes ML EE.UU (Tarjeta)', 1250, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-1"><div class="pkg-icon">⚔️</div><div class="pkg-title">278 Diamantes</div><div class="pkg-price">6200 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 1, '278 Diamantes ML EE.UU (Tarjeta)', 6200, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-1">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 1, '278 Diamantes ML EE.UU (Tarjeta)', 6200, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-2"><div class="pkg-icon">⚔️</div><div class="pkg-title">571 Diamantes</div><div class="pkg-price">12450 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 2, '571 Diamantes ML EE.UU (Tarjeta)', 12450, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-2">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 2, '571 Diamantes ML EE.UU (Tarjeta)', 12450, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-3"><div class="pkg-icon">⚔️</div><div class="pkg-title">1192 Diamantes</div><div class="pkg-price">24800 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 3, '1192 Diamantes ML EE.UU (Tarjeta)', 24800, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-3">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 3, '1192 Diamantes ML EE.UU (Tarjeta)', 24800, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-4"><div class="pkg-icon">⚔️</div><div class="pkg-title">1788 Diamantes</div><div class="pkg-price">37150 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 4, '1788 Diamantes ML EE.UU (Tarjeta)', 37150, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-4">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 4, '1788 Diamantes ML EE.UU (Tarjeta)', 37150, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-5"><div class="pkg-icon">⚔️</div><div class="pkg-title">3005 Diamantes</div><div class="pkg-price">61900 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 5, '3005 Diamantes ML EE.UU (Tarjeta)', 61900, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-5">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 5, '3005 Diamantes ML EE.UU (Tarjeta)', 61900, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-6"><div class="pkg-icon">⚔️</div><div class="pkg-title">3606 Diamantes</div><div class="pkg-price">74300 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 6, '3606 Diamantes ML EE.UU (Tarjeta)', 74300, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-6">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 6, '3606 Diamantes ML EE.UU (Tarjeta)', 74300, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-7"><div class="pkg-icon">⚔️</div><div class="pkg-title">4810 Diamantes</div><div class="pkg-price">99050 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 7, '4810 Diamantes ML EE.UU (Tarjeta)', 99050, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-7">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 7, '4810 Diamantes ML EE.UU (Tarjeta)', 99050, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-8"><div class="pkg-icon">⚔️</div><div class="pkg-title">6012 Diamantes</div><div class="pkg-price">123800 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 8, '6012 Diamantes ML EE.UU (Tarjeta)', 123800, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-8">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 8, '6012 Diamantes ML EE.UU (Tarjeta)', 123800, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-usa-t-9"><span class="badge-popular">Popular</span><div class="pkg-icon">👑</div><div class="pkg-title">Pase Semanal EE.UU</div><div class="pkg-price">2500 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 9, 'Pase Semanal ML EE.UU (Tarjeta)', 2500, -1)">-</button><span class="qty-value" id="qty-ml-usa-t-9">0</span><button class="qty-btn" onclick="updateQty('ml-usa', 'tarjeta', 9, 'Pase Semanal ML EE.UU (Tarjeta)', 2500, 1)">+</button></div></div>
+                    <div class="packages-grid" id="grid-ml-usa-saldo">
+                        <div class="pkg-card" id="card-ml-usa-s-0"><div class="pkg-icon">⚔️</div><div class="pkg-title">56 Diamantes</div><div class="pkg-price">350 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-1"><div class="pkg-icon">⚔️</div><div class="pkg-title">278 Diamantes</div><div class="pkg-price">1700 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-2"><div class="pkg-icon">⚔️</div><div class="pkg-title">571 Diamantes</div><div class="pkg-price">3550 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-3"><div class="pkg-icon">⚔️</div><div class="pkg-title">1192 Diamantes</div><div class="pkg-price">7050 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-4"><div class="pkg-icon">⚔️</div><div class="pkg-title">1788 Diamantes</div><div class="pkg-price">10500 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-5"><div class="pkg-icon">⚔️</div><div class="pkg-title">3005 Diamantes</div><div class="pkg-price">17600 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-6"><div class="pkg-icon">⚔️</div><div class="pkg-title">3606 Diamantes</div><div class="pkg-price">21100 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-7"><div class="pkg-icon">⚔️</div><div class="pkg-title">4810 Diamantes</div><div class="pkg-price">28200 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-8"><div class="pkg-icon">⚔️</div><div class="pkg-title">6012 Diamantes</div><div class="pkg-price">35250 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-s-9"><span class="badge-popular">Popular</span><div class="pkg-icon">👑</div><div class="pkg-title">Pase Semanal EE.UU</div><div class="pkg-price">710 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                    </div>
+
+                    <div class="packages-grid" id="grid-ml-usa-tarjeta" style="display: none;">
+                        <div class="pkg-card" id="card-ml-usa-t-0"><div class="pkg-icon">⚔️</div><div class="pkg-title">56 Diamantes</div><div class="pkg-price">1250 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-1"><div class="pkg-icon">⚔️</div><div class="pkg-title">278 Diamantes</div><div class="pkg-price">6200 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-2"><div class="pkg-icon">⚔️</div><div class="pkg-title">571 Diamantes</div><div class="pkg-price">12450 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-3"><div class="pkg-icon">⚔️</div><div class="pkg-title">1192 Diamantes</div><div class="pkg-price">24800 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-4"><div class="pkg-icon">⚔️</div><div class="pkg-title">1788 Diamantes</div><div class="pkg-price">37150 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-5"><div class="pkg-icon">⚔️</div><div class="pkg-title">3005 Diamantes</div><div class="pkg-price">61900 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-6"><div class="pkg-icon">⚔️</div><div class="pkg-title">3606 Diamantes</div><div class="pkg-price">74300 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-7"><div class="pkg-icon">⚔️</div><div class="pkg-title">4810 Diamantes</div><div class="pkg-price">99050 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-8"><div class="pkg-icon">⚔️</div><div class="pkg-title">6012 Diamantes</div><div class="pkg-price">123800 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                        <div class="pkg-card" id="card-ml-usa-t-9"><span class="badge-popular">Popular</span><div class="pkg-icon">👑</div><div class="pkg-title">Pase Semanal EE.UU</div><div class="pkg-price">2500 CUP</div><div class="quantity-control"><button class="qty-btn">-</button><span class="qty-value">0</span><button class="qty-btn">+</button></div></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- ===== BLOQUE MOBILE LEGENDS SERVIDOR GENERAL ===== -->
+            <!-- ===== BLOQUE MOBILE LEGENDS SERVIDOR GENERAL (NUEVOS PRECIOS) ===== -->
             <div id="game-section-ml-gen" style="display: none;">
                 <div class="packages-grid" id="grid-ml-gen-saldo">
-                    <div class="pkg-card" id="card-ml-gen-s-0"><div class="pkg-icon">⚔️</div><div class="pkg-title">55 Diamantes</div><div class="pkg-price">300 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 0, '55 Diamantes ML General', 300, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-0">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 0, '55 Diamantes ML General', 300, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-s-1"><div class="pkg-icon">⚔️</div><div class="pkg-title">86 Diamantes</div><div class="pkg-price">470 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 1, '86 Diamantes ML General', 470, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-1">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 1, '86 Diamantes ML General', 470, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-s-2"><div class="pkg-icon">⚔️</div><div class="pkg-title">172 Diamantes</div><div class="pkg-price">880 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 2, '172 Diamantes ML General', 880, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-2">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 2, '172 Diamantes ML General', 880, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-s-3"><div class="pkg-icon">⚔️</div><div class="pkg-title">257 Diamantes</div><div class="pkg-price">1280 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 3, '257 Diamantes ML General', 1280, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-3">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 3, '257 Diamantes ML General', 1280, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-s-4"><div class="pkg-icon">⚔️</div><div class="pkg-title">706 Diamantes</div><div class="pkg-price">3500 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 4, '706 Diamantes ML General', 3500, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-4">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 4, '706 Diamantes ML General', 3500, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-s-5"><div class="pkg-icon">⚔️</div><div class="pkg-title">1412 Diamantes</div><div class="pkg-price">7000 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 5, '1412 Diamantes ML General', 7000, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-5">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 5, '1412 Diamantes ML General', 7000, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-s-6"><span class="badge-popular">Popular</span><div class="pkg-icon">👑</div><div class="pkg-title">Pase Semanal General</div><div class="pkg-price">540 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 6, 'Pase Semanal ML General', 540, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-6">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 6, 'Pase Semanal ML General', 540, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-s-0"><div class="pkg-icon">⚔️</div><div class="pkg-title">55 Diamantes</div><div class="pkg-price">350 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 0, '55 Diamantes ML General', 350, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-0">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 0, '55 Diamantes ML General', 350, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-s-1"><div class="pkg-icon">⚔️</div><div class="pkg-title">86 Diamantes</div><div class="pkg-price">550 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 1, '86 Diamantes ML General', 550, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-1">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 1, '86 Diamantes ML General', 550, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-s-2"><div class="pkg-icon">⚔️</div><div class="pkg-title">172 Diamantes</div><div class="pkg-price">1000 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 2, '172 Diamantes ML General', 1000, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-2">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 2, '172 Diamantes ML General', 1000, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-s-3"><div class="pkg-icon">⚔️</div><div class="pkg-title">257 Diamantes</div><div class="pkg-price">1500 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 3, '257 Diamantes ML General', 1500, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-3">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 3, '257 Diamantes ML General', 1500, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-s-4"><div class="pkg-icon">⚔️</div><div class="pkg-title">706 Diamantes</div><div class="pkg-price">4700 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 4, '706 Diamantes ML General', 4700, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-4">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 4, '706 Diamantes ML General', 4700, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-s-5"><div class="pkg-icon">⚔️</div><div class="pkg-title">1412 Diamantes</div><div class="pkg-price">9300 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 5, '1412 Diamantes ML General', 9300, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-5">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 5, '1412 Diamantes ML General', 9300, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-s-6"><span class="badge-popular">Popular</span><div class="pkg-icon">👑</div><div class="pkg-title">Pase Semanal General</div><div class="pkg-price">650 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 6, 'Pase Semanal ML General', 650, -1)">-</button><span class="qty-value" id="qty-ml-gen-s-6">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'saldo', 6, 'Pase Semanal ML General', 650, 1)">+</button></div></div>
                 </div>
 
                 <div class="packages-grid" id="grid-ml-gen-tarjeta" style="display: none;">
-                    <div class="pkg-card" id="card-ml-gen-t-0"><div class="pkg-icon">⚔️</div><div class="pkg-title">55 Diamantes</div><div class="pkg-price">1050 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 0, '55 Diamantes ML General (Tarjeta)', 1050, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-0">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 0, '55 Diamantes ML General (Tarjeta)', 1050, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-t-1"><div class="pkg-icon">⚔️</div><div class="pkg-title">86 Diamantes</div><div class="pkg-price">1600 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 1, '86 Diamantes ML General (Tarjeta)', 1600, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-1">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 1, '86 Diamantes ML General (Tarjeta)', 1600, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-t-2"><div class="pkg-icon">⚔️</div><div class="pkg-title">172 Diamantes</div><div class="pkg-price">3150 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 2, '172 Diamantes ML General (Tarjeta)', 3150, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-2">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 2, '172 Diamantes ML General (Tarjeta)', 3150, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-t-3"><div class="pkg-icon">⚔️</div><div class="pkg-title">257 Diamantes</div><div class="pkg-price">4550 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 3, '257 Diamantes ML General (Tarjeta)', 4550, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-3">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 3, '257 Diamantes ML General (Tarjeta)', 4550, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-t-4"><div class="pkg-icon">⚔️</div><div class="pkg-title">706 Diamantes</div><div class="pkg-price">12500 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 4, '706 Diamantes ML General (Tarjeta)', 12500, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-4">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 4, '706 Diamantes ML General (Tarjeta)', 12500, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-t-5"><div class="pkg-icon">⚔️</div><div class="pkg-title">1412 Diamantes</div><div class="pkg-price">25000 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 5, '1412 Diamantes ML General (Tarjeta)', 25000, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-5">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 5, '1412 Diamantes ML General (Tarjeta)', 25000, 1)">+</button></div></div>
-                    <div class="pkg-card" id="card-ml-gen-t-6"><span class="badge-popular">Popular</span><div class="pkg-icon">👑</div><div class="pkg-title">Pase Semanal General</div><div class="pkg-price">2000 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 6, 'Pase Semanal ML General (Tarjeta)', 2000, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-6">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 6, 'Pase Semanal ML General (Tarjeta)', 2000, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-t-0"><div class="pkg-icon">⚔️</div><div class="pkg-title">55 Diamantes</div><div class="pkg-price">1200 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 0, '55 Diamantes ML General (Tarjeta)', 1200, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-0">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 0, '55 Diamantes ML General (Tarjeta)', 1200, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-t-1"><div class="pkg-icon">⚔️</div><div class="pkg-title">86 Diamantes</div><div class="pkg-price">1800 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 1, '86 Diamantes ML General (Tarjeta)', 1800, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-1">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 1, '86 Diamantes ML General (Tarjeta)', 1800, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-t-2"><div class="pkg-icon">⚔️</div><div class="pkg-title">172 Diamantes</div><div class="pkg-price">3550 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 2, '172 Diamantes ML General (Tarjeta)', 3550, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-2">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 2, '172 Diamantes ML General (Tarjeta)', 3550, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-t-3"><div class="pkg-icon">⚔️</div><div class="pkg-title">257 Diamantes</div><div class="pkg-price">5300 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 3, '257 Diamantes ML General (Tarjeta)', 5300, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-3">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 3, '257 Diamantes ML General (Tarjeta)', 5300, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-t-4"><div class="pkg-icon">⚔️</div><div class="pkg-title">706 Diamantes</div><div class="pkg-price">16500 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 4, '706 Diamantes ML General (Tarjeta)', 16500, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-4">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 4, '706 Diamantes ML General (Tarjeta)', 16500, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-t-5"><div class="pkg-icon">⚔️</div><div class="pkg-title">1412 Diamantes</div><div class="pkg-price">33000 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 5, '1412 Diamantes ML General (Tarjeta)', 33000, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-5">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 5, '1412 Diamantes ML General (Tarjeta)', 33000, 1)">+</button></div></div>
+                    <div class="pkg-card" id="card-ml-gen-t-6"><span class="badge-popular">Popular</span><div class="pkg-icon">👑</div><div class="pkg-title">Pase Semanal General</div><div class="pkg-price">2350 CUP</div><div class="quantity-control"><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 6, 'Pase Semanal ML General (Tarjeta)', 2350, -1)">-</button><span class="qty-value" id="qty-ml-gen-t-6">0</span><button class="qty-btn" onclick="updateQty('ml-gen', 'tarjeta', 6, 'Pase Semanal ML General (Tarjeta)', 2350, 1)">+</button></div></div>
                 </div>
             </div>
 
@@ -886,7 +930,7 @@
 
     <script>
         let currentGame = 'ff';
-        let currentMlServer = 'usa';
+        let currentMlServer = 'gen';
         let currentPay = 'saldo';
         let currentCalcMode = 'money';
         let cart = {};
@@ -903,7 +947,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             registrarVisita();
 
-            // Cargar portadas dinámicas desde el panel de admin
             const savedImages = JSON.parse(localStorage.getItem('diamantes_game_covers')) || {};
             if (savedImages.ff) document.getElementById('img-cover-ff').src = savedImages.ff;
             if (savedImages.ml) document.getElementById('img-cover-ml').src = savedImages.ml;
@@ -986,7 +1029,6 @@
             }
         }
 
-        // CAMBIAR JUEGO Y HACER SCROLL AUTOMÁTICO A CONFIGURAR PEDIDO
         function switchGameAndScroll(game) {
             switchGame(game);
             const seccionConfig = document.getElementById('seccion-configurar');
@@ -1066,7 +1108,7 @@
         function updateMlPlaceholder() {
             const serverInput = document.getElementById('server-id');
             if (currentMlServer === 'usa') {
-                serverInput.placeholder = 'Ej: 12345 (EE.UU)';
+                serverInput.placeholder = 'Server EE.UU en Mantenimiento';
             } else {
                 serverInput.placeholder = 'Ej: 1234 (General)';
             }
@@ -1105,6 +1147,11 @@
         }
 
         function updateQty(game, payType, index, name, unitPrice, change) {
+            if (game === 'ml-usa') {
+                alert("⚠️ El servidor EE.UU se encuentra pausado por mantenimiento. Por favor usa el Servidor General.");
+                return;
+            }
+
             let key = `${game}-${payType}-${index}`;
             if (!cart[key]) {
                 cart[key] = { game: game, category: payType, index: index, name: name, price: unitPrice, qty: 0 };
@@ -1176,6 +1223,12 @@
             if (!valStr || valStr === "") {
                 resultDiv.style.display = 'none';
                 ultimaCombinacionCalculada = null;
+                return;
+            }
+
+            if (currentGame === 'ml' && currentMlServer === 'usa') {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `<span style="color: #ff6b6b; font-weight: 600;">🚫 Servidor EE.UU pausado por mantenimiento. Selecciona el Servidor General para calcular.</span>`;
                 return;
             }
 
@@ -1343,7 +1396,16 @@
             const playerName = document.getElementById('player-name').value.trim();
 
             if (!playerId) { alert("Por favor, ingresa tu ID de jugador."); return; }
-            if (currentGame === 'ml' && !serverId) { alert("Por favor, ingresa tu Server ID de Mobile Legends."); return; }
+            if (currentGame === 'ml') {
+                if (currentMlServer === 'usa') {
+                    alert("🚫 El servidor EE.UU se encuentra pausado por mantenimiento. Por favor selecciona el Servidor General.");
+                    return;
+                }
+                if (!serverId) {
+                    alert("Por favor, ingresa tu Server ID de Mobile Legends.");
+                    return;
+                }
+            }
             if (currentGame !== 'ml' && !playerName) { alert("Por favor, ingresa tu Nombre/Apodo del juego."); return; }
 
             let keys = Object.keys(cart);
@@ -1357,7 +1419,7 @@
             let gameNames = { 
                 'ff': 'Free Fire', 
                 'bs': 'Blood Strike', 
-                'ml': currentMlServer === 'usa' ? 'Mobile Legends (Servidor EE.UU)' : 'Mobile Legends (Servidor General)' 
+                'ml': 'Mobile Legends (Servidor General)' 
             };
 
             keys.forEach(k => {
